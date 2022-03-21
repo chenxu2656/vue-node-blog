@@ -6,16 +6,17 @@ var logger = require('morgan');
 require('dotenv').config()
 // 连接数据库
 require('./model/connectDatabase')
-const articleRequest = require('./routes/User');
+const User = require('./routes/User');
 const errhandle = require('./middleware/errhandle')
 var app = express()
 
 app.use(logger('dev'));
+// 处理json数据
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', articleRequest);
+app.use('/api/user', User);
 app.use(errhandle)
 module.exports = app;

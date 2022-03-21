@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const Joi = require('joi')
 let userSchema = new mongoose.Schema({ 
     username: {
         type: String,
@@ -7,39 +8,65 @@ let userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        require: true
+        require: true,
+        unique: true   // 保证邮箱唯一
     },
     password: {
         type: String,
-        require: true
-    },
-    role: {
-        type: Number, // admin 1, editer 2
         require: true
     },
     ctime: {
         type: Date,
         default: Date.now
     },
-    state: {
-        type: Number,
-        default: 1   //0 启用 ，1 禁用
+    role: {
+        type: String,
+        default: 'admin',
+    },
+    status: {
+        type: String,
+        default: "active"
     }
 })
 const Users = mongoose.model('user',userSchema)
 
-let createUser = async(username,email,password,role,state)=>{
+let createUser = async(username,email,password,ctime,role,status)=>{
     let salt = await bcrypt.genSalt(11)
     let pwres = await bcrypt.hash(password,salt)
     const user = await Users.create({
         username: username,
         email: email,
         password: pwres,
+        ctime: ctime,
         role: role,
-        state: state
+        status: status
     })
+    return user
+}
+let Credentials = async(email,password)=>{
+    const userExit = await Users.findOne({email: email})
+    console.log(userExit);
+    if (userExit) {
+        const isequal = await bcrypt.compare(password,userExit.password) 
+        return isequal
+    } else {
+        return false
+    }
+}
+let formatVaild = ()=>{
+    const userSchema = {
+        username: Joi.string().min(6).max(16).required().error(new Error('用户名不符合规范')),
+        email: Joi.string().email().required().error(new Error('邮箱不符合规范')),
+        password: Joi.string().regex(/^[a-zA-Z0-9]{6,16}$/).required().error(new Error('密码不符合规范')),
+        // role: Joi.string().valid('normal','admin') //必须是这两个之一
+        state : Joi.string().required().error(new Error('角色非法')),
+        role: Joi.required().error(new Error('状态非法')),
+    }
+    const joiSchema = Joi.object(userSchema)
+    return joiSchema.validateAsync(user)
 }
 module.exports = {
     Users: Users,
-    createUser: createUser
+    createUser: createUser,
+    Credentials: Credentials
 }
