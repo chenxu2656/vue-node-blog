@@ -1,24 +1,8 @@
 # btfblog
-
-## Project setup
 ```
 yarn install
 ```
+# Api
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+> Database:  https://cloud.mongodb.com/v2/6212efd86341c213815dff44#metrics/replicaSet/62380bf7281c914b51fb0ce3/explorer
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
