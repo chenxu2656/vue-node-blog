@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "start": "concurrently 'npm run serve'",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "concurrently": "^7.0.0",
     "core-js": "^3.8.3",
+    "cross-env": "^7.0.3",
     "vue": "^3.2.13",
     "vue-router": "^4.0.14"
   },
