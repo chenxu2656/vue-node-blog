@@ -45,10 +45,8 @@ let createUser = async(username,email,password,ctime,role,status)=>{
 }
 let Credentials = async(email,password)=>{
     const userExit = await Users.findOne({email: email})
-    console.log(userExit);
     if (userExit) {
-        const isequal = await bcrypt.compare(password,userExit.password) 
-        return isequal
+        return await bcrypt.compare(password,userExit.password) ? userExit : false
     } else {
         return false
     }
