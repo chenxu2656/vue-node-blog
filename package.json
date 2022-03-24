@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "i": "yarn install",
     "serve": "vue-cli-service serve",
-    "start": "concurrently 'npm run serve'",
+    "start": "concurrently 'yarn run serve'",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -12,6 +13,7 @@
     "concurrently": "^7.0.0",
     "core-js": "^3.8.3",
     "cross-env": "^7.0.3",
+    "element-plus": "^2.1.4",
     "vue": "^3.2.13",
     "vue-router": "^4.0.14"
   },

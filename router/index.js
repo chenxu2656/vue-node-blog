@@ -1,4 +1,4 @@
-import { createRouter,createWebHashHistory } from "vue-router";
+import { createRouter,createWebHistory } from "vue-router";
 const HomePage = require('../views/HomePage')
 const ArticleDetail = require('../views/ArticleDetail')
 const routes = [
@@ -12,7 +12,8 @@ const routes = [
     }
 ]
 export const router = createRouter({
+    // createWebHashHistory 会使用一个 hash字符 #
+    history: createWebHistory(),
     routes: routes,
-    history: createWebHashHistory()
 })
 
