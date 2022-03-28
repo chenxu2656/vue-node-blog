@@ -8,7 +8,7 @@
             menu-trigger="hover"
             router='true'
           >
-            <el-menu-item index="home" >Home</el-menu-item>
+            <el-menu-item index="home" route="/">Home</el-menu-item>
             <el-sub-menu index="tag">
                 <template #title>Tag</template>
                 <el-menu-item index="front-end" key="">JavaScript</el-menu-item>
@@ -19,7 +19,7 @@
           </el-menu>
       </el-header>
       <el-main>
-        <router-view></router-view>
+        <router-view id="con"></router-view>
       </el-main>
       <el-footer>Footer</el-footer>
     </el-container>
@@ -50,7 +50,7 @@ export default {
       margin: auto;
       border: none;
       box-sizing: border-box;
-      flex-direction: row-reverse;
+      justify-content: flex-end;
       .el-sub-menu{
         font-size: $h3_size;
         font-weight: $font_weight_middle;
@@ -62,6 +62,13 @@ export default {
       
     }
   }
-  
+  .el-main{
+    background-color: $back_color;
+    min-height: 800px;
+    #con{
+      width: 1200px;
+      margin: autos;
+    }
+  }
 }
 </style>
