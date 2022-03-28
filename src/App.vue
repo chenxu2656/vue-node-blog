@@ -40,6 +40,28 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #1f5f9f;
+  .el-header{
+      width: 1200px;
+      margin: auto;
+    .el-menu {
+      width: 1000px;
+      padding: 0px;
+      margin: auto;
+      border: none;
+      box-sizing: border-box;
+      flex-direction: row-reverse;
+      .el-sub-menu{
+        font-size: $h3_size;
+        font-weight: $font_weight_middle;
+      }
+      .el-menu-item{
+        font-size: $h3_size;
+        font-weight: $font_weight_middle;
+      }
+      
+    }
+  }
+  
 }
 </style>
