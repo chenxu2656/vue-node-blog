@@ -19,7 +19,9 @@
           </el-menu>
       </el-header>
       <el-main>
-        <router-view id="con"></router-view>
+        <div id="content">
+          <router-view></router-view>
+        </div>
       </el-main>
       <el-footer>Footer</el-footer>
     </el-container>
@@ -65,9 +67,9 @@ export default {
   .el-main{
     background-color: $back_color;
     min-height: 800px;
-    #con{
+    #content{
       width: 1200px;
-      margin: autos;
+      margin: auto;
     }
   }
 }
