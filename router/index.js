@@ -1,6 +1,6 @@
 import { createRouter,createWebHistory } from "vue-router";
-const HomePage = require('../views/HomePage')
-const ArticleDetail = require('../views/ArticleDetail')
+const HomePage = require('../views/front/HomePage')
+const ArticleDetail = require('../views/front/ArticleDetail')
 const routes = [
     {
         path: "/",
