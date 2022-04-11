@@ -6,7 +6,7 @@ var logger = require('morgan');
 require('dotenv').config()
 // 连接数据库
 require('./model/connectDatabase')
-const User = require('./routes/version1/User');
+const User = require('./routes/User');
 const errhandle = require('./middleware/errhandle')
 var app = express()
 
