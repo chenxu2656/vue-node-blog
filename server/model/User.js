@@ -21,23 +21,22 @@ let userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        default: 'admin',
+        default: "admin"    // admin | user
     },
     status: {
-        type: String,
-        default: "active"
+        type: String, 
+        default: "active"    //active | inactive
     }
 })
 const Users = mongoose.model('user',userSchema)
 
-let createUser = async(username,email,password,ctime,role,status)=>{
+let createUser = async(username,email,password,role,status)=>{
     let salt = await bcrypt.genSalt(11)
     let pwres = await bcrypt.hash(password,salt)
     const user = await Users.create({
         username: username,
         email: email,
         password: pwres,
-        ctime: ctime,
         role: role,
         status: status
     })

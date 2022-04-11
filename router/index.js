@@ -7,7 +7,7 @@ const routes = [
         components: HomePage
     },
     {
-        path: "/articles",
+        path: "/contact",
         components: ArticleDetail
     }
 ]

@@ -2,9 +2,9 @@
   <!-- 为了解决刷新页面，路由回到默认active的item, default active 写成一个变量 -->
   <el-menu
     mode="horizontal"
-    :default-active="currentPath"
+    :default-active="activePath"
     menu-trigger="hover"
-    router="true"
+    :router="true"
   >
     <el-menu-item index="home" route="/">Home</el-menu-item>
     <el-sub-menu index="tag">
@@ -17,11 +17,14 @@
   </el-menu>
 </template>
 <script>
+import { useRouter } from 'vue-router'
 export default {
     name: 'navHeader',
     setup(){
-        let currentPath = 'home'
-        return {currentPath}
+        let currentPath = useRouter().currentRoute.value.path
+        let activePath = currentPath.substr(1)||'home'
+        console.log(activePath);
+        return {activePath}
     }
 }
 </script>
