@@ -8,15 +8,18 @@ module.exports = async(req,res)=>{
         const loginInfo = await Credentials(email,password)
         const {username} = loginInfo
         if (loginInfo) {
-            let secretkey=loginInfo.email;//加密字段
+            const secretkey='useremail';//加密字段
             const token= jwt.sign(
                 {username},
                 secretkey,
                 {
-                    expiresIn:60*10
+                    expiresIn: "7 days"
                 }
             );
-            res.status(200).json(userInfo)
+            res.status(200).json({
+                "token":token,
+                "message": "success"
+            })
         } else {
             res.status(400).json({"err":"Wrong Credentials"})
         }
