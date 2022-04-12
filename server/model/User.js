@@ -1,33 +1,8 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const Joi = require('joi')
-let userSchema = new mongoose.Schema({ 
-    username: {
-        type: String,
-        require: true
-    },
-    email: {
-        type: String,
-        require: true,
-        unique: true   // 保证邮箱唯一
-    },
-    password: {
-        type: String,
-        require: true
-    },
-    ctime: {
-        type: Date,
-        default: Date.now
-    },
-    role: {
-        type: String,
-        default: "admin"    // admin | user
-    },
-    status: {
-        type: String, 
-        default: "active"    //active | inactive
-    }
-})
+const {userStructure} = require('./schema')
+let userSchema = new mongoose.Schema(userStructure)
 const Users = mongoose.model('user',userSchema)
 
 let createUser = async(username,email,password,role,status)=>{

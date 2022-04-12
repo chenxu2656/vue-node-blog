@@ -1,24 +1,7 @@
 const mongoose = require('mongoose')
-let articleSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        require: true
-    },
-    ctime: {
-        type: String,
-        default: Date.now
-    },
-    content: {
-        type: String,
-        require: true
-    },
-    tags: {
-        type: Array,
-        require: true
-    }
-})
+const {articleStructure} = require('./schema')
+let articleSchema = new mongoose.Schema(articleStructure)
 const article = mongoose.model('article',articleSchema)
-
 const createArticle = async(title,content,tags)=>{
     const articleRes = await article.create({
         title: title,
@@ -28,5 +11,6 @@ const createArticle = async(title,content,tags)=>{
     return articleRes
 }
 module.exports = {
+    article: article,
     createArticle: createArticle
 }
