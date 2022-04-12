@@ -12,13 +12,30 @@ const createArticle = async(title,content,tags)=>{
     return articleRes
 }
 // 获取文章列表
-const getArticleList = async (req,res)=>{
+const getArticleList = async ()=>{
     // 
     let articleList = await article.find()
     return articleList
 }
+// 获取文章具体信息
+const getArticleDetail = async (id)=>{
+    const art = await article.findById(id)
+    if(art) {
+        return {
+            "msg": 'success',
+            "art": art
+        }
+    } else {
+        return { 
+            'msg': 'error',
+            "errorMsg": "No article"
+        }
+    }
+
+}
 module.exports = {
     article: article,
     createArticle: createArticle,
-    getArticleList: getArticleList
+    getArticleList: getArticleList,
+    getArticleDetail: getArticleDetail
 }
