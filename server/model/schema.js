@@ -41,6 +41,10 @@ const articleStructure = {
     tags: {
         type: Array,
         require: true
+    },
+    imgPath: {
+        type: String,
+        require: false
     }
 }
 module.exports = {
