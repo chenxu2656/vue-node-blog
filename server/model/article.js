@@ -33,9 +33,24 @@ const getArticleDetail = async (id)=>{
     }
 
 }
+// 更新文章信息
+const updateArticle = async (id,obj)=>{
+    // 返回更新后的文件
+    const updateInfo = await article.findByIdAndUpdate( id, obj, {new:true})
+    return updateInfo
+}
+// 删除
+const deleteArticle = async (id)=>{
+    // 返回更新后的文件
+    const deleteInfo = await article.deleteOne({"_id": id})
+    console.log(deleteInfo);
+    return deleteInfo
+}
 module.exports = {
     article: article,
     createArticle: createArticle,
     getArticleList: getArticleList,
-    getArticleDetail: getArticleDetail
+    getArticleDetail: getArticleDetail,
+    updateArticle: updateArticle,
+    deleteArticle: deleteArticle
 }
