@@ -1,7 +1,4 @@
-const mongoose = require('mongoose')
-const {articleStructure} = require('./schema')
-let articleSchema = new mongoose.Schema(articleStructure)
-const article = mongoose.model('article',articleSchema)
+const {article} = require('../model/index')
 // 创建文章
 const createArticle = async(title,content,tags,imgPath)=>{
     const articleRes = await article.create({
@@ -48,10 +45,9 @@ const deleteArticle = async (id)=>{
     return deleteInfo
 }
 module.exports = {
-    article: article,
-    createArticle: createArticle,
-    getArticleList: getArticleList,
-    getArticleDetail: getArticleDetail,
-    updateArticle: updateArticle,
-    deleteArticle: deleteArticle
+    createArticle,
+    getArticleList,
+    getArticleDetail,
+    updateArticle,
+    deleteArticle
 }

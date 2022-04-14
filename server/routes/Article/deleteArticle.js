@@ -1,4 +1,4 @@
-const {deleteArticle} = require('../../model/article')
+const {deleteArticle} = require('../../model/index')
 module.exports = async(req,res)=>{
     const artId = req.path.split('/')[1]
     const info = await deleteArticle(artId)

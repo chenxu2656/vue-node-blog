@@ -1,5 +1,5 @@
 // 获取所有的文章列表
-const {getArticleList} = require('../../model/article')
+const {getArticleList} = require('../../model/index')
 module.exports = async(req,res)=>{
     const articleList  = await getArticleList()
     console.log(articleList);

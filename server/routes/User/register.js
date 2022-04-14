@@ -1,4 +1,4 @@
-const {createUser} = require('../../model/User')
+const {createUser} = require('../../model/')
 module.exports = async(req,res,next)=>{
     try{
         let userInput = req.body

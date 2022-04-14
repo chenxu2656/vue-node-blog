@@ -1,4 +1,4 @@
-const {getArticleDetail}= require('../../model/article')
+const {getArticleDetail}= require('../../model/index')
 module.exports = async(req,res)=>{
     const artId = req.path.split('/')[1]
     console.log(artId);

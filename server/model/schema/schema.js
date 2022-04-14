@@ -47,6 +47,35 @@ const articleStructure = {
         require: false
     }
 }
+// 文件夹 
+const folderStructure = {
+    name: {
+        type: String,
+        require: true,
+        unique: true
+    },
+    ctime: {
+        type: Date,
+        default: Date.now
+    }
+}
+
+// tag
+const tagName = {
+    name: {
+        type: String,
+        require: true,
+        unique: true
+    },
+    ctime: {
+        type: Date,
+        default: Date.now
+    }
+}
+// 评论
+
+
+// 点赞
 module.exports = {
     userStructure: userStructure,
     articleStructure: articleStructure

@@ -1,7 +1,7 @@
 
 const jwt=require("jsonwebtoken");
 
-const {Credentials} = require('../../model/User')
+const {Credentials} = require('../../model/')
 module.exports = async(req,res)=>{
     let {email,password} = req.body
     try {

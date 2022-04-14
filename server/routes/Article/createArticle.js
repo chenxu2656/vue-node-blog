@@ -1,5 +1,5 @@
 // 创建一个博客
-const {createArticle} = require('../../model/article')
+const {createArticle} = require('../../model/index')
 module.exports = async (req,res)=>{
     const {title,content,tags,imgPath} = req.body
     try {

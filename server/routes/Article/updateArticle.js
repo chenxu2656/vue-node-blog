@@ -1,4 +1,4 @@
-const {updateArticle} = require('../../model/article')
+const {updateArticle} = require('../../model/index')
 module.exports = async (req,res)=>{
     const artId = req.path.split('/')[1]
     try {
