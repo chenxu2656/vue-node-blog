@@ -3,11 +3,12 @@ const {articleStructure} = require('./schema')
 let articleSchema = new mongoose.Schema(articleStructure)
 const article = mongoose.model('article',articleSchema)
 // 创建文章
-const createArticle = async(title,content,tags)=>{
+const createArticle = async(title,content,tags,imgPath)=>{
     const articleRes = await article.create({
         title: title,
         content: content,
-        tags: tags
+        tags: tags,
+        imgPath: imgPath
     })
     return articleRes
 }

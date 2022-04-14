@@ -1,9 +1,9 @@
 // 创建一个博客
 const {createArticle} = require('../../model/article')
 module.exports = async (req,res)=>{
-    const {title,content,tags} = req.body
+    const {title,content,tags,imgPath} = req.body
     try {
-        const art = await createArticle(title,content,tags)
+        const art = await createArticle(title,content,tags,imgPath)
         console.log(art);
         if(art) {
             res.status(200).json(art)

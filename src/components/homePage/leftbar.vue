@@ -9,9 +9,14 @@
             <div id="localtionName">Anhui,hefei,AHMU</div>
         </div>
     </el-card>
-    <el-card class="box-card" id="categoryList">
-        <div id="categoryTitle">Category</div>
+    <el-card class="box-card category" id="categoryList">
+        <div class="categoryTitle">Category</div>
         <el-divider></el-divider>
+    </el-card>
+    <el-card class="box-card category" id="archive">
+        <div class="categoryTitle">Archieve</div>
+        <el-divider></el-divider>
+        <div v-for="o in 4" :key="o" class="archievskList">{{ 'List item ' + o }}</div>
     </el-card>
 </template>
 <script>
@@ -42,10 +47,10 @@ export default {
             }
         }
         }
-    #categoryList{
+    .category{
         margin-top: 10px;
         text-align: left;
-        #categoryTitle{
+        .categoryTitle{
             left: 0px;
         }
         .el-divider{
