@@ -5,11 +5,14 @@ var logger = require('morgan');
 // 引入.env
 require('dotenv').config()
 // 连接数据库
-require('./model/connectDatabase')
+require('./model/tools/connectDatabase')
 // 用户操作
 const User = require('./routes/User');
 // 文章操作
 const Article = require('./routes/article')
+// 文件夹操作
+
+const Folder = require('./routes/folder')
 const errhandle = require('./middleware/errhandle')
 var app = express()
 
@@ -23,5 +26,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('./middleware/tokenCheck'))
 app.use('/api/user', User);
 app.use('/api/article',Article)
+app.use('/api/folder',Folder)
 app.use(errhandle)
 module.exports = app;

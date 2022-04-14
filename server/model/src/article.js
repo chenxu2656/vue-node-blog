@@ -1,12 +1,7 @@
 const {article} = require('../model/index')
 // 创建文章
-const createArticle = async(title,content,tags,imgPath)=>{
-    const articleRes = await article.create({
-        title: title,
-        content: content,
-        tags: tags,
-        imgPath: imgPath
-    })
+const createArticle = async(obj)=>{
+    const articleRes = await article.create(obj)
     return articleRes
 }
 // 获取文章列表

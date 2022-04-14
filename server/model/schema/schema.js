@@ -45,11 +45,15 @@ const articleStructure = {
     imgPath: {
         type: String,
         require: false
+    },
+    folders: {
+        type: Array,
+        require: true
     }
 }
 // 文件夹 
 const folderStructure = {
-    name: {
+    folderName: {
         type: String,
         require: true,
         unique: true
@@ -61,7 +65,7 @@ const folderStructure = {
 }
 
 // tag
-const tagName = {
+const tagStructure = {
     name: {
         type: String,
         require: true,
@@ -77,6 +81,8 @@ const tagName = {
 
 // 点赞
 module.exports = {
-    userStructure: userStructure,
-    articleStructure: articleStructure
+    userStructure,
+    articleStructure,
+    folderStructure,
+    tagStructure
 }

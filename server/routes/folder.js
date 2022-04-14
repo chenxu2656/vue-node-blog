@@ -4,7 +4,7 @@ const router = express.Router();
 // 获取文章列表
 router.get('/',require('./Article/articleList'))
 // 创建文章
-router.post('/',require('./Article/createArticle'))
+router.post('/',require('./folder/createFolder'))
 // 查询文章
 router.get('/:id',require('./Article/articleDetail'))
 // 修改文章内容

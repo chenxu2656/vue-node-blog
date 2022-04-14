@@ -9,7 +9,11 @@ const {
 const {
     createUser,
     Credentials
-} = require('./src/user')
+} = require('./src/user') 
+
+const {
+    createFolder
+} = require('./src/folder')
 
 module.exports = {
     createArticle, 
@@ -19,5 +23,7 @@ module.exports = {
     deleteArticle,
     
     createUser,
-    Credentials
+    Credentials,
+
+    createFolder
 }
