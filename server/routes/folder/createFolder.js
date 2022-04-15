@@ -1,4 +1,5 @@
 const {createFolder} = require('../../model')
+const {errorHandle} = require('../../model/tools/error')
 module.exports = async (req,res)=>{
     const folderInfo = req.body
     try{
@@ -12,6 +13,7 @@ module.exports = async (req,res)=>{
             })
         }
     } catch (err) {
-        res.status(400).json(err)
+        const errMsg = errorHandle(err)
+        res.status(400).json(errMsg)
     }
 }

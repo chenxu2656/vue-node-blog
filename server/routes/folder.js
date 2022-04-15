@@ -1,7 +1,7 @@
 // 操作文章
 const express = require('express');
 const router = express.Router();
-// 获取文章列表
+// 获取文件夹列表
 router.get('/',require('./Article/articleList'))
 // 创建文章
 router.post('/',require('./folder/createFolder'))

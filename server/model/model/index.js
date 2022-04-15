@@ -1,4 +1,4 @@
-const {createModel} = require('../tools/index')
+const {createModel} = require('../tools/optool')
 const  {
         folderStructure,
         articleStructure,
@@ -8,11 +8,11 @@ const  {
 // 文章
 const article = createModel('article',articleStructure)
 // 文件夹
-const folder = createModel('folders',folderStructure)
+const folder = createModel('folder',folderStructure)
 // 用户
 const Users = createModel('user',userStructure)
 // 标签
-const tags = createModel('folder',tagStructure)
+const tags = createModel('tag',tagStructure)
 module.exports = {
     folder,
     article,
