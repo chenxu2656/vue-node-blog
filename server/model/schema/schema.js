@@ -65,8 +65,8 @@ const folderStructure = {
 }
 
 // tag
-const tagStructure = {
-    name: {
+const tagsStructure = {
+    tagName: {
         type: String,
         require: true,
         unique: true
@@ -74,7 +74,7 @@ const tagStructure = {
     ctime: {
         type: Date,
         default: Date.now
-    }
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 }
 // 评论
 
@@ -84,5 +84,5 @@ module.exports = {
     userStructure,
     articleStructure,
     folderStructure,
-    tagStructure
+    tagsStructure
 }

@@ -1,13 +1,14 @@
-const {getfolderList} = require('../../model/')
+const {createtags} = require('../../model')
 const {errorHandle} = require('../../model/tools/error')
 module.exports = async (req,res)=>{
-    try {
-        const folderList = await getfolderList()
-        if (folderList) {
-            res.status(200).json(folderList)
+    const tagsInfo = req.body
+    try{
+        const tags = await createtags(tagsInfo)
+        if(tags) {
+            res.status(200).json(tags)
         } else {
             res.status(500).json({
-                'err': "没有获取到任何内容"
+                'err': "create fail"
             })
         }
     } catch (err) {

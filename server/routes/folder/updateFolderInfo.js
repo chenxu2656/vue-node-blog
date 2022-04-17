@@ -1,10 +1,11 @@
-const {getfolderList} = require('../../model/')
+const {updateFolder} = require('../../model/')
 const {errorHandle} = require('../../model/tools/error')
-module.exports = async (req,res)=>{
+module.exports = async(req,res)=>{
+    const folderId = req.path.split('/')[1]
     try {
-        const folderList = await getfolderList()
-        if (folderList) {
-            res.status(200).json(folderList)
+        const updatedInfo = await updateFolder(folderId,req.body)
+        if (updatedInfo) {
+            res.status(200).json(updatedInfo)
         } else {
             res.status(500).json({
                 'err': "没有获取到任何内容"

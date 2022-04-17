@@ -1,10 +1,10 @@
-const {getfolderList} = require('../../model/')
+const {gettagsList} = require('../../model/')
 const {errorHandle} = require('../../model/tools/error')
 module.exports = async (req,res)=>{
     try {
-        const folderList = await getfolderList()
-        if (folderList) {
-            res.status(200).json(folderList)
+        const tagsList = await gettagsList()
+        if (tagsList) {
+            res.status(200).json(tagsList)
         } else {
             res.status(500).json({
                 'err': "没有获取到任何内容"

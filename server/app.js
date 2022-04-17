@@ -13,6 +13,8 @@ const Article = require('./routes/article')
 // 文件夹操作
 
 const Folder = require('./routes/folder')
+
+const Tags = require('./routes/tags')
 const errhandle = require('./middleware/errhandle')
 var app = express()
 
@@ -27,5 +29,6 @@ app.use(require('./middleware/tokenCheck'))
 app.use('/api/user', User);
 app.use('/api/article',Article)
 app.use('/api/folder',Folder)
+app.use('/api/tags',Tags)
 app.use(errhandle)
 module.exports = app;

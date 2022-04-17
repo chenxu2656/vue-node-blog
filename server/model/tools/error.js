@@ -13,6 +13,10 @@ const errorHandle = (err) => {
                 "repeatValue" : err.keyValue
             }
             break;
+        default:
+            return {
+                'errMsg': "错误未被定义"
+            }
     }
 }
 module.exports = {

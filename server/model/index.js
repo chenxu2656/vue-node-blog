@@ -12,8 +12,21 @@ const {
 } = require('./src/user') 
 
 const {
-    createFolder
+    createFolder,
+    getfolderList,
+    getfolderDetail,
+    updateFolder,
+    deleteFolder
 } = require('./src/folder')
+
+const {
+    createtags,
+    gettagsList,
+    gettagsDetail,
+    updatetags,
+    deletetags
+} = require('./src/tags')
+
 
 module.exports = {
     createArticle, 
@@ -25,5 +38,15 @@ module.exports = {
     createUser,
     Credentials,
 
-    createFolder
+    createFolder,
+    getfolderList,
+    getfolderDetail,
+    updateFolder,
+    deleteFolder,
+
+    createtags,
+    gettagsList,
+    gettagsDetail,
+    updatetags,
+    deletetags
 }

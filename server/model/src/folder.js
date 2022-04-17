@@ -20,7 +20,7 @@ const updateFolder = async (id,obj)=>{
 // 删除
 const deleteFolder = async (id)=>{
     // 返回更新后的文件
-    const deleteInfo = await article.deleteOne({"_id": id})
+    const deleteInfo = await folder.deleteOne({"_id": id})
     return deleteInfo
 }
 module.exports = {
