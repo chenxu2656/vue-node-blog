@@ -2,10 +2,16 @@
 
 ## 开发日志
 
+### 2022.4.17
+- Update 
+  - 完善数据库结构
+  - 文章、用户、folder、category的增删改查
+  - 完成接口文档、接口测试
+- ToDo List （完成前端部分再来改）
+  - 高级查询，数据库引用
+  - err handle
 ### 2022.4.14
 - 重构后台结构
-
-
 ## Install
 ```
 yarn install
