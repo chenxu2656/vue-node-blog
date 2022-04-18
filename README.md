@@ -1,6 +1,14 @@
 # btfblog
+> 前后端分离全栈博客系统
+---  
+> 后端： Node + Express + Mongoose + jsonWebToken
+> 
+> 前端： Vue3 + Element-Plus + Vue-Router4
+> 
+> 接口： RestFul API
 
-## 开发日志
+ ## 
+## 开发日志 
 
 ### 2022.4.17
 - Update 
@@ -11,11 +19,24 @@
   - 高级查询，数据库引用
   - err handle
 ### 2022.4.14
-- 重构后台结构
+- Update
+  - 重构后台结构
 ## Install
 ```
 yarn install
 ```
+## Router
+- Front-End
+  - '/' : homePage
+    - '/blog/:id' : blog detail
+    - '/category/' : category list
+    - '/category/:id' : blog list of current category
+    - '/folder/' : folder list
+    - '/folder/:id' : blog list of current folder
+- Admin
+  - '/admin'
+    - '/login/' : login
+    - '/reg/': sign up
 ## 参考
 
 > Database:  https://cloud.mongodb.com/v2/6212efd86341c213815dff44#metrics/replicaSet/62380bf7281c914b51fb0ce3/explorer
