@@ -1,5 +1,5 @@
 <template>
-    <el-row id="container" :gutter="10">
+    <el-row id="container" :gutter="5">
         <el-col :span="6" class="leftSide">
             <leftBar/>
         </el-col>
@@ -18,10 +18,12 @@ import leftBar from '../../src/components/homePage/leftbar.vue'
 import articleList from '../../src/components/homePage/articleList.vue'
 export default {
     name: "HomePage",
+
     components: { 
         leftBar,
         articleList
     }
+    
 }
 </script>
 <style lang="scss" scoped>

@@ -17,7 +17,17 @@ const Folder = require('./routes/folder')
 const Tags = require('./routes/tags')
 const errhandle = require('./middleware/errhandle')
 var app = express()
-
+// 允许跨域 否则 前台请求可能会报错
+app.all('*', function(req, res, next) {
+    console.log(req.headers.origin)
+    console.log(req.environ)
+    res.header("Access-Control-Allow-Origin", req.headers.origin);
+    // res.header("Access-Control-Allow-Origin", '*');
+    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Credentials","true");
+    next()
+  });
 app.use(logger('dev'));
 // 处理json数据
 app.use(express.json());

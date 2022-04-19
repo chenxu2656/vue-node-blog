@@ -21,7 +21,7 @@
 </template>
 <script>
 export default {
-    name: 'leftBar'
+    name: 'leftBar',
 }
 </script>
 <style lang="scss" scoped>
