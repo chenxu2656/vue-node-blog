@@ -1,23 +1,32 @@
 # btfblog
+## 介绍
 > 前后端分离全栈博客系统
 ---  
+## 技术
 > 后端： Node + Express + Mongoose + jsonWebToken
 > 
-> 前端： Vue3 + Element-Plus + Vue-Router4
+> 前端： Vue3 + Element-Plus + Vue-Router4 
 > 
 > 接口： RestFul API
 
  ## 
 ## 开发日志 
-
+### 2022.4.19
+- Update
+  - 学习vue, vue3 , vue-axios,组合式api，生命周期hook
+  - 重构嵌套路由、嵌套组建
+  - 完成博客列表获取
+- Diary
+  > 昨天合肥确诊五例，一家五口。大家去做核酸检测，调休待定
 ### 2022.4.17
 - Update 
   - 完善数据库结构
   - 文章、用户、folder、category的增删改查
   - 完成接口文档、接口测试
 - ToDo List （完成前端部分再来改）
-  - 高级查询，数据库引用
-  - err handle
+  - [ ] 高级查询，数据库引用
+  - [ ] err handle
+  - [ ] 分页
 ### 2022.4.14
 - Update
   - 重构后台结构
@@ -45,6 +54,15 @@ yarn install
 
 > 关系型数据库设计： https://zhangjia.io/852.html
 
+> setup 语法糖 `<script setup>` 
+> - https://www.mybj123.com/10486.html
+> - https://juejin.cn/post/7078865301856583717
+
+> 组合式api: 
+> - https://zhuanlan.zhihu.com/p/361491044 
+> - https://juejin.cn/post/6907942907764965384
+
+> 子组件与父组件api： https://blog.csdn.net/cherry_vicent/article/details/117816855
 ## 工具
 
 > apiFox
