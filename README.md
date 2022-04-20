@@ -11,6 +11,11 @@
 
  ## 
 ## 开发日志 
+
+### 2022.4.20
+- Update
+  - 完成博客首页
+  - 修改后端接口的token验证，部分请求可以绕过token
 ### 2022.4.19
 - Update
   - 学习vue, vue3 , vue-axios,组合式api，生命周期hook
