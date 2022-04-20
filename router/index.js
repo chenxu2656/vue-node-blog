@@ -1,7 +1,7 @@
 import { createRouter,createWebHistory } from "vue-router";
-const HomePage = require('../views/front/HomePage.vue')
+const HomePage = require('../src/components/HomePage.vue')
 const FrontEnd = require('../views/front/FrontEnd.vue')
-const ArticleDetail = require('../views/front/ArticleDetail')
+const ArticleDetail = require('../src/components/ArticleDetail.vue')
 // const AdminLogin = require('../views/admin/AdminLogin')
 const routes = [
     {

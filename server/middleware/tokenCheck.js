@@ -4,8 +4,10 @@ module.exports = (req,res,next)=>{
     // 看请求是不是登陆或者注册，不是话的都需要进行检测
     const url = req.url
     let rex = /(register|login)/
-    if (req.method) {
-        rex = /(register|login|article)/
+    console.log(req.method);
+    if (req.method == 'GET') {
+        console.log(req.method);
+        rex = /(register|login|article|folder|tags)/
     } 
     if(!rex.test(url)) {
         const secretkey='useremail';//加密字段

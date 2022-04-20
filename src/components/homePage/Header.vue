@@ -8,7 +8,7 @@
   >
     <el-menu-item index="home" route="/">Home</el-menu-item>
     <el-sub-menu index="tag">
-      <template #title>Tag</template>
+      <template #title>Category</template>
       <el-menu-item index="front-end" key="">JavaScript</el-menu-item>
       <el-menu-item index="back-end" key="">Node</el-menu-item>
     </el-sub-menu>

@@ -2,7 +2,6 @@
 const {getArticleList} = require('../../model/index')
 module.exports = async(req,res)=>{
     const articleList  = await getArticleList()
-    console.log(articleList);
     if(articleList.length > 0) {
         res.status(200).json(articleList)
     }else{

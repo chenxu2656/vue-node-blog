@@ -12,7 +12,7 @@
     </el-container>
 </template>
 <script>
-import navHeader from '../../src/components/Header.vue'
+import navHeader from '../../src/components/homePage/Header.vue'
 export default {
   name: 'FrontEnd',
   components: {

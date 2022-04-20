@@ -4,7 +4,7 @@
       <li v-for="article in artList" :key="article.id">
         <el-card class="box-card" id="blog">
           <div class="sunTitle">
-            <span>POSTED:</span>
+            <span>POSTED: </span>
             <span>{{parseTimeStamp(article.ctime)}}</span>
           </div>
           <div class="blogTitle">{{article.title}}</div>
@@ -30,11 +30,10 @@ export default {
       })
       if (resp.data) {
           artList.value = resp.data
-          console.log(artList.value);
       }
     }
     let parseTimeStamp = (timeStamp)=>{
-      let date = new Date(timeStamp)
+      let date = new Date(parseInt(timeStamp))
       return date.toLocaleString()
     }
     onMounted( getBlogList )
@@ -49,31 +48,34 @@ export default {
 #postListConCon {
   height: auto;
   ul#articleList{
-    li {
-      list-style: none;
-      margin-top: 10px;
-      .sunTitle{
+    margin-top: 0px;
+    padding-left: 10px;
+    margin-bottom: 0pxs;
+    li{
+        list-style: none;
         text-align: left;
         color: #cacaca;
         font-size: 14px;
-      }
-      .blogTitle{
-        font-family: Ubuntu, Roboto, 'Open Sans', 'Microsoft YaHei', sans-serif;
-        font-size: 22px;
-        text-align: left;
-        padding-top: 10px;
-      }
-      .blogCon {
-        font-size: 16px;
-        text-align: justify;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        max-height: 100px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        text-indent: 24px;
-      }
+        .blogTitle{
+          font-family: Ubuntu, Roboto, 'Open Sans', 'Microsoft YaHei', sans-serif;
+          font-size: 22px;
+          text-align: left;
+          padding-top: 10px;
+        }
+        .blogCon {
+          font-size: 16px;
+          text-align: justify;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          max-height: 100px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-indent: 24px;
+        }
+      } 
+    li:not(:first-child) {
+          margin-top: 10px;
+        }
     }
   }
-}
 </style>

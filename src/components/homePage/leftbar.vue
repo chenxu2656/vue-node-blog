@@ -12,16 +12,57 @@
     <el-card class="box-card category" id="categoryList">
         <div class="categoryTitle">Category</div>
         <el-divider></el-divider>
+        <div v-for="item in categoryList" class="archievskList" :key="item.id">
+            <span>{{item.folderName}}</span> 
+        </div>
     </el-card>
     <el-card class="box-card category" id="archive">
-        <div class="categoryTitle">Archieve</div>
+        <div class="categoryTitle">Tags</div>
         <el-divider></el-divider>
-        <div v-for="o in 4" :key="o" class="archievskList">{{ 'List item ' + o }}</div>
+        <ul class="tagList">
+            <li  v-for="item in tagsList" :key="item.id"  id="tagName">{{item.tagName}} </li>
+        </ul>
     </el-card>
 </template>
 <script>
+import { ref } from 'vue';
+import axios from 'axios'
+import { onMounted } from 'vue'
 export default {
     name: 'leftBar',
+    setup(){
+        let categoryList = ref("")
+        let tagsList = ref("")
+        let getCategoryList = async()=>{
+            let category = await axios({
+                url: "/api/folder",
+                method: "get"
+            })
+            if(category.data) {
+                console.log(category.data);
+                categoryList.value = category.data
+            }
+        }
+        let getTagList = async()=>{
+            let tagList = await axios({
+                url: "/api/tags",
+                method: "get"
+            })
+            if(tagList.data) {
+                console.log(tagList.data);
+                tagsList.value = tagList.data
+            }
+        }
+        onMounted(() => {
+            getCategoryList() 
+            getTagList()
+        })
+        // onMounted(getCategoryList,getTagList)
+        return {
+            categoryList,
+            tagsList
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -51,10 +92,32 @@ export default {
         margin-top: 10px;
         text-align: left;
         .categoryTitle{
-            left: 0px;
+            left: 5px;
         }
         .el-divider{
             margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .archievskList{
+            padding-left: 10px;
+            height: 30px;
+        }
+        .tagList{
+            list-style: none;
+            padding-left: 0px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            #tagName {
+                background-color: #9accfa;
+                height: 25px;
+                line-height: 25px;
+                padding-left: 10px;
+                padding-right: 10px;
+                margin-right: 10px;
+                margin-bottom: 5px;
+                border-radius: 5px;
+            }
         }
     }
 </style>
