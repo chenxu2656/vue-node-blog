@@ -23,7 +23,6 @@ export default {
     setup(){
         let currentPath = useRouter().currentRoute.value.path
         let activePath = currentPath.substr(1)||'home'
-        console.log(activePath);
         return {activePath}
     }
 }

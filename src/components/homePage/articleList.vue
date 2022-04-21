@@ -7,7 +7,7 @@
             <span>POSTED: </span>
             <span>{{parseTimeStamp(article.ctime)}}</span>
           </div>
-          <div class="blogTitle"   @click="articleRouterPush(article._id)" >{{article.title}}</div>
+          <div class="blogTitle"   @click="articleRouterPush(article.title,article._id)" >{{article.title}}</div>
           <div class="blogCon">{{article.content}}</div>
         </el-card>
       </li>
@@ -32,7 +32,6 @@ export default {
         method: "get",
       })
       if (resp.data) {
-        console.log(resp.data);
           artList.value = resp.data
       }
     }
@@ -40,9 +39,8 @@ export default {
       let date = new Date(parseInt(timeStamp))
       return date.toLocaleString()
     }
-    let articleRouterPush = (id)=>{
-      console.log('test');
-      router.push(`/blog/${id}`)
+    let articleRouterPush = (title,id)=>{
+      router.push( { path: `/blog/${title}`,params: {id: id}})
     }
     onMounted( getBlogList )
     return {

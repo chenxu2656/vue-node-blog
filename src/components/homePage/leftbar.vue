@@ -39,7 +39,6 @@ export default {
                 method: "get"
             })
             if(category.data) {
-                console.log(category.data);
                 categoryList.value = category.data
             }
         }
@@ -49,7 +48,6 @@ export default {
                 method: "get"
             })
             if(tagList.data) {
-                console.log(tagList.data);
                 tagsList.value = tagList.data
             }
         }
