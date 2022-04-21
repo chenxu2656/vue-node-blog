@@ -12,5 +12,14 @@ module.exports = defineConfig({
         additionalData: `@import "~@/stylesheet/define.scss";`
       }
     }
+  },
+  chainWebpack: config =>{
+    config
+      .plugin("html")
+      .tap(args=>{
+        args[0].title = "xccit"
+        return args
+      })
+  
   }
 })
