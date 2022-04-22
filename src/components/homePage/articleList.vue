@@ -7,49 +7,40 @@
             <span>POSTED: </span>
             <span>{{parseTimeStamp(article.ctime)}}</span>
           </div>
-          <div class="blogTitle"   @click="articleRouterPush(article.title,article._id)" >{{article.title}}</div>
+          <div class="blogTitle"   @click="articleRouterPush(article._id)" >{{article.title}}</div>
           <div class="blogCon">{{article.content}}</div>
         </el-card>
       </li>
     </ul>
   </div>
 </template>
-<script>
+<script setup>
 import { ref } from 'vue';
 import axios from 'axios'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-export default {
-  name: "articleList",
-  setup(){
-    // 获取数据
-    let artList = ref("")
-     // 创建路由
-    const router = useRouter();
-    const getBlogList = async()=>{
-      const resp = await axios({
-        url: '/api/article',
-        method: "get",
-      })
-      if (resp.data) {
-          artList.value = resp.data
-      }
-    }
-    let parseTimeStamp = (timeStamp)=>{
-      let date = new Date(parseInt(timeStamp))
-      return date.toLocaleString()
-    }
-    let articleRouterPush = (title,id)=>{
-      router.push( { path: `/blog/${title}`,params: {id: id}})
-    }
-    onMounted( getBlogList )
-    return {
-      artList,
-      parseTimeStamp,
-      articleRouterPush
-    }
+import {parseTimeStamp} from "../../js/index"
+let artList = ref("")
+ // 创建路由
+const router = useRouter();
+const getBlogList = async()=>{
+  const resp = await axios({
+    url: '/api/article',
+    method: "get",
+  })
+  if (resp.data) {
+      artList.value = resp.data
   }
-};
+}
+// let parseTimeStamp = (timeStamp)=>{
+//   let date = new Date(parseInt(timeStamp))
+//   return date.toLocaleString()
+// }
+let articleRouterPush = (id)=>{
+  router.push( { path: `/blog/${id}`})
+}
+onMounted( getBlogList )
+
 </script>
 <style lang="scss" scoped>
 #postListConCon {

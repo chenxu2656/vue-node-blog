@@ -1,9 +1,14 @@
 <template>
-  <el-card class="box-card category" id="categoryList">
-    <div class="categoryTitle">Category</div>
-    <el-divider></el-divider>
-    <div v-for="o in 4" class="archievskList" :key="o">
-      <span>{{ o }}</span>
-    </div>
-  </el-card>
+  <el-row id="container" :gutter="5">
+    <el-col :span="6" class="leftSide">
+      <left-bar />
+    </el-col>
+    <el-col :span="18" class="con">
+      <article-detail/>
+    </el-col>
+  </el-row>
 </template>
+<script setup>
+import leftBar from "./homePage/leftbar.vue";
+import articleDetail from './homePage/articleDetail.vue'
+</script>

@@ -7,13 +7,15 @@
     :router="true"
   >
     <el-menu-item index="home" route="/">Home</el-menu-item>
-    <el-sub-menu index="tag">
+    <!-- <el-sub-menu index="tag">
       <template #title>Category</template>
       <el-menu-item index="front-end" key="">JavaScript</el-menu-item>
       <el-menu-item index="back-end" key="">Node</el-menu-item>
-    </el-sub-menu>
+    </el-sub-menu> -->
+    <el-menu-item index="tags">Tags</el-menu-item>
     <el-menu-item index="About">About</el-menu-item>
     <el-menu-item index="contact">Contact</el-menu-item>
+    <!-- <el-menu-item index="Admin">Admin</el-menu-item> -->
   </el-menu>
 </template>
 <script>
@@ -29,7 +31,7 @@ export default {
 </script>
 <style lang="scss" scoped>
     .el-menu {
-      width: 1000px;
+      width: 1100px;
       padding: 0px;
       margin: auto;
       border: none;

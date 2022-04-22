@@ -58,16 +58,19 @@ yarn install
 > https://ppoffice.github.io/hexo-theme-icarus/archives/
 
 > 关系型数据库设计： https://zhangjia.io/852.html
-
-> setup 语法糖 `<script setup>` 
+### vue3-study
+#### setup 语法糖 `<script setup>` 
 > - https://www.mybj123.com/10486.html
 > - https://juejin.cn/post/7078865301856583717
 
-> 组合式api: 
+#### 组合式api: 
 > - https://zhuanlan.zhihu.com/p/361491044 
 > - https://juejin.cn/post/6907942907764965384
-
+#### 组件
 > 子组件与父组件api： https://blog.csdn.net/cherry_vicent/article/details/117816855
+
+#### ref, refs ,reactive
+> ref获取DOM: https://www.bilibili.com/video/BV1Uq4y1L7oj?spm_id_from=333.337.search-card.all.click
 ## 工具
 
 > apiFox
