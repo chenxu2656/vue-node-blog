@@ -21,11 +21,11 @@ const routes = [
         ]
     },
     {
-        path: "/admin",
+        path: "/admin/",
         components: AdminMa,
         children: [
             {
-                path: "/login/",
+                path: "login",
                 components: LogIn
             }
         ]
