@@ -20,7 +20,7 @@
           />
         </el-form-item>
         <el-form-item id="submitButton">
-          <el-button type="primary" @click="submitForm(ruleFormRef)"
+          <el-button type="primary" @click="submitForm(ruleForm.email,ruleForm.pass)"
             >Submit</el-button
           >
         </el-form-item>
@@ -28,9 +28,7 @@
     </el-card>
   </div>
 </template>
-
 <style lang="scss" scoped>
-
 #con {
     width: 100%;
     height: 100%;
@@ -40,21 +38,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: -webkit-linear-gradient(
-      to right,
-      #64b3f4,
-      #c2e59c
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-      to right,
-      #64b3f4,
-      #c2e59c
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient( to right, #64b3f4, #c2e59c ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   #login {
     width: 600px;
     padding: 40px 0px 40px 0px;
     .el-form-item {
       margin-right: 120px;
+      font-size: 16px;
+      font-weight: 800;
     }
     #submitButton {
       .el-button {
@@ -65,14 +56,27 @@
   }
 }
 </style>
-  
-
 <script setup>
-import { reactive, ref } from "vue";
-const ruleFormRef = ref();
-
+import axios from "axios";
+import { reactive } from "vue";
+let token = ""
 const ruleForm = reactive({
   pass: "",
   email: "",
 });
+let submitForm = async (email,pass)=>{
+  let resp = await axios({
+    url: "/api/user/login",
+    method: "post",
+    data: {
+      "email": email,
+      "password": pass
+    }
+  })
+  console.log(resp);
+  if(resp){
+    token = resp.data.token
+    localStorage.setItem("token",token)
+  } 
+}
 </script>
