@@ -59,6 +59,8 @@
 <script setup>
 import axios from "axios";
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
+let router = useRouter()
 let token = ""
 const ruleForm = reactive({
   pass: "",
@@ -77,6 +79,7 @@ let submitForm = async (email,pass)=>{
   if(resp){
     token = resp.data.token
     localStorage.setItem("token",token)
+    router.push({path: '/admin'})
   } 
 }
 </script>

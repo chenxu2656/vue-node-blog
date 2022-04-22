@@ -12,6 +12,14 @@
  ## 
 ## 开发日志 
 > 下班更新
+
+### 2022.4.23
+- Update
+  - 博客信息页
+  - 登陆
+  - token验证
+- Bug
+  - [ ] token 验证
 ### 2022.4.20
 - Update
   - 完成博客首页
@@ -74,3 +82,4 @@ yarn install
 ## 工具
 
 > apiFox
+> jwt: https://www.npmjs.com/package/jsonwebtoken
