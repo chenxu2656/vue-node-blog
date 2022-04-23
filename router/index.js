@@ -5,6 +5,8 @@ const ArticleDetail = require('../src/components/ArticleDetail.vue')
 const AdminMa = require('../views/admin/AdminMa.vue')
 const LogIn = require('../src/components/AdminLogin.vue')
 const AdminP = require('../src/components/AdminP.vue')
+const AdminHomePage = require('../src/components/admin/content/HomePage.vue')
+const CreateBlog = require('../src/components/admin/content/CreateBlog.vue')
 const routes = [
     {
         path: "/",
@@ -21,12 +23,22 @@ const routes = [
         ]
     },
     {
-        path: "/admin/",
+        path: "/admin",
         components: AdminMa,
         children: [
             {
                 path: "",
-                components: AdminP
+                components: AdminP,
+                children: [
+                    {
+                        path: "",
+                        components: AdminHomePage
+                    },
+                    {
+                        path: "createBlog",
+                        components: CreateBlog
+                    }
+                ]
             },
             {
                 path: "login",

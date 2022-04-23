@@ -8,7 +8,9 @@
           <router-view></router-view>
         </div>
       </el-main>
-      <el-footer>Footer</el-footer>
+      <el-footer>
+        <router-link to="/admin">admin</router-link>
+      </el-footer>
     </el-container>
 </template>
 <script>
@@ -21,7 +23,7 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scope>
   .el-header{
       width: 1200px;
       margin: auto;

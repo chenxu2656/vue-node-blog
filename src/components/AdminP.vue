@@ -15,3 +15,13 @@
 <script setup>
     import SideMenuBar from '../components/admin/SideMenuBar.vue'
 </script>
+<style lang="scss" scoped>
+  .el-main{
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+  }
+  #content{
+    margin-top: 0px;
+  }
+</style>

@@ -18,8 +18,10 @@
   - 博客信息页
   - 登陆
   - token验证
+  - v-md-editor
+  - 后台框架
 - Bug
-  - [ ] token 验证
+  - [ ] token 正确性验证
 ### 2022.4.20
 - Update
   - 完成博客首页
@@ -79,7 +81,14 @@ yarn install
 
 #### ref, refs ,reactive
 > ref获取DOM: https://www.bilibili.com/video/BV1Uq4y1L7oj?spm_id_from=333.337.search-card.all.click
-## 工具
 
+## 工具 
+    
 > apiFox
+
 > jwt: https://www.npmjs.com/package/jsonwebtoken
+
+
+> > config: https://ckeditor.com/docs/ckeditor5/latest/api/module_core_editor_editorconfig-EditorConfig.html
+
+> v-md-editor:  https://ckang1229.gitee.io/vue-markdown-editor/zh/

@@ -1,56 +1,53 @@
 <template>
-  <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
+  <!-- <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
     <el-radio-button :label="false">expand</el-radio-button>
     <el-radio-button :label="true">collapse</el-radio-button>
-  </el-radio-group>
+  </el-radio-group> -->
   <el-menu
-    default-active="2"
+    default-active="home"
     class="el-menu-vertical-demo"
     :collapse="isCollapse"
     @open="handleOpen"
     @close="handleClose"
   >
-    <el-sub-menu index="1">
+    <el-menu-item index="home">
+      <el-icon><icon-menu /></el-icon>
+      <template #title>总览</template>
+    </el-menu-item>
+    <el-sub-menu index="article">
       <template #title>
         <el-icon><icon-menu /></el-icon>
-        <span>Navigator One</span>
+        <span>博客管理</span>
       </template>
       <el-menu-item-group>
-        <template #title><span>Group One</span></template>
-        <el-menu-item index="1-1">item one</el-menu-item>
-        <el-menu-item index="1-2">item two</el-menu-item>
+        <el-menu-item index="createArticle" @click="routerPush(router,'/admin/createBlog')">创建博客 </el-menu-item>
+        <el-menu-item index="articleManage">博客管理</el-menu-item>
+        <el-menu-item index="tagsManagement">标签管理</el-menu-item>
+        <!-- <el-menu-item index="tagsManagement">评论管理</el-menu-item> -->
+        <el-menu-item index="categoryManagement">文件夹管理</el-menu-item>
       </el-menu-item-group>
-      <el-menu-item-group title="Group Two">
-        <el-menu-item index="1-3">item three</el-menu-item>
-      </el-menu-item-group>
-      <el-sub-menu index="1-4">
-        <template #title><span>item four</span></template>
-        <el-menu-item index="1-4-1">item one</el-menu-item>
-      </el-sub-menu>
     </el-sub-menu>
-    <el-menu-item index="2">
+    <el-menu-item index="userManagement">
       <el-icon><icon-menu /></el-icon>
-      <template #title>Navigator Two</template>
+      <template #title>用户管理</template>
     </el-menu-item>
-    <el-menu-item index="3" disabled>
+    <el-menu-item index="me" >
       <el-icon><icon-menu /></el-icon>
-      <template #title>Navigator Three</template>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <el-icon><setting /></el-icon>
-      <template #title>Navigator Four</template>
+      <template #title>个人中心</template>
     </el-menu-item>
   </el-menu>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import {
-  Menu as IconMenu,
-  Setting,
-} from '@element-plus/icons-vue'
+import {routerPush} from '../../js/index'
 
-const isCollapse = ref(true)
+import {
+  Menu as IconMenu
+} from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const isCollapse = ref(false)
 const handleOpen = (key, keyPath) => {
   console.log(key, keyPath)
 }
