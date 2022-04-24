@@ -7,6 +7,12 @@ const LogIn = require('../src/components/AdminLogin.vue')
 const AdminP = require('../src/components/AdminP.vue')
 const AdminHomePage = require('../src/components/admin/content/HomePage.vue')
 const CreateBlog = require('../src/components/admin/content/CreateBlog.vue')
+
+const BlogList = require('../src/components/admin/content/ManageBlog.vue')
+const DraftBlog = require('../src/components/admin/content/DraftBlog.vue')
+const TagsManage = require('../src/components/admin/content/TagsManage.vue')
+const TrashBlog = require('../src/components/admin/content/TrashBlog.vue')
+
 const routes = [
     {
         path: "/",
@@ -37,6 +43,10 @@ const routes = [
                     {
                         path: "createBlog",
                         components: CreateBlog
+                    },
+                    {
+                        path: "blogList",
+                        components: BlogList
                     }
                 ]
             },

@@ -1,0 +1,3 @@
+<template>
+    daraft
+</template>

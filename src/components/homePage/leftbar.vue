@@ -65,6 +65,7 @@ export default {
 </script>
 <style lang="scss" scoped>
     #basicInfo {
+        text-align: center;
         .el-avatar{
             width: 100px;
             height: 100px;

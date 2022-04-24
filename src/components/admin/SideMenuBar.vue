@@ -21,7 +21,7 @@
       </template>
       <el-menu-item-group>
         <el-menu-item index="createArticle" @click="routerPush(router,'/admin/createBlog')">创建博客 </el-menu-item>
-        <el-menu-item index="articleManage">博客管理</el-menu-item>
+        <el-menu-item index="articleManage" >博客管理</el-menu-item>
         <el-menu-item index="tagsManagement">标签管理</el-menu-item>
         <!-- <el-menu-item index="tagsManagement">评论管理</el-menu-item> -->
         <el-menu-item index="categoryManagement">文件夹管理</el-menu-item>
