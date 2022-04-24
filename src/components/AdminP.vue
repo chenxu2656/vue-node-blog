@@ -20,8 +20,13 @@
     margin: 0px;
     padding: 0px;
     display: flex;
+    justify-content: space-between;
+  }
+  .el-header{
+    border-bottom: 1px solid gainsboro;
   }
   #content{
-    margin-top: 0px;
+    margin: 0px 20px 0px 20px;
+    flex-grow: 1;
   }
 </style>

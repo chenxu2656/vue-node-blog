@@ -10,9 +10,9 @@
     @open="handleOpen"
     @close="handleClose"
   >
-    <el-menu-item index="home">
+    <el-menu-item index="home" @click="routerPush(router,'/admin')">
       <el-icon><icon-menu /></el-icon>
-      <template #title>总览</template>
+      <template #title >总览</template>
     </el-menu-item>
     <el-sub-menu index="article">
       <template #title>
@@ -25,6 +25,8 @@
         <el-menu-item index="tagsManagement">标签管理</el-menu-item>
         <!-- <el-menu-item index="tagsManagement">评论管理</el-menu-item> -->
         <el-menu-item index="categoryManagement">文件夹管理</el-menu-item>
+        <el-menu-item index="draft">草稿箱</el-menu-item>
+        <el-menu-item index="trash">垃圾箱</el-menu-item>
       </el-menu-item-group>
     </el-sub-menu>
     <el-menu-item index="userManagement">

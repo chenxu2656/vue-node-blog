@@ -9,9 +9,10 @@
     <el-divider></el-divider>
   </el-card>
   <el-card class="box-card category" id="blogBlock">
-    <div id="blogCon">
+    <!-- <div >
       {{ blogDetail.content }}
-    </div>
+    </div> -->
+    <v-md-preview :text="blogDetail.content" id="blogCon"></v-md-preview>
   </el-card>
 </template>
 <style lang="scss" scoped>
