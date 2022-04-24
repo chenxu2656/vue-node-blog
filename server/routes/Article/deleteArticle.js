@@ -1,6 +1,6 @@
 const {deleteArticle} = require('../../model/index')
 module.exports = async(req,res)=>{
-    const artId = req.path.split('/')[1]
-    const info = await deleteArticle(artId)
+    const artIdList = req.body.idList
+    const info = await deleteArticle(artIdList)
     res.status(200).json(info)
 }

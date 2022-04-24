@@ -21,18 +21,17 @@
       </template>
       <el-menu-item-group>
         <el-menu-item index="createArticle" @click="routerPush(router,'/admin/createBlog')">创建博客 </el-menu-item>
-        <el-menu-item index="articleManage" >博客管理</el-menu-item>
-        <el-menu-item index="tagsManagement">标签管理</el-menu-item>
-        <!-- <el-menu-item index="tagsManagement">评论管理</el-menu-item> -->
-        <el-menu-item index="categoryManagement">文件夹管理</el-menu-item>
-        <el-menu-item index="draft">草稿箱</el-menu-item>
-        <el-menu-item index="trash">垃圾箱</el-menu-item>
+        <el-menu-item index="articleManage" @click="routerPush(router,'/admin/blogList')">博客管理</el-menu-item>
+        <el-menu-item index="tagsManagement" @click="routerPush(router,'/admin/tags')">标签管理</el-menu-item>
+        <el-menu-item index="categoryManagement" @click="routerPush(router,'/admin/folder')">文件夹管理</el-menu-item>
+        <el-menu-item index="draft" @click="routerPush(router,'/admin/draft')">草稿箱</el-menu-item>
+        <el-menu-item index="trash" @click="routerPush(router,'/admin/trash')">垃圾箱</el-menu-item>
       </el-menu-item-group>
     </el-sub-menu>
-    <el-menu-item index="userManagement">
+    <!-- <el-menu-item index="userManagement">
       <el-icon><icon-menu /></el-icon>
       <template #title>用户管理</template>
-    </el-menu-item>
+    </el-menu-item> -->
     <el-menu-item index="me" >
       <el-icon><icon-menu /></el-icon>
       <template #title>个人中心</template>
@@ -43,7 +42,6 @@
 <script setup>
 import { ref } from 'vue'
 import {routerPush} from '../../js/index'
-
 import {
   Menu as IconMenu
 } from '@element-plus/icons-vue'

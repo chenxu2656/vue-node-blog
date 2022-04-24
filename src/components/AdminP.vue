@@ -1,6 +1,9 @@
 <template>
   <el-container>
-    <el-header> header </el-header>
+    <el-header> 
+      <div id="title" class="topbarCon">XCCIT</div>
+      <div id="name" class="topbarCon">btfblog 后台管理系统</div>
+    </el-header>
     <el-main>
       <side-menu-bar />
       <div id="content">
@@ -22,6 +25,16 @@ import SideMenuBar from "../components/admin/SideMenuBar.vue";
 }
 .el-header {
   border-bottom: 1px solid gainsboro;
+  display: flex;
+  justify-content: space-between;
+  .topbarCon{
+    height: 100%;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 700;
+  }
 }
 #content {
   margin: 0px 20px 0px 20px;

@@ -8,10 +8,12 @@ const AdminP = require('../src/components/AdminP.vue')
 const AdminHomePage = require('../src/components/admin/content/HomePage.vue')
 const CreateBlog = require('../src/components/admin/content/CreateBlog.vue')
 
-const BlogList = require('../src/components/admin/content/ManageBlog.vue')
+const BlogList = require('../src/components/admin/content/BlogList.vue')
 const DraftBlog = require('../src/components/admin/content/DraftBlog.vue')
 const TagsManage = require('../src/components/admin/content/TagsManage.vue')
 const TrashBlog = require('../src/components/admin/content/TrashBlog.vue')
+const FolderManage = require('../src/components/admin/content/FolderManage.vue')
+
 
 const routes = [
     {
@@ -45,9 +47,30 @@ const routes = [
                         components: CreateBlog
                     },
                     {
+                        path: "createBlog/:id",
+                        components: CreateBlog,
+                    },
+                    {
                         path: "blogList",
                         components: BlogList
-                    }
+                    },
+                    {
+                        path: "draft",
+                        components: DraftBlog,
+                    },
+                    
+                    {
+                        path: "tags",
+                        components: TagsManage
+                    },
+                    {
+                        path: "trash",
+                        components: TrashBlog
+                    },
+                    {
+                        path: "folder",
+                        components: FolderManage
+                    },
                 ]
             },
             {
