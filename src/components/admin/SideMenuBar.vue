@@ -22,7 +22,6 @@
       <el-menu-item-group>
         <el-menu-item index="createArticle" @click="routerPush(router,'/admin/createBlog')">创建博客 </el-menu-item>
         <el-menu-item index="articleManage" @click="routerPush(router,'/admin/blogList')">博客管理</el-menu-item>
-        <el-menu-item index="tagsManagement" @click="routerPush(router,'/admin/tags')">标签管理</el-menu-item>
         <el-menu-item index="categoryManagement" @click="routerPush(router,'/admin/folder')">文件夹管理</el-menu-item>
         <el-menu-item index="draft" @click="routerPush(router,'/admin/draft')">草稿箱</el-menu-item>
         <el-menu-item index="trash" @click="routerPush(router,'/admin/trash')">垃圾箱</el-menu-item>
