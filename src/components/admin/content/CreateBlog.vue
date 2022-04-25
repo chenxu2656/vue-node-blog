@@ -57,13 +57,13 @@
     </div> -->
     <el-button type="primary" @click="postBlog()">创建博客</el-button>
     <el-button type="primary">保存到草稿</el-button>
-    <el-button type="primary">删除博客</el-button>
   </el-card>
 </template>
 
 <script setup>
 import axios from "axios";
-import { reactive, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
+import { useRoute } from "vue-router";
 const blogInfo = reactive({
   title: "",
   folders: [],
@@ -72,6 +72,22 @@ const blogInfo = reactive({
   ctime: Date.now(),
   imgPath: "http://dummyimage.com/120x90"
 });
+// 判断是编辑还是新建
+const router = useRoute()
+const blogId = router.path.split('createBlog/')[1]
+let getCon = async (blogId) => {
+  let resp = await axios({
+    url: `/api/article/${blogId}`,
+    method: "get",
+  });
+  if (resp) {
+    blogInfo.title = resp.data.title;
+    blogInfo.content = resp.data.content;
+    blogInfo.folders = resp.data.folders;
+    blogInfo.tags = resp.data.tags;
+    console.log(resp.data);
+  }
+};
 const labelPosition = ref("top");
 
 const category = ["前端", "后端", "数据库"];
@@ -96,7 +112,11 @@ const postBlog = async ()=>{
     }
   
 }
-
+onMounted(()=>{
+  if(blogId){
+    getCon(blogId)
+  }
+})
 // todo list
 // 上传文件到服务器并返回url，在此选用一个 图床吧
 </script>

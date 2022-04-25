@@ -2,7 +2,6 @@
 <el-card>
     <div id="operation" v-show="operationView">
         <el-button size="small" type="danger" @click="handleDelete(selectedRow)">批量删除</el-button>
-        <!-- <el-button size="small" @click="handleEdit(scope.$index, scope.row)">批量删除</el-button> -->
     </div>
     <el-table :data="filterTableData" style="width: 100%" @selection-change="selectionLineChangeHandle">
     <el-table-column type="selection" width="55" />
@@ -13,8 +12,8 @@
         <el-input v-model="search" size="small" placeholder="Type to search" />
       </template>
       <template #default="scope">
-        <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        <el-button size="small" @click="handleEdit(scope.$index, scope.row)">取消发布</el-button>
+        <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
+        <el-button size="small" @click="handleEdit(scope.row)">取消发布</el-button>
         <el-button size="small" type="danger" @click="handleDelete(scope.row)" >删除</el-button>
       </template>
     </el-table-column>
@@ -24,7 +23,9 @@
 <script  setup>
 import { computed, ref ,onMounted} from 'vue'
 import axios from 'axios'
-import {formateCtime} from "../../../js/index.js"
+import {formateCtime,routerPush} from "../../../js/index.js"
+import { useRouter } from "vue-router";
+const router = useRouter()
 const search = ref('')
 const tableData = ref([])
 const selectedRow = ref([])
@@ -54,7 +55,9 @@ const handleDelete = async(blogs) => {
   await deleteBlog(ids)
   getBlogList()
 }
-
+const handleEdit = (row)=>{
+  routerPush(router,`/admin/createBlog/${row._id}`)
+}
 const deleteBlog = async(ids)=>{
   try {
     let resp = await axios({
