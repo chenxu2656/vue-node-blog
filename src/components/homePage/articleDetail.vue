@@ -57,7 +57,6 @@ let getCon = async () => {
   });
   if (resp) {
     blogDetail.value = resp.data;
-    console.log(blogDetail.value);
   }
 };
 onMounted(() => {

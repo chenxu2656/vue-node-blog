@@ -89,3 +89,8 @@ const getBlogList = async()=>{
 onMounted( getBlogList )
 
 </script>
+<style scoped>
+.el-card{
+  margin-top: 20px;
+}
+</style>
