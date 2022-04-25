@@ -33,9 +33,9 @@ const updateArticle = async (id,obj)=>{
     return updateInfo
 }
 // 删除
-const deleteArticle = async (idList)=>{
+const deleteArticle = async (ids)=>{
     // 返回更新后的文件
-    const deleteInfo = await article.deleteOne({"_id": {$in: idList}})
+    const deleteInfo = await article.deleteOne({"_id": {$in: ids}})
     console.log(deleteInfo);
     return deleteInfo
 }

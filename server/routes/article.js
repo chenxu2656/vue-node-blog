@@ -10,6 +10,6 @@ router.get('/:id',require('./Article/articleDetail'))
 // 修改文章内容
 router.put('/:id',require('./Article/updateArticle'))
 // 删除文章
-router.delete('/:id',require('./Article/deleteArticle'))
+router.delete('/',require('./Article/deleteArticle'))
 
 module.exports = router;
