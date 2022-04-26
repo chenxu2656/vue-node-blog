@@ -44,9 +44,29 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="Images"> </el-form-item>
+        <el-form-item label="Images">
+          <el-upload
+            ref="uploadRef"
+            class="upload-demo"
+            :file-list="fileList"
+            :auto-upload="false"
+            action="/upload/qiniu"
+            method="post"
+          >
+            <template #trigger>
+              <el-button type="primary">select file</el-button>
+            </template>
+            <el-button class="ml-3" type="success" @click="submitUpload">
+              upload
+            </el-button>
+          </el-upload>
+        </el-form-item>
         <div id="editor">
-          <v-md-editor v-model="blogInfo.content" height="800px" :disabled-menus="[]">
+          <v-md-editor
+            v-model="blogInfo.content"
+            height="800px"
+            :disabled-menus="[]"
+          >
           </v-md-editor>
         </div>
       </el-form>
@@ -70,11 +90,13 @@ const blogInfo = reactive({
   tags: [],
   content: "",
   ctime: Date.now(),
-  imgPath: "http://dummyimage.com/120x90"
+  imgPath: "http://dummyimage.com/120x90",
 });
 // 判断是编辑还是新建
-const router = useRoute()
-const blogId = router.path.split('createBlog/')[1]
+const router = useRoute();
+const uploadRef = ref()
+const fileList = ref([])
+const blogId = router.path.split("createBlog/")[1];
 let getCon = async (blogId) => {
   let resp = await axios({
     url: `/api/article/${blogId}`,
@@ -89,34 +111,35 @@ let getCon = async (blogId) => {
   }
 };
 const labelPosition = ref("top");
-
+const submitUpload = ()=>{
+  console.log(fileList.value);
+}
 const category = ["前端", "后端", "数据库"];
 const tags = ["javascript", "mongodb", "nodejs"];
 
-const postBlog = async ()=>{
-    try{
-      let resp = await axios({
-          url: "/api/article/",
-          method: "post",
-          data: blogInfo,
-          headers: {
-            token: localStorage.getItem('token')
-          }
-      })
-      if (resp.data) {
-         console.log(resp); 
-      }
-    } catch (err) {
-      console.log(blogInfo);
-      console.log(`err: ${err}`);
+const postBlog = async () => {
+  try {
+    let resp = await axios({
+      url: "/api/article/",
+      method: "post",
+      data: blogInfo,
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    });
+    if (resp.data) {
+      console.log(resp);
     }
-  
-}
-onMounted(()=>{
-  if(blogId){
-    getCon(blogId)
+  } catch (err) {
+    console.log(blogInfo);
+    console.log(`err: ${err}`);
   }
-})
+};
+onMounted(() => {
+  if (blogId) {
+    getCon(blogId);
+  }
+});
 // todo list
 // 上传文件到服务器并返回url，在此选用一个 图床吧
 </script>
