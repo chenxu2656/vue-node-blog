@@ -56,7 +56,7 @@
             <template #trigger>
               <el-button type="primary">select file</el-button>
             </template>
-            <el-button class="ml-3" type="success" @click="submitUpload">
+            <el-button class="ml-3" type="success" @click="postImgToQiniu">
               upload
             </el-button>
           </el-upload>
@@ -111,9 +111,6 @@ let getCon = async (blogId) => {
   }
 };
 const labelPosition = ref("top");
-const submitUpload = ()=>{
-  console.log(fileList.value);
-}
 const category = ["前端", "后端", "数据库"];
 const tags = ["javascript", "mongodb", "nodejs"];
 
@@ -135,6 +132,21 @@ const postBlog = async () => {
     console.log(`err: ${err}`);
   }
 };
+const postImgToQiniu = async()=>{
+  let data = await axios({
+    url: '/upload/qiniu',
+    method: "post",
+    data: {
+      file: fileList.value[0].raw
+    },
+    headers: {
+      token: localStorage.getItem("token")
+    }
+  })
+  if (data) {
+    console.log(data);
+  }
+}
 onMounted(() => {
   if (blogId) {
     getCon(blogId);

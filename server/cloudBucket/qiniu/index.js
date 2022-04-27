@@ -9,14 +9,14 @@ const options = {
 const putPolicy = new qiniu.rs.PutPolicy(options);
 const uploadToken=putPolicy.uploadToken(mac);
 const config = new qiniu.conf.Config();
-const localFile = "/Users/chenxu/Desktop/aitmed/admin/admin/assets/keyboard.svg";
 const formUploader = new qiniu.form_up.FormUploader(config);
 const putExtra = new qiniu.form_up.PutExtra();
 const key='4.svg';
 // 文件上传
-let uploadFile = (filePath)=>{
+// https://developer.qiniu.com/kodo/1289/nodejs#5
+let uploadFile = (readableStream)=>{
   return new Promise((res,rej)=>{
-    formUploader.putFile(uploadToken, key, localFile, putExtra, function(respErr,
+    formUploader.putStream(uploadToken, key, readableStream, putExtra, function(respErr,
       respBody, respInfo) {
       if (respErr) {
         rej(respErr)
