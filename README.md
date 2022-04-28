@@ -12,13 +12,15 @@
 ## Start
 
 ```bash
-# 安装
 # 前台
 yarn && yarn run start
 # 后台,目前数据库用的mongodb云数据库，hardCode 在代码了，想改可以自己改 （/server/.env）
 cd server && yarn && yarn run start
 
 ```
+>  ApiFox api接口， 过期issues联系。
+
+链接: https://www.apifox.cn/apidoc/shared-6f8b1f31-9880-4ea6-a11a-022c782a2bde  访问密码 : vQYDZM9i 
 ## 开发日志 
 > 下班更新
 
