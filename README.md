@@ -9,7 +9,16 @@
 > 
 > 接口： RestFul API
 
- ## 
+## Start
+
+```bash
+# 安装
+# 前台
+yarn && yarn run start
+# 后台,目前数据库用的mongodb云数据库，hardCode 在代码了，想改可以自己改 （/server/.env）
+cd server && yarn && yarn run start
+
+```
 ## 开发日志 
 > 下班更新
 
@@ -51,10 +60,7 @@
 ### 2022.4.14
 - Update
   - 重构后台结构
-## Install
-```
-yarn install
-```
+
 ## Router
 - Front-End
   - '/' : homePage
