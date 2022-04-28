@@ -1,6 +1,6 @@
 # btfblog
 ## 介绍
-> 前后端分离全栈博客系统
+> Node + Express + Mongoose + Vue3 + Element-Plus + Vue-Router4  +  RestFul API **前后端分离全栈博客系统** 
 ---  
 ## 技术
 > 后端： Node + Express + Mongoose + jsonWebToken
