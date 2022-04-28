@@ -44,22 +44,13 @@
             />
           </el-select>
         </el-form-item>
+
         <el-form-item label="Images">
-          <el-upload
-            ref="uploadRef"
-            class="upload-demo"
-            :file-list="fileList"
-            :auto-upload="false"
-            action="/upload/qiniu"
-            method="post"
-          >
-            <template #trigger>
-              <el-button type="primary">select file</el-button>
-            </template>
-            <el-button class="ml-3" type="success" @click="uploadImg(qiniuToken,fileList)">
+          <input type="file" name="" id="" @change="selectImg">
+            <img :src="blobFile" alt="">
+            <el-button class="ml-3" type="success" @click="uploadImg(qiniuToken)">
               upload
             </el-button>
-          </el-upload>
         </el-form-item>
         <div id="editor">
           <v-md-editor
@@ -95,10 +86,9 @@ const blogInfo = reactive({
 });
 // 判断是编辑还是新建
 const router = useRoute();
-const uploadRef = ref()
-const fileList = ref([])
 let qiniuToken = ref()
 const blogId = router.path.split("createBlog/")[1];
+const blobFile = ref()
 let getCon = async (blogId) => {
   let resp = await axios({
     url: `/api/article/${blogId}`,
@@ -151,13 +141,28 @@ const getToken = async()=>{
     console.log(err);
   }
 }
-const uploadImg = async(token,file) =>{
+const selectImg = (e)=>{
+  let File = e.target.files[0]
+  let BlobFormat = URL.createObjectURL(File)
+  console.log(BlobFormat);
+  blobFile.value = BlobFormat
+
+}
+const uploadImg = async(token) =>{
   let tokenParse = token.data.token
-  let fileParse = file[0]
   console.log(tokenParse);
-  console.log(fileParse);
-  const observable =  startUpload(tokenParse,fileParse)
-  console.log(observable);
+  const observable = startUpload(blobFile.value,tokenParse)
+  observable.subscribe({
+    next(res){
+      console.log(`next:${res}`);
+    },
+    error(err){
+      console.log(`err:${err}`);
+    },
+    complete(res){
+      console.log(`complete:${res}`);
+    }
+  })
 }
 onMounted(async () => {
   if (blogId) {
