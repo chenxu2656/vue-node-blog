@@ -56,7 +56,7 @@
             <template #trigger>
               <el-button type="primary">select file</el-button>
             </template>
-            <el-button class="ml-3" type="success" @click="postImgToQiniu">
+            <el-button class="ml-3" type="success" @click="uploadImg(qiniuToken,fileList)">
               upload
             </el-button>
           </el-upload>
@@ -84,6 +84,7 @@
 import axios from "axios";
 import { onMounted, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
+import {startUpload} from '../../../js/bucket/qiniu'
 const blogInfo = reactive({
   title: "",
   folders: [],
@@ -96,6 +97,7 @@ const blogInfo = reactive({
 const router = useRoute();
 const uploadRef = ref()
 const fileList = ref([])
+let qiniuToken = ref()
 const blogId = router.path.split("createBlog/")[1];
 let getCon = async (blogId) => {
   let resp = await axios({
@@ -132,25 +134,36 @@ const postBlog = async () => {
     console.log(`err: ${err}`);
   }
 };
-const postImgToQiniu = async()=>{
+const getToken = async()=>{
+  try {
   let data = await axios({
-    url: '/upload/qiniu',
+    url: '/api/token/qiniu',
     method: "post",
-    data: {
-      file: fileList.value[0].raw
-    },
     headers: {
-      token: localStorage.getItem("token")
-    }
+        token: localStorage.getItem("token"),
+      },
   })
   if (data) {
-    console.log(data);
+    console.log(data.data.token);
+    return data
+  }
+  } catch(err){
+    console.log(err);
   }
 }
-onMounted(() => {
+const uploadImg = async(token,file) =>{
+  let tokenParse = token.data.token
+  let fileParse = file[0]
+  console.log(tokenParse);
+  console.log(fileParse);
+  const observable =  startUpload(tokenParse,fileParse)
+  console.log(observable);
+}
+onMounted(async () => {
   if (blogId) {
     getCon(blogId);
   }
+  qiniuToken.value = await getToken()
 });
 // todo list
 // 上传文件到服务器并返回url，在此选用一个 图床吧
