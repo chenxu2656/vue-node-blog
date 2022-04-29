@@ -51,6 +51,8 @@
             <el-button class="ml-3" type="success" @click="uploadImg(qiniuToken)">
               upload
             </el-button>
+            <span>{{uploadPresent}}</span>
+            <span>{{imgUrl}}</span>
         </el-form-item>
         <div id="editor">
           <v-md-editor
@@ -75,7 +77,7 @@
 import axios from "axios";
 import { onMounted, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
-import {startUpload} from '../../../js/bucket/qiniu'
+import {startUpload,url} from '../../../js/bucket/qiniu'
 const blogInfo = reactive({
   title: "",
   folders: [],
@@ -86,10 +88,25 @@ const blogInfo = reactive({
 });
 // 判断是编辑还是新建
 const router = useRoute();
-let qiniuToken = ref()
+// 文件id
 const blogId = router.path.split("createBlog/")[1];
+// 获取七牛云token
+let qiniuToken = ref()
+// 文件转成blob格式，用来预览
 const blobFile = ref()
-let getCon = async (blogId) => {
+// 上传至七牛云文件
+const files = ref()
+// 文件上传百分比
+const uploadPresent = ref()
+// 返回url
+const imgUrl = ref()
+const labelPosition = ref("top");
+// 文件夹
+const category = ["前端", "后端", "数据库"];
+// 标签
+const tags = ["javascript", "mongodb", "nodejs"];
+// 如果是修改，调用这个api
+const getCon = async (blogId) => {
   let resp = await axios({
     url: `/api/article/${blogId}`,
     method: "get",
@@ -102,10 +119,7 @@ let getCon = async (blogId) => {
     console.log(resp.data);
   }
 };
-const labelPosition = ref("top");
-const category = ["前端", "后端", "数据库"];
-const tags = ["javascript", "mongodb", "nodejs"];
-
+// 创建博客
 const postBlog = async () => {
   try {
     let resp = await axios({
@@ -120,10 +134,10 @@ const postBlog = async () => {
       console.log(resp);
     }
   } catch (err) {
-    console.log(blogInfo);
     console.log(`err: ${err}`);
   }
 };
+// 获取七牛云token
 const getToken = async()=>{
   try {
   let data = await axios({
@@ -134,33 +148,33 @@ const getToken = async()=>{
       },
   })
   if (data) {
-    console.log(data.data.token);
     return data
   }
   } catch(err){
-    console.log(err);
+    return err
   }
 }
+// 选择文件时触发， 一是转成blob并预览，同时获取到上传的文件
 const selectImg = (e)=>{
-  let File = e.target.files[0]
-  let BlobFormat = URL.createObjectURL(File)
-  console.log(BlobFormat);
+  files.value = e.target.files[0]
+  let BlobFormat = URL.createObjectURL(files.value)
   blobFile.value = BlobFormat
-
 }
+// 上传七牛云，并返回url
 const uploadImg = async(token) =>{
   let tokenParse = token.data.token
-  console.log(tokenParse);
-  const observable = startUpload(blobFile.value,tokenParse)
+  const observable = startUpload(files.value,`${Date.now()}_${files.value.name}`,tokenParse)
   observable.subscribe({
     next(res){
-      console.log(`next:${res}`);
+      uploadPresent.value = res.total.percent
+      console.dir(res);
     },
     error(err){
-      console.log(`err:${err}`);
+      console.dir(err);
     },
     complete(res){
-      console.log(`complete:${res}`);
+      console.dir(res);
+      imgUrl.value = `${url}${res.key}`
     }
   })
 }
@@ -170,8 +184,6 @@ onMounted(async () => {
   }
   qiniuToken.value = await getToken()
 });
-// todo list
-// 上传文件到服务器并返回url，在此选用一个 图床吧
 </script>
 <style scoped lang="scss">
 .el-card {
