@@ -23,7 +23,11 @@ cd server && yarn && yarn run start
 链接: https://www.apifox.cn/apidoc/shared-6f8b1f31-9880-4ea6-a11a-022c782a2bde  访问密码 : vQYDZM9i 
 ## 开发日志 
 > 下班更新
-
+### 2022.5.1
+- Update
+  - update admin UI
+  - add some api request
+  - Refactoring pages
 ### 2022.4.28
 > 最近比较忙
 - Update
