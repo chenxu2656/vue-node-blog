@@ -5,7 +5,6 @@ module.exports = async (req,res)=>{
     try{
         const folder = await createFolder(folderInfo)
         if(folder) {
-            console.log(folder);
             res.status(200).json(folder)
         } else {
             res.status(500).json({

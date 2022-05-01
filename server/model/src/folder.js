@@ -2,7 +2,6 @@ const {folder} = require('../model/')
 
 const createFolder = async(obj)=>{
     const folderInfo = await folder.create(obj)
-    console.log(folderInfo);
     return folderInfo
 }
 const getfolderList = async()=>{

@@ -15,13 +15,11 @@ const Article = require('./routes/article')
 const Folder = require('./routes/folder')
 
 const Tags = require('./routes/tags')
-const Token = require('./routes/token')
+const Qiniu = require('./routes/qiniu')
 const errhandle = require('./middleware/errhandle')
 var app = express()
 // 允许跨域 否则 前台请求可能会报错
 app.all('*', function(req, res, next) {
-    console.log(req.headers.origin)
-    console.log(req.environ)
     res.header("Access-Control-Allow-Origin", req.headers.origin);
     // res.header("Access-Control-Allow-Origin", '*');
     res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
@@ -41,6 +39,6 @@ app.use('/api/user', User);
 app.use('/api/article',Article)
 app.use('/api/folder',Folder)
 app.use('/api/tags',Tags)
-app.use('/api/token',Token)
+app.use('/api/qiniu',Qiniu)
 app.use(errhandle)
 module.exports = app;

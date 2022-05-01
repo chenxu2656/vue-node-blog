@@ -4,7 +4,6 @@ module.exports = async(req,res)=>{
     const tagsId = req.path.split('/')[1]
     try {
         const info = await deletetags(tagsId) 
-        console.log(info);
         if(info) {
             res.status(200).json(info)
         } else {
@@ -13,7 +12,6 @@ module.exports = async(req,res)=>{
             })
         }
     } catch (err) {
-        console.log(err);
         const errMsg = errorHandle(err)
     }
 }

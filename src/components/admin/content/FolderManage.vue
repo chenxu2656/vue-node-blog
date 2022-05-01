@@ -1,42 +1,37 @@
 <template>
   <el-card>
-    <div id="folderMa">
-      <el-menu
-        class="el-menu-vertical-demo"
-        :collapse="isCollapse"
-      >
-        <el-menu-item v-for="item in folders" :index="item._id" :key="item._id"
-          >{{ item.folderName }}
-        </el-menu-item>
-      </el-menu>
-      <div id="selectedList">
-        <div id="table">
-          <el-table :data="filterTableData" style="width: 100%" fit>
-            <el-table-column type="selection" width="55" />
-            <el-table-column label="标题" prop="title" />
-            <el-table-column label="创建时间" prop="ctime" sortable :formatter="formateCtime"/>
-            <el-table-column align="right">
-              <template #header>
-                <el-input v-model="search" size="small" placeholder="Type to search" />
-              </template>
-              <template #default="scope">
-                <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-                <el-button size="small" @click="handleEdit(scope.row)">取消发布</el-button>
-                <el-button size="small" type="danger" @click="handleDelete(scope.row)" >删除</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-          </div>
-      </div>
-    </div>
+  <el-table :data="folders" style="width: 100%">
+    <!-- <el-table-column type="selection" width="55" /> -->
+    <el-table-column label="标题" prop="folderName" />
+    <el-table-column label="创建时间" prop="ctime" sortable :formatter="formateCtime"/>
+    <el-table-column align="right">
+      <template #default="scope">
+        <el-button size="small" @click="dialogFormVisible=true">编辑</el-button>
+        <el-button size="small" type="danger" @click="handleUpdate(scope.row._id)" >删除</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+  <el-dialog v-model="dialogFormVisible" title="修改文件夹名字">
+    <el-input v-model="editName" autocomplete="off" />
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false"
+          >Confirm</el-button
+        >
+      </span>
+    </template>
+  </el-dialog>
   </el-card>
 </template>
 <script setup>
-import { computed,onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
+import {formateCtime} from "../../../js/index.js"
+import {folderDelete} from '../../../js/api/index'
 import axios from "axios";
 const folders = ref([]);
-const tableData = ref([])
-const search = ref('')
+const dialogFormVisible = ref(false)
+const editName = ref()
 let getCategoryList = async () => {
   let category = await axios({
     url: "/api/folder",
@@ -44,29 +39,16 @@ let getCategoryList = async () => {
   });
   if (category.data) {
     folders.value = category.data;
+    console.log(folders.value);
   }
 };
-const filterTableData = computed(() => 
-  tableData.value.filter(
-    (data) =>
-      !search.value ||
-      data.title.toLowerCase().includes(search.value.toLowerCase())
-  )
-)
-
-const getBlogList = async()=>{
-  const resp = await axios({
-    url: '/api/article/',
-    method: "get",
-  })
-  if (resp.data) {
-      tableData.value = resp.data
-      console.log(tableData.value);
-  }
+const handleUpdate = async (folderId)=>{
+  const resp = folderDelete(folderId)
+  console.log(resp);
 }
+
 onMounted(()=>{
-  getCategoryList(),
-  getBlogList()
+  getCategoryList()
 });
 </script>
 <style lang="scss" scoped>

@@ -1,7 +1,7 @@
 <template>
 <el-card>
     <div id="operation" v-show="operationView">
-        <el-button size="small" type="danger" @click="handleDelete(selectedRow)">批量删除</el-button>
+        <el-button size="small" type="danger" @click="handleUpdate(selectedRow,-1)">批量删除</el-button>
     </div>
     <el-table :data="filterTableData" style="width: 100%" @selection-change="selectionLineChangeHandle">
     <el-table-column type="selection" width="55" />
@@ -12,9 +12,9 @@
         <el-input v-model="search" size="small" placeholder="Type to search" />
       </template>
       <template #default="scope">
+        <el-button size="small" @click="handleUpdate(scope.row,1)">发布</el-button>
         <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-        <el-button size="small" @click="handleEdit(scope.row)">发布</el-button>
-        <el-button size="small" type="danger" @click="handleDelete(scope.row)" >删除</el-button>
+        <el-button size="small" type="danger" @click="handleUpdate(scope.row,-1)" >删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -42,8 +42,8 @@ const selectionLineChangeHandle = (data)=>{
     selectedRow.value = data
     console.log(selectedRow);
 }
-
-const handleDelete = async(blogs) => {
+const handleUpdate = async(blogs,tage) => {
+  console.log(blogs.length);
   let ids = []
   if (blogs.length != undefined) {
     blogs.forEach((item)=>{
@@ -52,19 +52,24 @@ const handleDelete = async(blogs) => {
   } else {
     ids = blogs._id
   }
-  await deleteBlog(ids)
+  console.log(ids);
+  await updateBlog(ids,tage)
   getBlogList()
 }
+
 const handleEdit = (row)=>{
   routerPush(router,`/admin/createBlog/${row._id}`)
 }
-const deleteBlog = async(ids)=>{
+const updateBlog = async(ids,tage)=>{
   try {
     let resp = await axios({
-      url: "/api/article/",
-      method: "delete",
+      url: "/api/article/list",
+      method: "put",
       data: {
-        "ids": ids
+        "ids": ids,
+        "field": {
+          tage: tage
+        }
       },
       headers: {
             token: localStorage.getItem('token')
@@ -80,6 +85,9 @@ const getBlogList = async()=>{
   const resp = await axios({
     url: '/api/article/',
     method: "get",
+    params: {
+      type: "draft"
+    }
   })
   if (resp.data) {
       tableData.value = resp.data

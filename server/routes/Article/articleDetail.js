@@ -1,6 +1,6 @@
 const {getArticleDetail}= require('../../model/index')
 module.exports = async(req,res)=>{
-    const artId = req.path.split('/')[1]
+    const artId = req.params.id
     console.log(artId);
     try {
         const art = await getArticleDetail(artId)
@@ -10,7 +10,6 @@ module.exports = async(req,res)=>{
             res.status(500).json(art)
         }
     } catch (err) {
-        console.log('chucuole');
         res.status(400).json(err)
     }
 }

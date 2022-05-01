@@ -13,7 +13,7 @@ const DraftBlog = require('../src/components/admin/content/DraftBlog.vue')
 const TagsManage = require('../src/components/admin/content/TagsManage.vue')
 const TrashBlog = require('../src/components/admin/content/TrashBlog.vue')
 const FolderManage = require('../src/components/admin/content/FolderManage.vue')
-
+const FileManage = require('../src/components/admin/content/FileManage.vue')
 
 const routes = [
     {
@@ -70,6 +70,10 @@ const routes = [
                     {
                         path: "folder",
                         components: FolderManage
+                    },
+                    {
+                        path: "qiniuFile",
+                        components: FileManage
                     },
                 ]
             },

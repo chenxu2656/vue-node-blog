@@ -49,6 +49,10 @@ const articleStructure = {
     folders: {
         type: Array,
         require: true
+    },
+    tage: {
+        type: Number,
+        require: false
     }
 }
 // 文件夹 
@@ -59,7 +63,7 @@ const folderStructure = {
         unique: true
     },
     ctime: {
-        type: Date,
+        type: String,
         default: Date.now
     }
 }
@@ -72,7 +76,7 @@ const tagsStructure = {
         unique: true
     },
     ctime: {
-        type: Date,
+        type: String,
         default: Date.now
     }                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 }

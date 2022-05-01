@@ -4,7 +4,6 @@ module.exports = async (req,res)=>{
     const article= req.body
     try {
         const art = await createArticle(article)
-        console.log(art);
         if(art) {
             res.status(200).json(art)
         } else {
