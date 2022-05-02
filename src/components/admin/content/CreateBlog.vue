@@ -82,6 +82,7 @@
             v-model="blogInfo.content"
             height="800px"
             :disabled-menus="[]"
+            @upload-image="handleUploadQiniu"
           >
           </v-md-editor>
         </div>
@@ -111,7 +112,7 @@ const blogInfo = reactive({
   content: "",
   ctime: Date.now(),
   imgPath: "",
-  tage: 1
+  tage: 1,
 });
 // 从数据库获取的所有文件夹的列表
 const categoryList = ref();
@@ -131,8 +132,10 @@ const blogId = router.path.split("createBlog/")[1];
 let qiniuToken = ref();
 // 文件转成blob格式，用来预览
 const blobFile = ref();
+const insertUrl = ref();
 // 上传至七牛云文件
 const files = ref();
+const editorfile = ref();
 // 文件上传百分比
 const uploadPresent = ref();
 // 返回url
@@ -167,6 +170,7 @@ const transIdListToFolder = (objList, selectKey) => {
   optionInfo.folders = folderIdList;
 };
 const transIdListToTag = (objList, selectKey) => {
+
   let folderIdList = [];
   objList.forEach((element) => {
     if (selectKey.includes(element._id)) {
@@ -175,7 +179,14 @@ const transIdListToTag = (objList, selectKey) => {
   });
   optionInfo.tags = folderIdList;
 };
-
+const handleUploadQiniu = async (event, insertImage, files) => {
+  editorfile.value = files[0];
+  insertUrl.value = await editorUploadImg(qiniuToken.value);
+  insertImage({
+    url: insertUrl.value,
+    desc: 'text'
+  })
+};
 // 如果是修改，调用这个api
 const getCon = async (blogId) => {
   let resp = await axios({
@@ -191,12 +202,11 @@ const getCon = async (blogId) => {
     blogInfo.folders = resp.data.folders;
     blogInfo.tags = resp.data.tags;
     blogInfo.imgPath = resp.data.imgPath;
-    console.log(resp.data);
   }
 };
 // 创建博客
 const postBlog = async (tage) => {
-  blogInfo.tage = tage
+  blogInfo.tage = tage;
   try {
     let resp = await axios({
       url: "/api/article/",
@@ -216,7 +226,7 @@ const postBlog = async (tage) => {
 
 // 更新博客
 const putBlog = async (tage) => {
-  blogInfo.tage = tage
+  blogInfo.tage = tage;
   try {
     let resp = await axios({
       url: `/api/article/${blogId}`,
@@ -241,7 +251,7 @@ const getToken = async () => {
       method: "get",
       headers: {
         token: localStorage.getItem("token"),
-      }
+      },
     });
     if (data) {
       console.dir(data);
@@ -253,7 +263,6 @@ const getToken = async () => {
 };
 // 选择文件时触发， 一是转成blob并预览，同时获取到上传的文件
 const selectImg = (e) => {
-  console.dir(e);
   files.value = e.raw;
   let BlobFormat = URL.createObjectURL(files.value);
   blobFile.value = BlobFormat;
@@ -271,18 +280,39 @@ const uploadImg = async (token) => {
   observable.subscribe({
     next(res) {
       uploadPresent.value = res.total.percent;
-      console.dir(res);
     },
     error(err) {
       console.dir(err);
     },
     complete(res) {
-      console.dir(res);
       imgUrl.value = `${url}${res.key}`;
       blogInfo.imgPath = `${url}${res.key}`;
     },
   });
 };
+// eeditor 上传
+const editorUploadImg = async (token) => {
+  return new Promise((resolve, reject) => {
+    let tokenParse = token.data.token;
+    const observable = startUpload(
+      editorfile.value,
+      `${Date.now()}_${editorfile.value.name}`,
+      tokenParse
+    );
+    let insertUrl = "";
+    observable.subscribe({
+      next() {},
+      error(err) {
+        reject(err);
+      },
+      complete(res) {
+        insertUrl = `${url}${res.key}`;
+        resolve(insertUrl);
+      },
+    });
+  });
+};
+
 const folders = async () => {
   let resp = await axios({
     url: "/api/folder",
@@ -297,13 +327,14 @@ const tags = async () => {
     url: "/api/tags",
     method: "get",
   });
+  // 
   if (resp.data) {
     tagList.value = resp.data;
   }
 };
 onMounted(async () => {
-  tags();
-  folders();
+  await tags();
+  await folders();
   /**
    * 两种情况
    * 1. 创建 博客
@@ -346,7 +377,7 @@ onMounted(async () => {
       font-weight: 800;
     }
   }
-  .operationButton{
+  .operationButton {
     margin-top: 20px;
   }
 }

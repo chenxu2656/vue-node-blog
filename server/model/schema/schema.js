@@ -1,3 +1,4 @@
+
 const userStructure = { 
     username: {
         type: String,
@@ -81,7 +82,35 @@ const tagsStructure = {
     }                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 }
 // 评论
-
+//setting
+const settingStructure = {
+    bucket: {
+        pk: {
+            type: String
+        },
+        sk: {
+            type: String
+        },
+        url: {
+            type: String
+        }
+    },
+    basicInfo: {
+        generalinfo: {
+            name: {
+                type: String
+            }
+        },
+        media: {
+            sina: {
+                type: String
+            },
+            github: {
+                type: String
+            },
+        }
+    }
+}
 
 // 点赞
 module.exports = {

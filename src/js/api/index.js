@@ -1,15 +1,6 @@
-// folder
-import axios from 'axios'
-
-const folderDelete = async(id)=>{
-    const resp = await axios({
-        url: `/api/folder/${id}`,
-        method: "delete"
-    })
-    if (resp) {
-        return resp
-    }
-}
-export{
-    folderDelete
+import * as folder from './folder'
+import * as tag from './tag'
+export {
+    folder,
+    tag
 }

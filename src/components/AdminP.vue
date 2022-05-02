@@ -36,6 +36,10 @@ import SideMenuBar from "../components/admin/SideMenuBar.vue";
     font-weight: 700;
   }
 }
+.el-footer{
+  bottom: 0px;
+  height: 100px;
+}
 #content {
   margin: 0px 20px 0px 20px;
   flex-grow: 1;

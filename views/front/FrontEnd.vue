@@ -34,6 +34,7 @@ export default {
     #content{
       width: 1200px;
       margin: auto;
+      height: auto;
     }
   }
 </style>

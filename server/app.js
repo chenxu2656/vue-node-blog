@@ -16,6 +16,7 @@ const Folder = require('./routes/folder')
 
 const Tags = require('./routes/tags')
 const Qiniu = require('./routes/qiniu')
+const Setting = require('./routes/setting')
 const errhandle = require('./middleware/errhandle')
 var app = express()
 // 允许跨域 否则 前台请求可能会报错
@@ -40,5 +41,6 @@ app.use('/api/article',Article)
 app.use('/api/folder',Folder)
 app.use('/api/tags',Tags)
 app.use('/api/qiniu',Qiniu)
+app.use('/api/setting',Setting)
 app.use(errhandle)
 module.exports = app;
