@@ -83,32 +83,18 @@ const tagsStructure = {
 }
 // 评论
 //setting
-const settingStructure = {
-    bucket: {
-        pk: {
-            type: String
-        },
-        sk: {
-            type: String
-        },
-        url: {
-            type: String
-        }
+const syssettingStructure = {
+    ak: {
+        type: String
     },
-    basicInfo: {
-        generalinfo: {
-            name: {
-                type: String
-            }
-        },
-        media: {
-            sina: {
-                type: String
-            },
-            github: {
-                type: String
-            },
-        }
+    sk: {
+        type: String
+    },
+    url: {
+        type: String
+    },
+    backetName: {
+        type: String
     }
 }
 
@@ -117,5 +103,6 @@ module.exports = {
     userStructure,
     articleStructure,
     folderStructure,
-    tagsStructure
+    tagsStructure,
+    syssettingStructure
 }

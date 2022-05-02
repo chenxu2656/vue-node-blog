@@ -14,7 +14,8 @@ const TagsManage = require('../src/components/admin/content/TagsManage.vue')
 const TrashBlog = require('../src/components/admin/content/TrashBlog.vue')
 const FolderManage = require('../src/components/admin/content/FolderManage.vue')
 const FileManage = require('../src/components/admin/content/FileManage.vue')
-
+const UserInfo = require('../src/components/admin/content/UserInfo.vue')
+const QiniuSetting = require('../src/components/admin/content/QiniuSetting.vue')
 const routes = [
     {
         path: "/",
@@ -75,6 +76,14 @@ const routes = [
                         path: "qiniuFile",
                         components: FileManage
                     },
+                    {
+                        path: 'info',
+                        components: UserInfo
+                    },
+                    {
+                        path: 'qiniu',
+                        components: QiniuSetting
+                    }
                 ]
             },
             {

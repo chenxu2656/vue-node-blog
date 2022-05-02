@@ -3,7 +3,8 @@ const  {
         folderStructure,
         articleStructure,
         userStructure,
-        tagsStructure
+        tagsStructure,
+        syssettingStructure
     } = require('../schema/schema')
 // 文章
 const article = createModel('article',articleStructure)
@@ -13,9 +14,12 @@ const folder = createModel('folder',folderStructure)
 const Users = createModel('user',userStructure)
 // 标签
 const tags = createModel('tags',tagsStructure,'tags')
+// 系统信息
+const sysSetting = createModel('sysSsetting',syssettingStructure)
 module.exports = {
     folder,
     article,
     Users,
-    tags
+    tags,
+    sysSetting
 }
