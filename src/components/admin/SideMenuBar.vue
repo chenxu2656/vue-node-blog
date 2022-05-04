@@ -64,7 +64,7 @@
       </template>
       <el-menu-item-group>
         <el-menu-item
-          index="qiniu"
+          index="qiniuKey"
           @click="routerPush(router, '/admin/qiniu')"
           >七牛云设置
         </el-menu-item>

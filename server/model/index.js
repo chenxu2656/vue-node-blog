@@ -28,7 +28,8 @@ const {
 } = require('./src/tags')
 const {
     createSys,
-    updateSys
+    updateSys,
+    getSys
 } = require('./src/sysSetting')
 
 
@@ -55,5 +56,6 @@ module.exports = {
     deletetags,
 
     createSys,
-    updateSys
+    updateSys,
+    getSys
 }

@@ -1,7 +1,7 @@
-const { async } = require('@kangc/v-md-editor');
+const axios = require('axios')
+
 const qiniu = require('qiniu')
 const bucket = 'btfblog'
-
 const accessKey = 'iTSU7wboYomELP7uxPTinSNqRvozdI-3US3B0vPD';
 const secretKey = 'aCq9TM7ygVksC4dTc-dUfghjv_vn6DVaIC4kXzRg';
 const mac = new qiniu.auth.digest.Mac(accessKey, secretKey);

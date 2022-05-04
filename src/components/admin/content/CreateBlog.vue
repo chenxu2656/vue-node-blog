@@ -89,7 +89,7 @@
       </el-form>
     </div>
     <div id="createBlog" v-if="isUpdate" class="operationButton">
-      <el-button type="primary" @click="postBlog(1)">创建博客</el-button>
+      <el-button type="primary" @click="postBlog(1);">创建博客</el-button>
       <el-button type="primary" @click="postBlog(0)">保存到草稿</el-button>
     </div>
     <div id="updateBlog" v-if="!isUpdate" class="operationButton">
@@ -102,9 +102,11 @@
 <script setup>
 import axios from "axios";
 import { onMounted, reactive, ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute,useRouter } from "vue-router";
 import { startUpload, url } from "../../../js/bucket/qiniu";
 import uploadImgUrl from "../../../../public/images/upload.png";
+import { routerPush } from "../../../js/index";
+
 const blogInfo = reactive({
   title: "",
   folders: [],
@@ -125,9 +127,10 @@ const optionInfo = reactive({
 });
 const fileList = ref();
 // 判断是编辑还是新建
-const router = useRoute();
+const route = useRoute();
+const router = useRouter();
 // 文件id
-const blogId = router.path.split("createBlog/")[1];
+const blogId = route.path.split("createBlog/")[1];
 // 获取七牛云token
 let qiniuToken = ref();
 // 文件转成blob格式，用来预览
@@ -217,11 +220,15 @@ const postBlog = async (tage) => {
       },
     });
     if (resp.data) {
-      console.log(resp);
+      if(tage == 1) {
+        console.log('123123');
+        routerPush(router,'/admin/blogList')
+      }
     }
   } catch (err) {
     console.log(`err: ${err}`);
   }
+  
 };
 
 // 更新博客

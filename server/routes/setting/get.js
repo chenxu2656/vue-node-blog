@@ -1,14 +1,13 @@
-const {createSys} = require('../../model/index')
+const {getSys} = require('../../model/')
 const {errorHandle} = require('../../model/tools/error')
 module.exports = async (req,res)=>{
-    const reqData = req.body
-    try{
-        const resp = await createSys(reqData)
-        if(resp) {
-            res.status(200).json(resp)
+    try {
+        const sysInfo = await getSys()
+        if (sysInfo) {
+            res.status(200).json(sysInfo)
         } else {
             res.status(500).json({
-                'err': "create fail"
+                'err': "没有获取到任何内容"
             })
         }
     } catch (err) {

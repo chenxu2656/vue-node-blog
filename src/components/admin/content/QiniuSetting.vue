@@ -21,24 +21,56 @@
             </el-form>
         </div>
         <div id="ope">
-            <el-button type="primary" @click="setQiniu(qiniuSetting)">保存</el-button>
+            <el-button type="primary" @click="setQiniu(qiniuSetting)">{{buttonInfo}}</el-button>
         </div>
     </el-card>
 </template>
 <script setup>
-import {reactive, ref} from 'vue'
+import {onMounted, reactive, ref} from 'vue'
+import {creatSys,updateSys,getSys} from '../../../js/api/sysSetting'
 // 表单label位置
 const labelPosition = ref('top')
 // 定义表单信息
 const qiniuSetting = reactive({
-    ak: "",
+    pk: "",
     sk: "",
     url: "",
     bucketName: ""
 })
-const setQiniu = (obj)=>{
-    console.log(obj);
+let respInfo = {
+    data: []
 }
+//文档id
+const settingId = ref()
+const buttonInfo = ref('创建')
+const setQiniu = async (field)=>{
+    if (!settingId.value ) {
+            const resp = await creatSys(field)
+            settingId.value = resp.data._id
+            buttonInfo.value = '更新'
+            console.log(settingId.value);
+    } else {
+        const resp = await updateSys(settingId.value,field)
+        console.log(resp);
+        console.log('更新了');
+    }
+
+}
+onMounted(async()=>{
+    respInfo = await getSys()
+    if (respInfo.data.length > 0) {
+        let data = respInfo.data[0]
+        Object.keys(qiniuSetting).forEach((key) => {
+            qiniuSetting[key] = data[key];
+        });
+        settingId.value = data._id
+        buttonInfo.value = '更新'
+        console.log(qiniuSetting);
+    } else {
+        console.log('没有');
+    }
+    console.log(respInfo);
+})
 </script>
 <style lang="scss" scoped>
 .el-card{
