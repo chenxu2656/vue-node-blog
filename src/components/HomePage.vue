@@ -1,7 +1,10 @@
 <template>
     <el-row id="container" :gutter="5">
         <el-col :span="6" class="leftSide">
+            <keep-alive>
             <leftBar/>
+            </keep-alive>
+            
         </el-col>
         <el-col :span="18" class="con">
             <articleList/>

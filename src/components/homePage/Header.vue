@@ -18,16 +18,11 @@
     <!-- <el-menu-item index="Admin">Admin</el-menu-item> -->
   </el-menu>
 </template>
-<script>
-import { useRouter } from 'vue-router'
-export default {
-    name: 'navHeader',
-    setup(){
-        let currentPath = useRouter().currentRoute.value.path
-        let activePath = currentPath.substr(1)||'home'
-        return {activePath}
-    }
-}
+<script setup>
+import {ref} from 'vue'
+// import { useRouter } from 'vue-router'
+const activePath = ref('home')
+
 </script>
 <style lang="scss" scoped>
     .el-menu {
