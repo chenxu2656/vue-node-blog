@@ -29,7 +29,9 @@ const getSys = async() =>{
     const resp = await axios({
         url: `/api/setting/`,
         method: "get",
-        headers: headers,
+        headers: {
+            token: localStorage.getItem("token")
+        }
     })
     if(resp) {
         return resp

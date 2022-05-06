@@ -60,6 +60,7 @@
 import axios from "axios";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
+import {getSys} from '../js/api/sysSetting'
 let router = useRouter()
 let token = ""
 const ruleForm = reactive({
@@ -78,7 +79,13 @@ let submitForm = async (email,pass)=>{
   console.log(resp);
   if(resp){
     token = resp.data.token
+    //获取七牛云pk,sk,bucketName
     localStorage.setItem("token",token)
+    let qiniu = await getSys()
+    if (qiniu) {
+        // 把信息放到token里面
+        localStorage.setItem('qiniuToken', JSON.stringify(qiniu.data[0]))
+    }
     router.push({path: '/admin'})
   } 
 }

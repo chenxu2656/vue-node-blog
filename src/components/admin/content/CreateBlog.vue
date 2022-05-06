@@ -251,15 +251,21 @@ const putBlog = async (tage) => {
   }
 };
 // 获取七牛云token
+/**
+ * TODO: 从后台获取token
+ * */
 const getToken = async () => {
   try {
     let data = await axios({
       url: "/api/qiniu/token",
-      method: "get",
+      method: "post",
       headers: {
         token: localStorage.getItem("token"),
       },
+      data: JSON.parse(localStorage.getItem('qiniuToken'))
     });
+    console.log('111');
+    console.log(data);
     if (data) {
       console.dir(data);
       return data;
@@ -278,6 +284,8 @@ const selectImg = (e) => {
 };
 // 上传七牛云，并返回url
 const uploadImg = async (token) => {
+  console.log('222');
+  console.log(token);
   let tokenParse = token.data.token;
   const observable = startUpload(
     files.value,
