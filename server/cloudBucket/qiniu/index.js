@@ -1,11 +1,15 @@
 const qiniu = require('qiniu')
-// https://developer.qiniu.com/kodo/1289/nodejs
+/**
+ * @link {七牛云开发文档} https://developer.qiniu.com/kodo/1289/nodejs
+ */
+
+
 /**
  * 生成鉴权对象 mac
  * @param {*} pk
  * @param {*} sk
  */
-let genMac = (pk,sk)=>{
+const genMac = (pk,sk)=>{
   return new qiniu.auth.digest.Mac(pk, sk);
 }
 /**
@@ -15,7 +19,7 @@ let genMac = (pk,sk)=>{
  * @param {*} sk sk
  * @returns 返回token
  */
-let getToken = async(bucket,pk,sk)=>{
+ const getToken = async(bucket,pk,sk)=>{
   const options = { 
       scope: bucket, 
       callbackBodyType: 'application/json'
@@ -34,7 +38,7 @@ let getToken = async(bucket,pk,sk)=>{
  * @param {*} limit 查询条数
  * @returns 返回文件列表
  */
-let getFileList = (bucket,pk,sk,marker,limit)=>{
+ const getFileList = (bucket,pk,sk,marker,limit)=>{
   const mac = genMac(pk, sk);
   const config = new qiniu.conf.Config();
   const bucketManager = new qiniu.rs.BucketManager(mac, config);

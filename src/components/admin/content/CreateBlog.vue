@@ -53,6 +53,7 @@
             <el-upload
               class="upload-demo"
               drag
+              :disabled="!hasQiniuToken"
               action="https://jsonplaceholder.typicode.com/posts/"
               :on-change="selectImg"
               :file-list="fileList"
@@ -81,7 +82,7 @@
           <v-md-editor
             v-model="blogInfo.content"
             height="800px"
-            :disabled-menus="[]"
+            :disabled-menus="disableMenus"
             @upload-image="handleUploadQiniu"
           >
           </v-md-editor>
@@ -126,11 +127,16 @@ const optionInfo = reactive({
   tags: [],
 });
 const fileList = ref();
+
 // 判断是编辑还是新建
 const route = useRoute();
 const router = useRouter();
 // 文件id
 const blogId = route.path.split("createBlog/")[1];
+// 是否有token
+let hasQiniuToken = ref(true)
+// 控制菜单栏的上传功能
+let disableMenus = ref([])
 // 获取七牛云token
 let qiniuToken = ref();
 // 文件转成blob格式，用来预览
@@ -360,7 +366,14 @@ onMounted(async () => {
     isUpdate.value = false;
     getCon(blogId);
   }
-  qiniuToken.value = await getToken();
+  // 没有token 需要阻断。 
+  if (localStorage.getItem('qiniuToken')) {
+    qiniuToken.value = await getToken();
+  } else {
+    disableMenus.value = ['image/upload-image']
+    hasQiniuToken.value = false
+  }
+  console.log(hasQiniuToken.value);
 });
 </script>
 <style scoped lang="scss">

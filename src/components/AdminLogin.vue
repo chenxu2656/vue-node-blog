@@ -82,9 +82,16 @@ let submitForm = async (email,pass)=>{
     //获取七牛云pk,sk,bucketName
     localStorage.setItem("token",token)
     let qiniu = await getSys()
-    if (qiniu) {
-        // 把信息放到token里面
-        localStorage.setItem('qiniuToken', JSON.stringify(qiniu.data[0]))
+    console.log(qiniu);
+    if (qiniu.data.length == 1) {
+      // 把信息放到token里面
+      localStorage.setItem('qiniuToken', JSON.stringify(qiniu.data[0]))
+    } else if(qiniu.data.length == 0) {
+      // 用户还没有设置qiniu信息，在后面上传图片的时候handle
+      console.log('nothing');
+    } else {
+      //TODO: 出现多个setting信息, 告诉用户有这个error，
+      console.log('err');
     }
     router.push({path: '/admin'})
   } 

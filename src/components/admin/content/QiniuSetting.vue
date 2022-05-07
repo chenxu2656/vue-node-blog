@@ -46,11 +46,15 @@ const buttonInfo = ref('创建')
 const setQiniu = async (field)=>{
     if (!settingId.value ) {
             const resp = await creatSys(field)
+            //创建完成之后把token放到 localstorage
+            localStorage.setItem('qiniuToken',JSON.stringify(resp.data))
             settingId.value = resp.data._id
             buttonInfo.value = '更新'
             console.log(settingId.value);
     } else {
         const resp = await updateSys(settingId.value,field)
+        localStorage.removeItem('qiniuToken')
+        localStorage.setItem('qiniuToken',JSON.stringify(resp.data))
         console.log(resp);
         console.log('更新了');
     }

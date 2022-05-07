@@ -1,13 +1,12 @@
 import axios from 'axios'
-const headers = {
-    token: localStorage.getItem("token")
-}
 
 const creatSys = async(field) =>{
     const resp = await axios({
         url: "/api/setting",
         method: "post",
-        headers: headers,
+        headers: {
+            token: localStorage.getItem("token")
+        },
         data: field
     })
     if(resp) {
@@ -15,10 +14,13 @@ const creatSys = async(field) =>{
     }
 }
 const updateSys = async(id,field) =>{
+    console.log(id);
     const resp = await axios({
         url: `/api/setting/${id}`,
         method: "put",
-        headers: headers,
+        headers: {
+            token: localStorage.getItem("token")
+        },
         data: field
     })
     if(resp) {
