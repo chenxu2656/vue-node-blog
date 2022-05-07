@@ -23,6 +23,10 @@ cd server && yarn && yarn run start
 链接: https://www.apifox.cn/apidoc/shared-6f8b1f31-9880-4ea6-a11a-022c782a2bde  访问密码 : vQYDZM9i 
 ## 开发日志 
 > 下班更新
+
+### 2022.5.7
+- Update
+  - 完成前台设置七牛云信息，后台生成token
 ### 2022.5.6
 - Update
   - set qiniu key in frontEnd, sys setting part
