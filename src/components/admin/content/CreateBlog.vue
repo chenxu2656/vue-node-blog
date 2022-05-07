@@ -49,7 +49,7 @@
           </el-form-item>
         </div>
         <div id="imgUpload">
-          <el-form-item label="Images">
+          <el-form-item label="Images (封面图片)">
             <el-upload
               class="upload-demo"
               drag

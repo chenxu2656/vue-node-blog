@@ -16,6 +16,8 @@ const FolderManage = require('../src/components/admin/content/FolderManage.vue')
 const FileManage = require('../src/components/admin/content/FileManage.vue')
 const UserInfo = require('../src/components/admin/content/UserInfo.vue')
 const QiniuSetting = require('../src/components/admin/content/QiniuSetting.vue')
+
+const FrontDesk = require('../src/components/admin/content/frontDesk/FrontDesk.vue')
 const routes = [
     {
         path: "/",
@@ -83,6 +85,10 @@ const routes = [
                     {
                         path: 'qiniu',
                         components: QiniuSetting
+                    },
+                    {
+                        path: "frontDesk",
+                        components: FrontDesk
                     }
                 ]
             },

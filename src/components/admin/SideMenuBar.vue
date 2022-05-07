@@ -7,8 +7,6 @@
     default-active="home"
     class="el-menu-vertical-demo"
     :collapse="isCollapse"
-    @open="handleOpen"
-    @close="handleClose"
   >
     <el-menu-item index="home" @click="routerPush(router, '/admin')">
       <el-icon><icon-menu /></el-icon>
@@ -53,13 +51,13 @@
         >
       </el-menu-item-group>
     </el-sub-menu>
-    <el-menu-item index="userManagement" @click="routerPush(router, '/admin/info')">
+    <el-menu-item index="frontDesk" @click="routerPush(router, '/admin/frontDesk')">
       <el-icon><icon-menu /></el-icon>
-      <template #title>个人信息</template>
+      <template #title>前台配置</template>
     </el-menu-item>
     <el-sub-menu index="sysSetting">
       <template #title>
-        <el-icon><icon-menu /></el-icon>
+        <el-icon><setting color="red"/></el-icon>
         <span>系统设置</span>
       </template>
       <el-menu-item-group>
@@ -68,6 +66,9 @@
           @click="routerPush(router, '/admin/qiniu')"
           >七牛云设置
         </el-menu-item>
+        <el-menu-item index="userManagement" @click="routerPush(router, '/admin/info')">
+      <template #title>个人信息</template>
+    </el-menu-item>
       </el-menu-item-group>
     </el-sub-menu>
   </el-menu>
@@ -76,16 +77,10 @@
 <script setup>
 import { ref } from "vue";
 import { routerPush } from "../../js/index";
-import { Menu as IconMenu } from "@element-plus/icons-vue";
+import { Menu as IconMenu, Setting} from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 const isCollapse = ref(false);
-const handleOpen = (key, keyPath) => {
-  console.log(key, keyPath);
-};
-const handleClose = (key, keyPath) => {
-  console.log(key, keyPath);
-};
 </script>
 
 <style>
