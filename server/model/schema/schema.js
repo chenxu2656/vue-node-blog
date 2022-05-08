@@ -82,6 +82,8 @@ const tagsStructure = {
     }                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 }
 // 评论
+
+
 //setting
 const syssettingStructure = {
     ak: {
@@ -98,11 +100,33 @@ const syssettingStructure = {
     }
 }
 
+// 前台设置
+const themeSetting = {
+    lunbo: {
+        open: {
+            type: Boolean,
+            default: true
+        },
+        category: {
+            name: {
+                type: String,
+                require: true
+            },
+            id: {
+                type: ObjectId,
+                require: true
+            },
+            require: true 
+        },
+        require: false
+    }
+}
 // 点赞
 module.exports = {
     userStructure,
     articleStructure,
     folderStructure,
     tagsStructure,
-    syssettingStructure
+    syssettingStructure,
+    themeSetting
 }
