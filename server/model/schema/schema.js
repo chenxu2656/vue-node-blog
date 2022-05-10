@@ -113,10 +113,9 @@ const themeSetting = {
                 require: true
             },
             id: {
-                type: ObjectId,
+                type: String,
                 require: true
-            },
-            require: true 
+            }
         },
         require: false
     }
