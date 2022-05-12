@@ -1,5 +1,7 @@
 <template>
-  <el-card class="box-card category">
+  <div id="exportPdf" @click="exportPdf(pdfDom)">导出pdf</div>
+  <div id="con" ref="pdfDom">
+  <el-card class="box-card category" id="articelDetail">
     <div id="blogTitle">
       <div class="title">{{ blogDetail.title }}</div>
       <div class="otherInfo">
@@ -14,6 +16,8 @@
     </div> -->
     <v-md-preview :text="blogDetail.content" id="blogCon"></v-md-preview>
   </el-card>
+  </div>
+
 </template>
 <style lang="scss" scoped>
 #blogTitle {
@@ -47,9 +51,11 @@ import axios from "axios";
 import { onMounted, ref } from "vue-demi";
 import { useRoute } from "vue-router";
 import { parseTimeStamp } from "../../js/index";
+import exportPdf from 'export-dom2pdf'
 const url = useRoute().path;
 const blogId = url.split("blog/")[1];
 let blogDetail = ref({});
+const pdfDom = ref()
 let getCon = async () => {
   let resp = await axios({
     url: `/api/article/${blogId}`,
@@ -58,8 +64,10 @@ let getCon = async () => {
   if (resp) {
     blogDetail.value = resp.data;
   }
-};
+}
 onMounted(() => {
   getCon();
+  console.log(pdfDom.value);
 });
+// https://www.cnblogs.com/taohuaya/p/10805585.html#%E6%96%B9%E5%BC%8F%E4%BA%8C:window.print%E6%96%B9%E6%B3%95
 </script>
