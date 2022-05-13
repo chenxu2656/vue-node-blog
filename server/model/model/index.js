@@ -15,7 +15,8 @@ const  {
         articleStructure,
         userStructure,
         tagsStructure,
-        syssettingStructure
+        syssettingStructure,
+        themeSetting
     } = require('../schema/schema')
 // 文章
 const article = createModel('article',articleStructure)
@@ -25,13 +26,20 @@ const folder = createModel('folder',folderStructure)
 const Users = createModel('user',userStructure)
 // 标签
 const tags = createModel('tags',tagsStructure,'tags')
+
 // 系统信息
 const sysSchema = new mongoose.Schema(syssettingStructure,{strict: false})
 const sysSetting = mongoose.model('sysSsetting',sysSchema)
+
+// 前台设置
+const themeSchema = new mongoose.Schema(themeSetting)
+const themeModel = mongoose.model('themeSetting',themeSchema)
+
 module.exports = {
     folder,
     article,
     Users,
     tags,
-    sysSetting
+    sysSetting,
+    themeModel
 }

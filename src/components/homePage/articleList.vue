@@ -7,8 +7,11 @@
             <span>POSTED: </span>
             <span>{{parseTimeStamp(article.ctime)}}</span>
           </div>
-          <div class="blogTitle"   @click="articleRouterPush(article._id)" >{{article.title}}</div>
-          <div class="blogCon">{{article.content}}</div>
+          <div class="blogTitle" @click="articleRouterPush(article._id)" >{{article.title}}</div>
+          <div class="blogCon">
+            {{article.content}}
+          </div>
+          <div id="readMore">Read More</div>
         </el-card>
       </li>
     </ul>
@@ -49,6 +52,7 @@ onMounted( getBlogList )
     margin-top: 0px;
     padding-left: 10px;
     margin-bottom: 0pxs;
+    position: relative;
     li{
         list-style: none;
         text-align: left;
@@ -63,12 +67,34 @@ onMounted( getBlogList )
         .blogCon {
           font-size: 16px;
           text-align: justify;
-          padding-top: 10px;
-          padding-bottom: 10px;
-          max-height: 100px;
+          margin: {
+            top: 5px;
+            bottom: 5px;
+          }
+          // max-height: 100px;
           overflow: hidden;
-          text-overflow: ellipsis;
-          text-indent: 24px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+          &:after{
+            content: '...';
+            position: absolute;
+            font-size: 16px;
+            right: 7px;
+            bottom: 25px;
+            width: 100px;
+            background-color: white;
+            line-height: 20px;
+          }
+        }
+        #readMore{
+          position: absolute;
+          right: 20px;
+          bottom: 25px;
+          font-weight: 700;
+          font-size: 14px;
+          z-index: 10;
+          line-height: 20px;
         }
       } 
     li:not(:first-child) {
