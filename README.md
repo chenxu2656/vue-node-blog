@@ -24,6 +24,10 @@ cd server && yarn && yarn run start
 ## 开发日志 
 > 下班更新
 
+### 2022.5.14-5.15
+- Update
+  - docker 部署
+    - dockerfile
 ### 2022.5.7
 - Update
   - 完成前台设置七牛云信息，后台生成token
