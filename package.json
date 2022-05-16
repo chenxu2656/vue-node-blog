@@ -6,7 +6,7 @@
     "i": "yarn install",
     "serve": "vue-cli-service serve",
     "start": "concurrently 'yarn run serve'",
-    "build": "vue-cli-service build",
+    "build": "rm -rf dist/* && vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
