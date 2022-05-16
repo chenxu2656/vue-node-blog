@@ -1,3 +1,10 @@
 version: '2'
 services:
-  fontWeb
+  blog:
+    build: .
+    ports:
+      - "3001:3001"
+  api:
+    build: ./server
+    ports:
+      - "3002:80"
