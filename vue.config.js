@@ -3,7 +3,11 @@ module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
     port: "3010",
-    proxy: 'http://localhost:3001'
+    proxy: {
+      '/api/':{
+        target: 'http://124.222.84.233:3001'
+      }
+    }
   },
   css: {
     loaderOptions: {
