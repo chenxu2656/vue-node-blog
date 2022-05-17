@@ -9,7 +9,7 @@
         </div>
       </el-main>
       <el-footer>
-        <router-link to="/admin">admin</router-link>
+        
       </el-footer>
     </el-container>
 </template>
