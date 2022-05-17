@@ -1,7 +1,7 @@
 # install & build
 FROM node:latest AS build
 ## install yarn in global
-RUN npm --registry https://registry.npm.taobao.org install yarn -g --force \
+RUN npm install yarn -g --force \
     && mkdir -p /github/btfblog
 COPY . /github/btfblog
 WORKDIR /github/btfblog
