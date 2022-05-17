@@ -3,8 +3,8 @@ services:
   blog:
     build: .
     ports:
-      - "3001:3001"
+      - "80:80"
   api:
     build: ./server
     ports:
-      - "3002:80"
+      - "3001:3001"
