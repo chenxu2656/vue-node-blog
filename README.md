@@ -9,6 +9,12 @@
 > 
 > 接口： RestFul API
 
+## demo
+---
+> 前台：http://blog.xccit.cn
+> 后台：http://blog.xccit.cn/admin
+> Username: test@xccit.com passwrod: 1234
+
 ## Start
 
 ```bash
@@ -24,6 +30,8 @@ cd server && yarn && yarn run start
 ## 开发日志 
 > 下班更新
 
+### 2022.5.17
+- Version 1
 ### 2022.5.14-5.15
 - Update
   - docker 部署
