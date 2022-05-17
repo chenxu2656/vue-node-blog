@@ -1,0 +1,15 @@
+version: '2'
+services:
+  blog:
+    image: blog
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - /github/nginx/conf.d:/etc/nginx/conf.d
+  api:
+    image: api
+    build: ./server
+    ports:
+      - "3001:3001"
+    
