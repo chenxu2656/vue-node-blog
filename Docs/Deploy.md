@@ -1,10 +1,9 @@
 ## 部署
 ---
-我已经写了 `Dockerfile` 和 `Docker-compose.yml`.所以我们可以通过 
-
-具体宿主机和容器的目录结构参照 [Docker-Structure.md](./Docker-Structure.md)
+我已经写了 `Dockerfile` 和 `Docker-compose.yml`.所以我们可以通过
 
 **Docker compose** 直接部署.
+具体宿主机和容器的目录结构参照 [Docker-Structure.md](./ServerStructure.md)
 
 ### Step1
 ---
@@ -16,14 +15,11 @@
 
 如果您选择购买`linux`版本，需要手动安装`docker`.
 
-#### 1.以**centos**为例
----
-```
-1. 安装 docker & docker-compose
-> https://www.runoob.com/docker/centos-docker-install.html
-> https://www.runoob.com/docker/docker-compose.html
-```
+以**centos**为例
 
+安装 docker & docker-compose
+> https://www.runoob.com/docker/centos-docker-install.html <br>
+> https://www.runoob.com/docker/docker-compose.html
 
 ### Step 2
 ---
@@ -56,7 +52,7 @@ server {
 ---
 克隆或者上传项目
 
-参考目录：/github/btfblog/
+克隆到如下目录：/github/btfblog/
 
 ### Step 4
 ---
@@ -70,6 +66,7 @@ docker-compose up -d
 ---
 5.1 更新项目
 ```
+git pull
 docker-compose down
 docker-compose up -d build
 ```
