@@ -68,7 +68,7 @@ docker-compose up -d
 ```
 git pull
 docker-compose down
-docker-compose up -d build
+docker-compose up -d --build
 ```
 5.2 查看日志
 ```
