@@ -1,7 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-const HomePage = require('../src/components/HomePage.vue')
+//单页
+const SinglePage = require('../views/front/SinglePage.vue')
+// 
 const FrontEnd = require('../views/front/FrontEnd.vue')
-const ArticleDetail = require('../src/components/ArticleDetail.vue')
+
+const ArticleList = require('../src/components/homePage/articleList.vue')  
+const ArticleDetail = require('../src/components/homePage/articleDetail.vue')
+const TagList = require('../src/components/homePage/tagList.vue')
+
 const AdminMa = require('../views/admin/AdminMa.vue')
 const LogIn = require('../src/components/AdminLogin.vue')
 const AdminP = require('../src/components/AdminP.vue')
@@ -25,13 +31,30 @@ const routes = [
         children: [
             {
                 path: "/",
-                components: HomePage
+                components: ArticleList
             },
             {
                 path: "/blog/:id",
                 components: ArticleDetail
+            },
+            {
+                path: "tags",
+                components: TagList
+            },
+            {
+                path: 'about',
+                components: ArticleDetail
+            },
+            {
+                path: 'contact',
+                components: ArticleDetail
             }
         ]
+    },
+    {
+        path: '/sp',
+        components: SinglePage,
+        children: []
     },
     {
         path: "/admin",

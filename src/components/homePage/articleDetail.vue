@@ -16,7 +16,11 @@
   </el-card>
 </template>
 <style lang="scss" scoped>
+.el-card{
+  width: 100%;
+}
 #blogTitle {
+  width: 100%;
   .title {
     text-align: left;
     font-size: 25px;
@@ -47,8 +51,20 @@ import axios from "axios";
 import { onMounted, ref } from "vue-demi";
 import { useRoute } from "vue-router";
 import { parseTimeStamp } from "../../js/index";
+let blogId = ""
 const url = useRoute().path;
-const blogId = url.split("blog/")[1];
+console.log(`url:${url}`);
+if(url === '/about') {
+  // 调出关于我的页面
+  blogId = '626f7b3d5e85154ee901d305'
+} else if(url === '/contact') {
+// 调出与我联系
+  blogId = '626f7b3d5e85154ee901d305'
+} 
+else if(url.split("blog/")[1]) {
+  blogId = url.split("blog/")[1];
+}
+
 let blogDetail = ref({});
 let getCon = async () => {
   let resp = await axios({

@@ -35,10 +35,6 @@ const getBlogList = async()=>{
       artList.value = resp.data
   }
 }
-// let parseTimeStamp = (timeStamp)=>{
-//   let date = new Date(parseInt(timeStamp))
-//   return date.toLocaleString()
-// }
 let articleRouterPush = (id)=>{
   router.push( { path: `/blog/${id}`})
 }
@@ -50,8 +46,7 @@ onMounted( getBlogList )
   height: auto;
   ul#articleList{
     margin-top: 0px;
-    padding-left: 10px;
-    margin-bottom: 0pxs;
+    margin-bottom: 0px;
     position: relative;
     li{
         list-style: none;

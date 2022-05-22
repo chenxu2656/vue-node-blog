@@ -7,21 +7,18 @@
     :router="true"
   >
     <el-menu-item index="home" route="/">Home</el-menu-item>
-    <!-- <el-sub-menu index="tag">
-      <template #title>Category</template>
-      <el-menu-item index="front-end" key="">JavaScript</el-menu-item>
-      <el-menu-item index="back-end" key="">Node</el-menu-item>
-    </el-sub-menu> -->
-    <el-menu-item index="tags">Tags</el-menu-item>
-    <el-menu-item index="About">About</el-menu-item>
-    <el-menu-item index="contact">Contact</el-menu-item>
+    <el-menu-item index="tags" route="/tags">Tags</el-menu-item>
+    <el-menu-item index="about" route="/about">About</el-menu-item>
+    <el-menu-item index="contact" route="/contact">Contact</el-menu-item>
     <!-- <el-menu-item index="Admin">Admin</el-menu-item> -->
   </el-menu>
 </template>
 <script setup>
 import {ref} from 'vue'
-// import { useRouter } from 'vue-router'
+import { useRoute } from "vue-router";
 const activePath = ref('home')
+const url = useRoute().path
+activePath.value = url.split('/')[1];
 
 </script>
 <style lang="scss" scoped>
