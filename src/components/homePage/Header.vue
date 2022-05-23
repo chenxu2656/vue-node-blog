@@ -5,6 +5,8 @@
     :default-active="activePath"
     menu-trigger="hover"
     :router="true"
+    text-color="#3490de"
+    active-text-color="#f07b3f"
   >
     <el-menu-item index="home" route="/">Home</el-menu-item>
     <el-menu-item index="tags" route="/tags">Tags</el-menu-item>
@@ -18,7 +20,7 @@ import {ref} from 'vue'
 import { useRoute } from "vue-router";
 const activePath = ref('home')
 const url = useRoute().path
-activePath.value = url.split('/')[1];
+activePath.value = url.split('/')[1] || 'home';
 
 </script>
 <style lang="scss" scoped>
