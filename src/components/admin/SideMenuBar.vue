@@ -4,7 +4,7 @@
     <el-radio-button :label="true">collapse</el-radio-button>
   </el-radio-group> -->
   <el-menu
-    default-active="home"
+    :default-active="activePath"
     class="el-menu-vertical-demo"
     :collapse="isCollapse"
   >
@@ -19,22 +19,22 @@
       </template>
       <el-menu-item-group>
         <el-menu-item
-          index="createArticle"
+          index="createBlog"
           @click="routerPush(router, '/admin/createBlog')"
           >创建博客
         </el-menu-item>
         <el-menu-item
-          index="articleManage"
+          index="blogList"
           @click="routerPush(router, '/admin/blogList')"
           >博客管理</el-menu-item
         >
         <el-menu-item
-          index="categoryManagement"
+          index="folder"
           @click="routerPush(router, '/admin/folder')"
           >文件夹管理</el-menu-item
         >
         <el-menu-item
-          index="tagManagement"
+          index="tags"
           @click="routerPush(router, '/admin/tags')"
           >标签管理</el-menu-item
         >
@@ -45,7 +45,7 @@
           >垃圾箱</el-menu-item
         >
         <el-menu-item
-          index="qiniu"
+          index="qiniuFile"
           @click="routerPush(router, '/admin/qiniuFile')"
           >七牛云</el-menu-item
         >
@@ -62,11 +62,11 @@
       </template>
       <el-menu-item-group>
         <el-menu-item
-          index="qiniuKey"
+          index="qiniu"
           @click="routerPush(router, '/admin/qiniu')"
           >七牛云设置
         </el-menu-item>
-        <el-menu-item index="userManagement" @click="routerPush(router, '/admin/info')">
+        <el-menu-item index="info" @click="routerPush(router, '/admin/info')">
       <template #title>个人信息</template>
     </el-menu-item>
       </el-menu-item-group>
@@ -78,9 +78,12 @@
 import { ref } from "vue";
 import { routerPush } from "../../js/index";
 import { Menu as IconMenu, Setting} from "@element-plus/icons-vue";
-import { useRouter } from "vue-router";
+import { useRouter,useRoute } from "vue-router";
 const router = useRouter();
+const route = useRoute()
 const isCollapse = ref(false);
+const activePath = ref("home");
+activePath.value = route.path.split('/admin/')[1] || 'home'
 </script>
 
 <style>

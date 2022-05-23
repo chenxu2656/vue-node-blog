@@ -227,7 +227,6 @@ const postBlog = async (tage) => {
     });
     if (resp.data) {
       if(tage == 1) {
-        console.log('123123');
         routerPush(router,'/admin/blogList')
       }
     }
@@ -270,8 +269,6 @@ const getToken = async () => {
       },
       data: JSON.parse(localStorage.getItem('qiniuToken'))
     });
-    console.log('111');
-    console.log(data);
     if (data) {
       console.dir(data);
       return data;
@@ -290,8 +287,6 @@ const selectImg = (e) => {
 };
 // 上传七牛云，并返回url
 const uploadImg = async (token) => {
-  console.log('222');
-  console.log(token);
   let tokenParse = token.data.token;
   const observable = startUpload(
     files.value,
@@ -373,7 +368,6 @@ onMounted(async () => {
     disableMenus.value = ['image/upload-image']
     hasQiniuToken.value = false
   }
-  console.log(hasQiniuToken.value);
 });
 </script>
 <style scoped lang="scss">

@@ -11,7 +11,7 @@
           <div class="blogCon">
             {{article.content}}
           </div>
-          <div id="readMore">Read More</div>
+          <!-- <div id="readMore">Read More</div> -->
         </el-card>
       </li>
     </ul>
@@ -71,16 +71,16 @@ onMounted( getBlogList )
           display: -webkit-box;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 3;
-          &:after{
-            content: '...';
-            position: absolute;
-            font-size: 16px;
-            right: 7px;
-            bottom: 25px;
-            width: 100px;
-            background-color: white;
-            line-height: 20px;
-          }
+          // &:after{
+          //   content: '...';
+          //   position: absolute;
+          //   font-size: 16px;
+          //   right: 7px;
+          //   bottom: 25px;
+          //   width: 100px;
+          //   background-color: white;
+          //   line-height: 20px;
+          // }
         }
         #readMore{
           position: absolute;
