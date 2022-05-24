@@ -25,11 +25,12 @@ activePath.value = url.split('/')[1] || 'home';
 </script>
 <style lang="scss" scoped>
     .el-menu {
-      width: 1100px;
+      width: 1200px;
       padding: 0px;
       margin: auto;
       border: none;
       box-sizing: border-box;
+      position: static;
       justify-content: flex-end;
       .el-sub-menu{
         font-size: $h3_size;

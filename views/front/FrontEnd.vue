@@ -25,12 +25,16 @@ import leftBar from "../../src/components/homePage/leftbar.vue";
 
 <style lang='scss' scoped>
 .el-header {
-  width: 1200px;
+  width: 100%;
+  position: fixed;
   margin: auto;
+  background-color: white;
+  z-index: 10;
 }
 .el-main {
   background-color: $back_color;
   min-height: 800px;
+  margin-top: 60px;
   #content {
     width: 1200px;
     margin: auto;
