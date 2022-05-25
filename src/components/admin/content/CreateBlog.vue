@@ -15,7 +15,7 @@
           <el-input style="width: 100%" v-model="blogInfo.title" />
         </el-form-item>
         <div id="tags">
-          <el-form-item label="Category">
+          <el-form-item label="Category" size="large">
             <el-select
               v-model="optionInfo.folders"
               multiple
@@ -401,6 +401,18 @@ onMounted(async () => {
   }
   .operationButton {
     margin-top: 20px;
+    .el-button{
+      background-color: $button_color;
+    }
   }
+  .el-form-item{
+    label{
+      font-size: 40px;
+    }
+  }
+  
 }
+label{
+    color: aquamarine!important;
+  }
 </style>

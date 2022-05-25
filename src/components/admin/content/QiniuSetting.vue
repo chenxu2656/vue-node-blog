@@ -80,4 +80,9 @@ onMounted(async()=>{
 .el-card{
     margin-top: 10px;
 }
+#ope{
+    button{
+        background-color: $button_color;
+    }
+}
 </style>

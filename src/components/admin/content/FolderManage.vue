@@ -114,9 +114,11 @@ onMounted(() => {
 <style lang="scss" scoped>
 // http://www.vc706.cn/2019/09/11/element-ui-table%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8flex%E5%B8%83%E5%B1%80%E9%97%AE%E9%A2%98/
 .el-card {
-  margin-top: 20px;
   #but {
     text-align: right;
+    .el-button{
+      background-color: $button_color;
+    }
   }
   .el-table {
     margin-top: 10px;

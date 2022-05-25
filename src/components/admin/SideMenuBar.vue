@@ -9,12 +9,12 @@
     :collapse="isCollapse"
   >
     <el-menu-item index="home" @click="routerPush(router, '/admin')">
-      <el-icon><icon-menu /></el-icon>
-      <template #title>总览</template>
+      <el-icon><img src="../../../public/images/icons/dashboard.svg" alt=""></el-icon>
+      <template #title>后台总览</template>
     </el-menu-item>
     <el-sub-menu index="article">
       <template #title>
-        <el-icon><icon-menu /></el-icon>
+        <el-icon><img src="../../../public/images/icons/blog.svg" alt=""></el-icon>
         <span>博客管理</span>
       </template>
       <el-menu-item-group>
@@ -52,12 +52,12 @@
       </el-menu-item-group>
     </el-sub-menu>
     <el-menu-item index="frontDesk" @click="routerPush(router, '/admin/frontDesk')">
-      <el-icon><icon-menu /></el-icon>
+      <el-icon><img src="../../../public/images/icons/frontend.svg" alt=""></el-icon>
       <template #title>前台配置</template>
     </el-menu-item>
     <el-sub-menu index="sysSetting">
       <template #title>
-        <el-icon><setting color="red"/></el-icon>
+        <el-icon><img src="../../../public/images/icons/setting.svg" alt=""></el-icon>
         <span>系统设置</span>
       </template>
       <el-menu-item-group>
@@ -77,7 +77,6 @@
 <script setup>
 import { ref } from "vue";
 import { routerPush } from "../../js/index";
-import { Menu as IconMenu, Setting} from "@element-plus/icons-vue";
 import { useRouter,useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute()
@@ -86,12 +85,20 @@ const activePath = ref("home");
 activePath.value = route.path.split('/admin/')[1] || 'home'
 </script>
 
-<style>
+<style lang="scss">
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
 }
 .el-sub-menu {
   height: auto;
+  
 }
+.el-icon{
+    img{
+      width: 20px;
+      padding-right: 10px;
+    }
+  }
+
 </style>
