@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 //单页
 const SinglePage = require('../views/front/SinglePage.vue')
+const TodoList =require('../src/components/homePage/todolist/TodoList.vue')
 // 
 const FrontEnd = require('../views/front/FrontEnd.vue')
 
@@ -54,7 +55,12 @@ const routes = [
     {
         path: '/sp',
         components: SinglePage,
-        children: []
+        children: [
+            {
+                path: 'todo',
+                components: TodoList
+            }
+        ]
     },
     {
         path: "/admin",
