@@ -88,7 +88,7 @@ activePath.value = route.path.split('/admin/')[1] || 'home'
 <style lang="scss">
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
-  min-height: 400px;
+  height: 100%;
 }
 .el-sub-menu {
   height: auto;

@@ -8,6 +8,11 @@
       >
     </div>
     <el-table :data="tags" style="width: 100%">
+      <template v-slot:empty>
+   <div style="margin-top: 35px">
+     <img src="../../../../public/images/empty.svg" />
+   </div>
+ </template>
       <!-- <el-table-column type="selection" width="55" /> -->
       <el-table-column label="标题" prop="tagName" />
       <el-table-column
@@ -29,11 +34,12 @@
           <el-button
             size="small"
             type="danger"
-            @click="handleDelete(tagId)"
+            @click="handleDelete(scope.row._id)"
             >删除</el-button
           >
         </template>
       </el-table-column>
+      
     </el-table>
     <el-dialog v-model="dialogFormVisible" title="修改标签名字">
       <label class="fodlerName">TagName</label>

@@ -9,7 +9,7 @@
     active-text-color="#f07b3f"
   >
     <el-menu-item index="home" route="/">Home</el-menu-item>
-    <el-menu-item index="todo" route="/sp/todo">TodoList</el-menu-item>
+    <!-- <el-menu-item index="todo" route="/sp/todo">TodoList</el-menu-item> -->
     <el-menu-item index="about" route="/about">About</el-menu-item>
     <el-menu-item index="contact" route="/contact">Contact</el-menu-item>
     <!-- <el-menu-item index="Admin">Admin</el-menu-item> -->

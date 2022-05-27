@@ -4,7 +4,7 @@
       <div id="title" class="topbarCon">XCCIT</div>
       <div id="name" class="topbarCon">btfblog 后台管理系统</div>
     </el-header>
-    <el-container>
+    <el-container id="con">
       <el-aside class="el-aside"> <side-menu-bar /></el-aside>
       <el-main class="el-main">
         <router-view></router-view
@@ -34,12 +34,18 @@ import SideMenuBar from "../components/admin/SideMenuBar.vue";
     font-weight: 700;
   }
 }
-.el-aside {
+#con{
+  height: calc(100vh - 120px);
+  .el-aside {
   width: 200px;
+  
 }
+}
+
 .el-footer {
+  border-top: 1px solid #dddfe5;
   bottom: 0px;
-  height: 100px;
+  height: 60px;
 }
 
 </style>

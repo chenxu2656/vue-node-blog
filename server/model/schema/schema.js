@@ -120,6 +120,22 @@ const themeSetting = {
         require: false
     }
 }
+
+const todoList = {
+    title: {
+        require: true,
+        type: String
+    },
+    startTime: {
+        type: String
+    },
+    endTime: {
+        type: String
+    },
+    folderName: {
+        
+    }
+}
 // 点赞
 module.exports = {
     userStructure,

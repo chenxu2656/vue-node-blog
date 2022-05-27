@@ -33,12 +33,17 @@ import leftBar from "../../src/components/homePage/leftbar.vue";
 }
 .el-main {
   background-color: $back_color;
-  min-height: 800px;
+  // min-height: 800px;
   margin-top: 60px;
+  height: calc(100vh - 120px);
   #content {
     width: 1200px;
     margin: auto;
     height: auto;
+    .con{
+      height: 100%;
+      overflow-y: scroll;
+    }
   }
 }
 </style>
