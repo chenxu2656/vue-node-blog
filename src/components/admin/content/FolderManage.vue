@@ -9,6 +9,9 @@
     </div>
     <el-table :data="folders" style="width: 100%">
       <!-- <el-table-column type="selection" width="55" /> -->
+      <template v-slot:empty>
+        <EmptyDisplayVue />
+      </template>
       <el-table-column label="标题" prop="folderName" />
       <el-table-column
         label="创建时间"
@@ -76,6 +79,7 @@ import { onMounted, reactive, ref } from "vue";
 import { formateCtime } from "../../../js/index.js";
 import { folder } from "../../../js/api/index";
 import { Edit } from "@element-plus/icons-vue";
+import EmptyDisplayVue from "./common/EmptyDisplay.vue";
 const folders = ref([]);
 const dialogFormVisible = ref(false);
 const createFieldVisible = ref(false);

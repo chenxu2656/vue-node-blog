@@ -1,9 +1,19 @@
 <template>
 <el-card>
+  <div id="but">
+      <el-button type="primary"
+        @click="createFieldVisible=true"><edit
+          style="width: 1em; height: 1em; margin-right: 8px"
+        />写一篇</el-button
+      >
+    </div>
     <div id="operation" v-show="operationView">
         <el-button size="small" type="danger" @click="handleUpdate(selectedRow,-1)">批量删除</el-button>
     </div>
     <el-table :data="filterTableData" style="width: 100%" @selection-change="selectionLineChangeHandle">
+    <template v-slot:empty>
+        <EmptyDisplayVue />
+      </template>
     <el-table-column type="selection" width="55" />
     <el-table-column label="标题" prop="title" />
     <el-table-column label="创建时间" prop="ctime" sortable :formatter="formateCtime"/>
@@ -25,6 +35,8 @@ import { computed, ref ,onMounted} from 'vue'
 import axios from 'axios'
 import {formateCtime,routerPush} from "../../../js/index.js"
 import { useRouter } from "vue-router";
+import EmptyDisplayVue from "./common/EmptyDisplay.vue";
+import { Edit } from "@element-plus/icons-vue";
 const router = useRouter()
 const search = ref('')
 const tableData = ref([])
@@ -99,5 +111,13 @@ const getBlogList = async()=>{
 onMounted( getBlogList )
 
 </script>
-<style scoped>
+<style scoped lang="scss">
+.el-card{
+  #but {
+    text-align: right;
+    .el-button{
+      background-color: $button_color;
+    }
+  }
+}
 </style>

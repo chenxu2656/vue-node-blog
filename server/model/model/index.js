@@ -16,7 +16,8 @@ const  {
         userStructure,
         tagsStructure,
         syssettingStructure,
-        themeSetting
+        themeSetting,
+        navItemList
     } = require('../schema/schema')
 // 文章
 const article = createModel('article',articleStructure)
@@ -35,11 +36,15 @@ const sysSetting = mongoose.model('sysSsetting',sysSchema)
 const themeSchema = new mongoose.Schema(themeSetting)
 const themeModel = mongoose.model('themeSetting',themeSchema)
 
+// 导航栏设置
+const navItemSchema = new mongoose.Schema(navItemList,{ capped: { size : 1024, max: 1,autoIndexId: true}})
+const navItemModel = mongoose.model('navItemSetting',navItemSchema)
 module.exports = {
     folder,
     article,
     Users,
     tags,
     sysSetting,
-    themeModel
+    themeModel,
+    navItemModel
 }

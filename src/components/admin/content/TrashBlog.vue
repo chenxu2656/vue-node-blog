@@ -5,10 +5,8 @@
     </div>
     <el-table :data="filterTableData" style="width: 100%" @selection-change="selectionLineChangeHandle">
     <template v-slot:empty>
-   <div style="margin-top: 35px">
-     <img src="../../../../public/images/empty.svg" />
-   </div>
-   </template>
+        <EmptyDisplayVue />
+      </template>
     <el-table-column type="selection" width="55" />
     <el-table-column label="标题" prop="title" />
     <el-table-column label="创建时间" prop="ctime" sortable :formatter="formateCtime"/>
@@ -43,6 +41,7 @@
 </template>
 <script  setup>
 import { computed, ref ,onMounted} from 'vue'
+import EmptyDisplayVue from "./common/EmptyDisplay.vue";
 import axios from 'axios'
 const search = ref('')
 const tableData = ref([])

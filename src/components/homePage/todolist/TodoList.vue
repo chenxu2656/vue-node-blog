@@ -10,10 +10,9 @@
         <el-col :span="18" class="con">
           <el-card  v-for="item in a" :key="item.title">
           <div id="itemCon">
-<img src="../../../../public/images/icons/dashboard.svg" alt="" > 
+            <img src="../../../../public/images/icons/dashboard.svg" alt="" > 
           <span id="itemTitle">{{item.title}}</span>
           </div>
-          
           </el-card>
         </el-col>
       </el-row>

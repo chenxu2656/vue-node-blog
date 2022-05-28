@@ -1,4 +1,3 @@
-
 const userStructure = { 
     username: {
         type: String,
@@ -136,6 +135,29 @@ const todoList = {
         
     }
 }
+const navItemList = {
+    title: {
+        require: true,
+        type: String
+    },
+    index: {
+        require: true,
+        type: String
+    },
+    type: {
+        require: true,
+        type: String
+    },
+    dataSourceId: {
+        require: true,
+        type: String
+    },
+    status: {
+        require: true,
+        type: Boolean,
+        default: true
+    }
+}
 // 点赞
 module.exports = {
     userStructure,
@@ -143,5 +165,6 @@ module.exports = {
     folderStructure,
     tagsStructure,
     syssettingStructure,
-    themeSetting
+    themeSetting,
+    navItemList
 }

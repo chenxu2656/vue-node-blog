@@ -15,7 +15,7 @@
           <el-input style="width: 100%" v-model="blogInfo.title" />
         </el-form-item>
         <div id="tags">
-          <el-form-item label="Category" size="large">
+          <el-form-item label="Category">
             <el-select
               v-model="optionInfo.folders"
               multiple

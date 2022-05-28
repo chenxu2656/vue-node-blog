@@ -1,45 +1,25 @@
 <template>
   <el-card>
     <div id="but">
-      <el-button type="primary"
-        @click="createFieldVisible=true"><edit
-          style="width: 1em; height: 1em; margin-right: 8px"
-        />创建标签</el-button
-      >
+      <el-button type="primary" @click="createFieldVisible = true">
+        <edit style="width: 1em; height: 1em; margin-right: 8px" />创建标签
+      </el-button>
     </div>
     <el-table :data="tags" style="width: 100%">
       <template v-slot:empty>
-   <div style="margin-top: 35px">
-     <img src="../../../../public/images/empty.svg" />
-   </div>
- </template>
-      <!-- <el-table-column type="selection" width="55" /> -->
+        <EmptyDisplayVue />
+      </template>
       <el-table-column label="标题" prop="tagName" />
-      <el-table-column
-        label="创建时间"
-        prop="ctime"
-        sortable
-        :formatter="formateCtime"
-      />
+      <el-table-column label="创建时间" prop="ctime" sortable :formatter="formateCtime" />
       <el-table-column align="right">
         <template #default="scope">
-          <el-button
-            size="small"
-            @click="
-              dialogFormVisible = true;
-              tagId = scope.row._id;
-            "
-            >编辑</el-button
-          >
-          <el-button
-            size="small"
-            type="danger"
-            @click="handleDelete(scope.row._id)"
-            >删除</el-button
-          >
+          <el-button size="small" @click="
+            dialogFormVisible = true;
+          tagId = scope.row._id;
+          ">编辑</el-button>
+          <el-button size="small" type="danger" @click="handleDelete(scope.row._id)">删除</el-button>
         </template>
       </el-table-column>
-      
     </el-table>
     <el-dialog v-model="dialogFormVisible" title="修改标签名字">
       <label class="fodlerName">TagName</label>
@@ -47,14 +27,10 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogFormVisible = false">Cancel</el-button>
-          <el-button
-            type="primary"
-            @click="
-              dialogFormVisible = false;
-              handleUpdate(tagId, updateField);
-            "
-            >Confirm</el-button
-          >
+          <el-button type="primary" @click="
+            dialogFormVisible = false;
+          handleUpdate(tagId, updateField);
+          ">Confirm</el-button>
         </span>
       </template>
     </el-dialog>
@@ -64,14 +40,10 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="createFieldVisible = false">Cancel</el-button>
-          <el-button
-            type="primary"
-            @click="
-              createFieldVisible = false;
-              handleCreate(createField);
-            "
-            >Confirm</el-button
-          >
+          <el-button type="primary" @click="
+            createFieldVisible = false;
+          handleCreate(createField);
+          ">Confirm</el-button>
         </span>
       </template>
     </el-dialog>
@@ -82,6 +54,7 @@ import { onMounted, reactive, ref } from "vue";
 import { formateCtime } from "../../../js/index.js";
 import { tag } from "../../../js/api/index";
 import { Edit } from "@element-plus/icons-vue";
+import EmptyDisplayVue from "./common/EmptyDisplay.vue";
 const tags = ref([]);
 const dialogFormVisible = ref(false);
 const createFieldVisible = ref(false);
@@ -108,7 +81,7 @@ const handleUpdate = async (tagId, field) => {
   updateField.tagName = ''
   await handleGetList();
 };
-const handleCreate = async(field)=>{
+const handleCreate = async (field) => {
   const resp = await tag.createTag(field)
   console.log(resp);
   createField.tagName = ''
@@ -123,28 +96,35 @@ onMounted(() => {
 .el-card {
   #but {
     text-align: right;
-    .el-button{
+
+    .el-button {
       background-color: $button_color;
     }
   }
+
   .el-table {
     margin-top: 10px;
+
     #folderMa {
       display: flex;
+
       .el-menu {
         width: 10%;
       }
+
       #selectedList {
         flex-grow: 1;
         height: 200px;
       }
     }
   }
-  .el-dialog{
-    .el-input{
+
+  .el-dialog {
+    .el-input {
       margin-top: 10px;
     }
-    label{
+
+    label {
       font-size: 16px;
       font-weight: 500;
     }
