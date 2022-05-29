@@ -43,7 +43,7 @@ app.use('/api/article',Article)
 app.use('/api/folder',Folder)
 app.use('/api/tags',Tags)
 app.use('/api/qiniu',Qiniu)
-// app.use('/api/setting',Setting)
+app.use('/api/setting',Setting)
 app.use('/api/navItem',NavItem)
 app.use(errhandle)
 module.exports = app;

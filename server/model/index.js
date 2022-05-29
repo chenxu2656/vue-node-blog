@@ -33,7 +33,8 @@ const {
 } = require('./src/sysSetting')
 const {
     createNavItem,
-    getNavItem
+    getNavItem,
+    deleteNavItem
 } = require('./src/navItem')
 
 module.exports = {
@@ -63,5 +64,6 @@ module.exports = {
     getSys,
     
     createNavItem,
-    getNavItem
+    getNavItem,
+    deleteNavItem
 }

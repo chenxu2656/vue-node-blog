@@ -1,4 +1,0 @@
-GET  http://localhost:3001/api/article
-
-
-GET  http://localhost:3001/api/setting
