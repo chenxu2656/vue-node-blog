@@ -7,7 +7,7 @@ export default (options)=>{
             other = {
                 parmas: options.parmas
             }
-        } else if(options.method == 'post') {
+        } else if(options.method == 'post' || options.method == 'put') {
             other = {
                 data: options.parmas
             }

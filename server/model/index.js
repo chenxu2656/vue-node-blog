@@ -34,7 +34,8 @@ const {
 const {
     createNavItem,
     getNavItem,
-    deleteNavItem
+    deleteNavItem,
+    updateNavItem
 } = require('./src/navItem')
 
 module.exports = {
@@ -65,5 +66,6 @@ module.exports = {
     
     createNavItem,
     getNavItem,
-    deleteNavItem
+    deleteNavItem,
+    updateNavItem
 }

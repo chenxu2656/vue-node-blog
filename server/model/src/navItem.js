@@ -12,8 +12,15 @@ let deleteNavItem = async(id)=>{
     const resp = await navItemModel.deleteOne({"_id": id})
     return resp
 }
+// 更新文章信息
+const updateNavItem = async (id,obj)=>{
+    // 返回更新后的文件
+    const updateInfo = await navItemModel.findByIdAndUpdate( id, obj, {new:true})
+    return updateInfo
+}
 module.exports = {
     createNavItem,
     getNavItem,
-    deleteNavItem
+    deleteNavItem,
+    updateNavItem
 }
