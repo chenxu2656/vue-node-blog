@@ -51,20 +51,29 @@ import axios from "axios";
 import { onMounted, ref } from "vue-demi";
 import { useRoute } from "vue-router";
 import { parseTimeStamp } from "../../js/index";
+import apiRequest from '../../../http/index'
 let blogId = ""
-const url = useRoute().path;
-console.log(`url:${url}`);
-if(url === '/about') {
-  // 调出关于我的页面
-  blogId = '626f7b3d5e85154ee901d305'
-} else if(url === '/contact') {
-// 调出与我联系
-  blogId = '626f7b3d5e85154ee901d305'
-} 
-else if(url.split("blog/")[1]) {
-  blogId = url.split("blog/")[1];
+const urlSplit  = useRoute().path.split('/')
+const itemList = ref([])
+const handleGetTagList = async() => {
+    await apiRequest({
+        url: '/api/navItem/'
+    }).then((resp) => {
+        itemList.value = resp
+    }).catch((err) => {
+        console.log(err);
+    })
 }
-
+console.log(urlSplit);
+// // 获取到应该展示的blogid
+const handleGetBlogId = ()=>{
+  if (urlSplit[1] == 'custom') {
+    return itemList.value[itemList.value.findIndex(item=> item.index === urlSplit[3])].dataSourceId
+  } else if (urlSplit[1] == 'blog'){
+    console.log(urlSplit[3]);
+    return urlSplit[2]
+  }
+}
 let blogDetail = ref({});
 let getCon = async () => {
   let resp = await axios({
@@ -75,7 +84,10 @@ let getCon = async () => {
     blogDetail.value = resp.data;
   }
 };
-onMounted(() => {
+onMounted(async () => {
+  
+  await handleGetTagList();
+  blogId = handleGetBlogId();
   getCon();
 });
 </script>

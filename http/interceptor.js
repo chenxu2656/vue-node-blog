@@ -18,7 +18,6 @@ instance.interceptors.request.use((config)=>{
 })
 
 instance.interceptors.response.use((resp)=>{
-    console.log(resp.data);
     return resp.data
 },err=>{
     console.log(err);
