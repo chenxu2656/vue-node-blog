@@ -41,7 +41,7 @@
                 <el-col :span="8">
                     <el-form-item label="数据类型">
                         <el-select v-model="navItem.type" placeholder="please select your zone">
-                            <el-option label="文章页" value="atricle" />
+                            <el-option label="文章页" value="article" />
                             <el-option label="列表页-Tag" value="tag" />
                             <el-option label="列表页-Folder" value="folder" />
                             <el-option label="单页" value="sp" />

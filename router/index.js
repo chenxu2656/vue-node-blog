@@ -43,12 +43,20 @@ const routes = [
                 components: TagList
             },
             {
-                path: 'about',
+                path: '/custom/article/:index',
                 components: ArticleDetail
             },
             {
-                path: 'contact',
-                components: ArticleDetail
+                path: '/custom/tag/:index',
+                components: ArticleList
+            },
+            {
+                path: '/custom/folder/:index',
+                components: ArticleList
+            },
+            {
+                path: '/custom/sp/:index',
+                components: SinglePage
             }
         ]
     },
