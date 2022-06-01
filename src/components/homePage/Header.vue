@@ -50,7 +50,10 @@ const handleGetActivepath = () => {
 }
 const handleGetTagList = () => {
     apiRequest({
-        url: '/api/navItem/'
+        url: '/api/navItem/',
+        params: {
+            status: true
+        }
     }).then((resp) => {
         itemList.value = resp
     }).catch((err) => {
