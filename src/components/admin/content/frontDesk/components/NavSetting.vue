@@ -69,7 +69,7 @@
                     <el-option v-for="item in folderList" :key="item._id" :value="item._id" :label="item.folderName"/>
                 </el-select>
                 <el-select v-model="navItem.dataSourceId" placeholder="文章id"
-                    v-if="navItem.type == 'atricle' || navItem.type == 'sp'" 
+                    v-if="navItem.type == 'article' || navItem.type == 'sp'" 
                     @focus="handleGetBlogList();"
                     @change="(val)=>{
                         navItem.dataSourceId = val;
@@ -112,7 +112,7 @@ const handleCreate = (navItem) => {
     apiRequest({
         url: "/api/navItem/",
         method: "post",
-        parmas: navItem,
+        params: navItem,
     }).then((resp) => {
         // 将创建项添加到原数组， 避免重复请求
         navItemList.value.push(resp)
@@ -137,7 +137,7 @@ const handleUpdateStatus = (id, status) => {
     apiRequest({
         url: `/api/navItem/${id}`,
         method: "put",
-        parmas: {
+        params: {
             "status": status
         }
     }).then((resp) => {

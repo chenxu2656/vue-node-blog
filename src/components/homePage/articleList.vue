@@ -18,15 +18,33 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { ref ,onMounted} from 'vue';
 import axios from 'axios'
-import { onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter , useRoute} from 'vue-router'
 import {parseTimeStamp} from "../../js/index"
+/**
+ * 1. 首页
+ * 2. 自定义页面
+ * 2.1 tag list
+ * 2.2 folder list
+ */
 let artList = ref("")
  // 创建路由
- 
 const router = useRouter();
+const urlSplit  = useRoute().path.split('/')
+console.log(urlSplit);
+/**
+ * @description 返回列表类型 
+ * @return tag | folder | blogList
+ */
+// const handlegetArticleType = (url)=>{
+//   if(url[1]=='custom'){
+//     return url[2]
+//   } else {
+//     return 
+//   }
+// }
+console.log(urlSplit);
 const getBlogList = async()=>{
   const resp = await axios({
     url: '/api/article',
