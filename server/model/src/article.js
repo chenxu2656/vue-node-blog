@@ -6,8 +6,21 @@ const createArticle = async(obj)=>{
 }
 // 获取文章列表
 const getArticleList = async (query)=>{
-    // 
-    let articleList = await article.find(query)
+    let articleList = {}
+    if(query.hasOwnProperty('tagid')) {
+        articleList = await article.find({
+            tage: query.tage,
+            tags: {$all: [query.tagid]}
+        })
+    }else if (query.hasOwnProperty('folderid')){
+        articleList = await article.find({
+            tage: query.tage,
+            folders: {$all: [query.folderid]}
+        })
+    } else {
+        articleList = await article.find(query)
+    }
+    
     return articleList
 }
 // 获取文章具体信息s

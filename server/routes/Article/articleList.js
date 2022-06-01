@@ -16,14 +16,17 @@ const listtype = (type) =>{
     }
 }
 module.exports = async(req,res)=>{
-    let query = req.query? listtype(req.query.type) : null
-    // console.log(query);
-    console.log(query)
+    let query = req.query.type? listtype(req.query.type) : {}
+    if(req.query.tagid){
+        query.tagid = req.query.tagid
+    }
+    if(req.query.folderid){
+        query.folderid = req.query.folderid
+    }
     const articleList  = await getArticleList(query)
     if(articleList.length > 0) {
         res.status(200).json(articleList)
     }else{
         res.status(200).json([])
     }
-
 }

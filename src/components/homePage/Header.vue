@@ -26,7 +26,7 @@ const urlSplit  = url.split('/')
 const router = useRouter()
 const itemList = ref()
 // const reload = ref(true)
-console.log(urlSplit);
+
 const customRouter = (index,type) =>{
   router.push({
     path: `/custom/${type}/${index}`

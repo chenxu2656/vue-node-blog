@@ -43,7 +43,8 @@ import {useRoute} from 'vue-router'
     height: auto;
     .con{
       height: 100%;
-      overflow-y: scroll;
+      // overflow-y: scroll;
+      overflow-x: hidden;
     }
   }
 }

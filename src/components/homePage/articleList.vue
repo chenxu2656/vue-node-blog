@@ -22,6 +22,7 @@ import { ref ,onMounted} from 'vue';
 import axios from 'axios'
 import { useRouter , useRoute} from 'vue-router'
 import {parseTimeStamp} from "../../js/index"
+import apiRequest from '../../../http/index'
 /**
  * 1. 首页
  * 2. 自定义页面
@@ -29,35 +30,96 @@ import {parseTimeStamp} from "../../js/index"
  * 2.2 folder list
  */
 let artList = ref("")
+let itemList = []
+let listType = ""
+let listName = ""
+let queryParams = new Object()
  // 创建路由
 const router = useRouter();
 const urlSplit  = useRoute().path.split('/')
-console.log(urlSplit);
+const handleGetTagList = async() => {
+    await apiRequest({
+        url: '/api/navItem/',
+        params: {
+            status: true
+        }
+    }).then((resp) => {
+        itemList = resp
+    }).catch((err) => {
+        console.log(err);
+    })
+}
+
+const handleId = (navlist,listName)=>{
+  return navlist[navlist.findIndex(item=>item.index == listName)].dataSourceId
+}
 /**
- * @description 返回列表类型 
+ * @description 返回当前列表类型 
  * @return tag | folder | blogList
  */
-// const handlegetArticleType = (url)=>{
-//   if(url[1]=='custom'){
-//     return url[2]
-//   } else {
-//     return 
-//   }
-// }
-console.log(urlSplit);
+const handlegetArticleType = (url)=>{
+  return new Promise((res)=>{
+if(url[1]=='custom'){
+    listType =  url[2]
+    listName = url[3]
+  } else {
+    listType =  'blogList'
+  }
+  res(listType)
+  })
+  
+}
+
+/**
+ * 
+ * @param {*} listType 
+ */
+const handleQueryParams = (listType2)=>{
+if(listType2 == 'tag'){
+  return {
+    type: 'list',
+    tagid: handleId(itemList,listName)
+  }
+} else if (listType2 == 'folder') {
+  return {
+    type: 'list',
+    folderid: handleId(itemList,listName)
+  }
+} else {
+  return {
+    type: 'list',
+  }
+}
+}
+
+/**
+ * @description 路由跳转
+ * @param {*} id 文章ID
+ */
+const articleRouterPush = (id)=>{
+  router.push( { path: `/blog/${id}`})
+}
+/**
+ * @description 获取文章列表
+ */
 const getBlogList = async()=>{
   const resp = await axios({
     url: '/api/article',
     method: "get",
+    params: queryParams
   })
   if (resp.data) {
       artList.value = resp.data
   }
 }
-let articleRouterPush = (id)=>{
-  router.push( { path: `/blog/${id}`})
-}
-onMounted( getBlogList )
+onMounted(async()=>{
+  // 1. 获取所有导航项目
+  await handleGetTagList()
+  // 2. 
+  await handlegetArticleType(urlSplit)
+  queryParams = handleQueryParams(listType)
+  getBlogList()
+} )
 
 </script>
 <style lang="scss" scoped>
