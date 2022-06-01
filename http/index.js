@@ -2,17 +2,19 @@
 import {instance} from './interceptor'
 export default (options)=>{
     return new Promise((resolve,reject)=>{
-        let other = { }
+        let other = {}
         if(options.method == 'get') {
             other = {
-                parmas: options.parmas
+                params: options.params
             }
         } else if(options.method == 'post' || options.method == 'put') {
             other = {
-                data: options.parmas
+                data: options.params
             }
         } else {
-            other = {}
+            other = {
+                params: options.params
+            }
         }
         instance({
             method: options.method || 'get',
