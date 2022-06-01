@@ -10,7 +10,7 @@
           <leftBar />
         </el-col>
         <el-col :span="18" class="con">
-          <router-view></router-view>
+          <router-view :key="useRoute().fullPath"></router-view>
         </el-col>
         </el-row>
       </div>
@@ -21,6 +21,7 @@
 <script setup>
 import navHeader from "../../src/components/homePage/Header.vue";
 import leftBar from "../../src/components/homePage/leftbar.vue";
+import {useRoute} from 'vue-router'
 </script>
 
 <style lang='scss' scoped>

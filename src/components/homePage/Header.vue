@@ -59,7 +59,6 @@ const handleGetTagList = () => {
 }
 activePath.value = handleGetActivepath(url);
 const handleUpdate = (index)=>{
-  console.log(index);
   activePath.value = index
 }
 onMounted(() => {
