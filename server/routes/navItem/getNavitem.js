@@ -1,9 +1,10 @@
 const {getNavItem} = require('../../model/index')
 module.exports = async(req,res)=>{
     const reqData = req.query
+    console.log('111');
     console.log(reqData);
     try {
-        const data = await getNavItem()
+        const data = await getNavItem(reqData)
         if (data) {
             res.status(200).json(data)
         } else {

@@ -4,8 +4,8 @@ let createNavItem = async(data)=>{
     const createNavResp = await navItemModel.create(data)
     return createNavResp
 }
-let getNavItem = async()=>{
-    const resp = await navItemModel.find()
+let getNavItem = async(reqData)=>{
+    const resp = await navItemModel.find(reqData)
     return resp
 }
 let deleteNavItem = async(id)=>{
