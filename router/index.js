@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 //单页
 const SinglePage = require('../views/front/SinglePage.vue')
-const TodoList =require('../src/components/homePage/todolist/TodoList.vue')
+// const TodoList =require('../src/components/homePage/todolist/TodoList.vue')
 // 
 const FrontEnd = require('../views/front/FrontEnd.vue')
 
@@ -62,21 +62,21 @@ const routes = [
                 path: '/custom/folder/:index',
                 components: ArticleList
             },
-            {
-                path: '/custom/sp/:index',
-                components: SinglePage
-            }
+            // {
+            //     path: '/custom/sp/:index',
+            //     components: SinglePage
+            // }
         ]
     },
     {
-        path: '/sp',
+        path: '/custom/sp/:index',
         components: SinglePage,
-        children: [
-            {
-                path: 'todo',
-                components: TodoList
-            }
-        ]
+        // children: [
+        //     {
+        //         path: 'todo',
+        //         components: TodoList
+        //     }
+        // ]
     },
     {
         path: "/admin",

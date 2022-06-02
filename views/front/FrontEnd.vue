@@ -6,22 +6,26 @@
     <el-main>
       <div id="content">
         <el-row :gutter="10">
-        <el-col :span="6" class="leftSide">
-          <leftBar />
-        </el-col>
-        <el-col :span="18" class="con">
-          <router-view :key="useRoute().fullPath"></router-view>
-        </el-col>
+          <el-col :span="6" class="leftSide">
+            <leftBar />
+          </el-col>
+          <el-col :span="18" class="con">
+            <router-view :key="useRoute().fullPath"></router-view>
+          </el-col>
         </el-row>
       </div>
     </el-main>
-    <el-footer> </el-footer>
+    <el-footer>
+      <!-- 皖ICP备2022003024 <br>
+      <span>版权所有：</span>
+      <a href="https://github.com/">https://github.com/</a> -->
+    </el-footer>
   </el-container>
 </template>
 <script setup>
 import navHeader from "../../src/components/homePage/Header.vue";
 import leftBar from "../../src/components/homePage/leftbar.vue";
-import {useRoute} from 'vue-router'
+import { useRoute } from 'vue-router'
 </script>
 
 <style lang='scss' scoped>
@@ -31,21 +35,32 @@ import {useRoute} from 'vue-router'
   margin: auto;
   background-color: white;
   z-index: 10;
+  border-bottom: 1px solid $base_color;
 }
+
 .el-main {
   background-color: $back_color;
   // min-height: 800px;
   margin-top: 60px;
   height: calc(100vh - 120px);
+
   #content {
     width: 1200px;
     margin: auto;
     height: auto;
-    .con{
+
+    .con {
       height: 100%;
       // overflow-y: scroll;
       overflow-x: hidden;
     }
   }
+}
+
+.el-footer {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 </style>

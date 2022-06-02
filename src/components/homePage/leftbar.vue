@@ -22,7 +22,7 @@
         <div class="categoryTitle">Tags</div>
         <el-divider></el-divider>
         <ul class="tagList">
-            <li  v-for="item in tagsList" :key="item._id"  id="tagName" @click="routerPush(router, `/blog/tag/${item._id}`)">{{item.tagName}} </li>
+            <li  v-for="item in tagsList" :key="item._id"  class="tagName" @click="routerPush(router, `/blog/tag/${item._id}`)">{{item.tagName}} </li>
         </ul>
     </el-card>
 </template>
@@ -91,6 +91,8 @@ import { useRouter } from "vue-router";
         text-align: left;
         .categoryTitle{
             left: 5px;
+            color: $base_color;
+            font-weight: $font_weight_bold;
         }
         .el-divider{
             margin-top: 10px;
@@ -99,6 +101,10 @@ import { useRouter } from "vue-router";
         .archievskList{
             padding-left: 10px;
             height: 30px;
+            &:hover{
+                    cursor: pointer;
+                    color: $base_color;
+                }
         }
         .tagList{
             list-style: none;
@@ -106,15 +112,20 @@ import { useRouter } from "vue-router";
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
-            #tagName {
-                background-color: #9accfa;
+            .tagName {
+                // background-color: $light_font_color;
                 height: 25px;
                 line-height: 25px;
                 padding-left: 10px;
                 padding-right: 10px;
                 margin-right: 10px;
                 margin-bottom: 5px;
-                border-radius: 5px;
+                font-weight: $font_weight_middle;
+                border-radius: 4px;
+                &:hover{
+                    cursor: pointer;
+                    color: $base_color;
+                }
             }
         }
     }
