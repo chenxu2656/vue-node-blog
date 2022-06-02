@@ -14,7 +14,7 @@
     <el-card class="box-card category" id="categoryList">
         <div class="categoryTitle">Category</div>
         <el-divider></el-divider>
-        <div v-for="item in categoryList" class="archievskList" :key="item.id">
+        <div v-for="item in categoryList" class="archievskList" :key="item.id" @click="routerPush(router, `/blog/folder/${item._id}`)">
             <span>{{item.folderName}}</span> 
         </div>
     </el-card>
@@ -22,19 +22,21 @@
         <div class="categoryTitle">Tags</div>
         <el-divider></el-divider>
         <ul class="tagList">
-            <li  v-for="item in tagsList" :key="item.id"  id="tagName">{{item.tagName}} </li>
+            <li  v-for="item in tagsList" :key="item._id"  id="tagName" @click="routerPush(router, `/blog/tag/${item._id}`)">{{item.tagName}} </li>
         </ul>
     </el-card>
 </template>
-<script>
+<script setup>
 import { ref } from 'vue';
 import axios from 'axios'
 import { onMounted } from 'vue'
-export default {
-    name: 'leftBar',
-    setup(){
+import { routerPush } from "../../js/index";
+import { useRouter } from "vue-router";
+
+
         let categoryList = ref("")
         let tagsList = ref("")
+        const router = useRouter();
         let getCategoryList = async()=>{
             let category = await axios({
                 url: "/api/folder",
@@ -58,12 +60,7 @@ export default {
             getTagList()
         })
         // onMounted(getCategoryList,getTagList)
-        return {
-            categoryList,
-            tagsList
-        }
-    }
-}
+
 </script>
 <style lang="scss" scoped>
     #basicInfo {

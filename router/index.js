@@ -35,6 +35,14 @@ const routes = [
                 components: ArticleList
             },
             {
+                path: "/blog/tag/:id",
+                components: ArticleList
+            },
+            {
+                path: "/blog/folder/:id",
+                components: ArticleList
+            },
+            {
                 path: "/blog/:id",
                 components: ArticleDetail
             },

@@ -1,5 +1,6 @@
 <template>
   <div id="postListConCon">
+    
     <ul id="articleList">
       <li v-for="article in artList" :key="article.id">
         <el-card class="box-card" id="blog">
@@ -13,6 +14,9 @@
           </div>
           <!-- <div id="readMore">Read More</div> -->
         </el-card>
+        <!-- <slot>
+        <EmptyDisplayVue />
+    </slot> -->
       </li>
     </ul>
   </div>
@@ -23,6 +27,7 @@ import axios from 'axios'
 import { useRouter , useRoute} from 'vue-router'
 import {parseTimeStamp} from "../../js/index"
 import apiRequest from '../../../http/index'
+// import EmptyDisplayVue from "../admin/content/common/EmptyDisplay.vue"
 /**
  * 1. 首页
  * 2. 自定义页面
@@ -33,6 +38,7 @@ let artList = ref("")
 let itemList = []
 let listType = ""
 let listName = ""
+let sourceId = ""
 let queryParams = new Object()
  // 创建路由
 const router = useRouter();
@@ -62,7 +68,12 @@ const handlegetArticleType = (url)=>{
 if(url[1]=='custom'){
     listType =  url[2]
     listName = url[3]
-  } else {
+  } else if (url[1]=='blog'){
+    // 说明是某个标签下或者某个文件夹下的列表
+    listType = `${url[2]}-id`
+    sourceId = url[3]
+  }
+   else {
     listType =  'blogList'
   }
   res(listType)
@@ -85,7 +96,19 @@ if(listType2 == 'tag'){
     type: 'list',
     folderid: handleId(itemList,listName)
   }
-} else {
+} else if (listType2 == 'folder-id') {
+  return {
+    type: 'list',
+    folderid: sourceId
+  }
+}
+else if (listType2 == 'tag-id') {
+  return {
+    type: 'list',
+    tagid: sourceId
+  }
+}
+else {
   return {
     type: 'list',
   }
