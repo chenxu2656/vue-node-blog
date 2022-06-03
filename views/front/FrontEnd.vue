@@ -35,7 +35,7 @@ import { useRoute } from 'vue-router'
   margin: auto;
   background-color: white;
   z-index: 10;
-  border-bottom: 1px solid $base_color;
+  // border-bottom: 1px solid $base_color;
 }
 
 .el-main {
