@@ -2,7 +2,7 @@
 <el-card>
   <div id="but">
       <el-button type="primary"
-        @click="createFieldVisible=true"><edit
+        @click="routerPush(router, '/admin/createBlog')"><edit
           style="width: 1em; height: 1em; margin-right: 8px"
         />写一篇</el-button
       >

@@ -38,7 +38,12 @@ import SideMenuBar from "../components/admin/SideMenuBar.vue";
   height: calc(100vh - 120px);
   .el-aside {
   width: 200px;
-  
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-right: 1px solid #dddfe5;
+  &::-webkit-scrollbar{
+    display: none;
+  }
 }
 }
 
