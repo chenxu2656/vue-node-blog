@@ -63,11 +63,16 @@ onMounted(async () => {
   margin-top: 60px;
   height: calc(100vh - 120px);
   border: none;
+  overflow-x: hidden;
+  border: none;
+  ::-webkit-scrollbar {
+      display: none;
+  }
   .el-card{
 width: 100%;
-  max-width: 1400px;
+//   max-width: 1300px;
   margin: auto;
-  margin-top: 20px;
+  
   }
 }
 

@@ -2,7 +2,10 @@
 <div id="content">
         <el-row :gutter="10">
           <el-col :span="6" class="leftSide">
-            <leftBar />
+          <keep-alive>
+      <leftBar />
+      </keep-alive>
+            
           </el-col>
           <el-col :span="18" class="con">
             <router-view :key="useRoute().fullPath"></router-view>
@@ -19,7 +22,7 @@ import { useRoute } from 'vue-router'
     width: 1200px;
     margin: auto;
     height: auto;
-
+    margin-top: 10px;
     .con {
       height: 100%;
       // overflow-y: scroll;

@@ -7,9 +7,6 @@
       <router-view :key="useRoute().fullPath"></router-view>
     </el-main>
     <el-footer>
-      <!-- 皖ICP备2022003024 <br>
-      <span>版权所有：</span>
-      <a href="https://github.com/">https://github.com/</a> -->
     </el-footer>
   </el-container>
 </template>
