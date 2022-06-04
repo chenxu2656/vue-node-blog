@@ -6,14 +6,13 @@
     class="demo-tabs"
     @tab-click="handleClick"
   >
-    <!-- <el-tab-pane label="主页配置" name="first">
-      <LunboSetting/>
-    </el-tab-pane> -->
-    <el-tab-pane label="导航栏配置" name="first">
+    <el-tab-pane label="导航栏配置" name="first" class="navSetting">
       <NavSettingVue />
     </el-tab-pane>
-    <!-- <el-tab-pane label="Role" name="third">Role</el-tab-pane>
-    <el-tab-pane label="Task" name="fourth">Task</el-tab-pane> -->
+    <!-- <el-tab-pane label="轮播图设置" name="second" class="carousel">
+      <LunboSetting />
+    </el-tab-pane> -->
+    <!-- <el-tab-pane label="Task" name="fourth">Task</el-tab-pane> -->
   </el-tabs>
 </el-card>
 
@@ -28,14 +27,20 @@ const handleClick = (tab, event) => {
   console.log(tab, event)
 }
 </script>
-<style>
+<style lang="scss" scoped>
 .demo-tabs > .el-tabs__content {
   padding: 5px;
   color: #6b778c;
   font-size: 32px;
   font-weight: 600;
   height: calc(100vh - 280px);
-  overflow-y: scroll;
+  .navSetting{
+    height: calc(100vh - 280px);
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+    display: none;
+  }
+  }
 }
 #set{
     margin-top: 10px;
