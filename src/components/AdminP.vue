@@ -5,7 +5,7 @@
       <div id="name" class="topbarCon">btfblog 后台管理系统</div>
     </el-header>
     <el-container id="con">
-      <el-aside class="el-aside"> <side-menu-bar /></el-aside>
+      <el-aside class="el-aside"> <side-menu-bar  /></el-aside>
       <el-main class="el-main">
         <router-view></router-view
       ></el-main>
@@ -15,6 +15,7 @@
 </template>
 <script setup>
 import SideMenuBar from "../components/admin/SideMenuBar.vue";
+// import { useRoute } from 'vue-router'
 </script>
 <style lang="scss" scoped>
 

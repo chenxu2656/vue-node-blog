@@ -5,7 +5,7 @@ module.exports = (req,res,next)=>{
     const url = req.url
     let rex = /(register|login)/
     if (req.method == 'GET') {
-        rex = /(register|login|article|folder|tags)/s
+        rex = /(register|login|article|folder|tags|navItem|setting)/s
     } 
     if(!rex.test(url)) {
         const secretkey='useremail';//加密字段

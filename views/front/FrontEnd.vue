@@ -30,6 +30,11 @@ import { useRoute } from 'vue-router'
   // min-height: 800px;
   margin-top: 60px;
   height: calc(100vh - 120px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  &::-webkit-scrollbar{
+    display: none;
+  }
 }
 
 .el-footer {

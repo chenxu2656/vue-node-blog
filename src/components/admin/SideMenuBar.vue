@@ -7,6 +7,7 @@
     :default-active="activePath"
     class="el-menu-vertical-demo"
     :collapse="isCollapse"
+    @select="handleUpdate"
   >
     <el-menu-item index="home" @click="routerPush(router, '/admin')">
       <el-icon><img src="../../../public/images/icons/dashboard.svg" alt=""></el-icon>
@@ -83,6 +84,9 @@ const route = useRoute()
 const isCollapse = ref(false);
 const activePath = ref("home");
 activePath.value = route.path.split('/admin/')[1] || 'home'
+const handleUpdate = (index)=>{
+  activePath.value = index
+}
 </script>
 
 <style lang="scss">
