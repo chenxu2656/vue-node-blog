@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 //单页
-const SinglePage = require('../views/front/SinglePage.vue')
+const SinglePage = require('../views/front/components/SinglePage.vue')
 // const TodoList =require('../src/components/homePage/todolist/TodoList.vue')
 // 
 const FrontEnd = require('../views/front/FrontEnd.vue')
 
+const GeneralPage = require('../views/front/components/GeneralPage.vue')
 const ArticleList = require('../src/components/homePage/articleList.vue')  
 const ArticleDetail = require('../src/components/homePage/articleDetail.vue')
 const TagList = require('../src/components/homePage/tagList.vue')
@@ -32,52 +33,49 @@ const routes = [
         children: [
             {
                 path: "/",
-                components: ArticleList
+                components: GeneralPage,
+                children: [
+                    {
+                        path: "/",
+                        components: ArticleList,
+                    },
+                    {
+                        path: "/blog/tag/:id",
+                        components: ArticleList
+                    },
+                    {
+                        path: "/blog/folder/:id",
+                        components: ArticleList
+                    },
+                    {
+                        path: "/blog/:id",
+                        components: ArticleDetail
+                    },
+                    {
+                        path: "tags",
+                        components: TagList
+                    },
+                    {
+                        path: '/custom/article/:index',
+                        components: ArticleDetail
+                    },
+                    {
+                        path: '/custom/tag/:index',
+                        components: ArticleList
+                    },
+                    {
+                        path: '/custom/folder/:index',
+                        components: ArticleList
+                    },
+                ]
             },
             {
-                path: "/blog/tag/:id",
-                components: ArticleList
+                path: '/custom/sp/:index',
+                components: SinglePage
             },
-            {
-                path: "/blog/folder/:id",
-                components: ArticleList
-            },
-            {
-                path: "/blog/:id",
-                components: ArticleDetail
-            },
-            {
-                path: "tags",
-                components: TagList
-            },
-            {
-                path: '/custom/article/:index',
-                components: ArticleDetail
-            },
-            {
-                path: '/custom/tag/:index',
-                components: ArticleList
-            },
-            {
-                path: '/custom/folder/:index',
-                components: ArticleList
-            },
-            // {
-            //     path: '/custom/sp/:index',
-            //     components: SinglePage
-            // }
         ]
     },
-    {
-        path: '/custom/sp/:index',
-        components: SinglePage,
-        // children: [
-        //     {
-        //         path: 'todo',
-        //         components: TodoList
-        //     }
-        // ]
-    },
+    
     {
         path: "/admin",
         components: AdminMa,

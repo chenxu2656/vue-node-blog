@@ -1,25 +1,16 @@
 <!-- 单页应用 -->
 <template>
-  <el-container>
-    <el-header>
-      <navHeader />
-    </el-header>
-    <el-main>
   <el-card class="box-card category" id="blogBlock">
     <!-- <div >
       {{ blogDetail.content }}
     </div> -->
     <v-md-preview :text="blogDetail.content" id="blogCon"></v-md-preview>
   </el-card>
-    </el-main>
-    <el-footer> </el-footer>
-  </el-container>
 </template>
 <script setup>
-import navHeader from "../../src/components/homePage/Header.vue";
 import axios from "axios";
 import { onMounted, ref } from "vue-demi";
-import apiRequest from '../../http/index'
+import apiRequest from '../../../http/index'
 import { useRoute } from "vue-router";
 let blogId = ""
 const itemList = ref([])

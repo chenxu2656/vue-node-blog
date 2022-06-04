@@ -4,16 +4,7 @@
       <navHeader />
     </el-header>
     <el-main>
-      <div id="content">
-        <el-row :gutter="10">
-          <el-col :span="6" class="leftSide">
-            <leftBar />
-          </el-col>
-          <el-col :span="18" class="con">
-            <router-view :key="useRoute().fullPath"></router-view>
-          </el-col>
-        </el-row>
-      </div>
+      <router-view :key="useRoute().fullPath"></router-view>
     </el-main>
     <el-footer>
       <!-- 皖ICP备2022003024 <br>
@@ -24,7 +15,6 @@
 </template>
 <script setup>
 import navHeader from "../../src/components/homePage/Header.vue";
-import leftBar from "../../src/components/homePage/leftbar.vue";
 import { useRoute } from 'vue-router'
 </script>
 
@@ -43,18 +33,6 @@ import { useRoute } from 'vue-router'
   // min-height: 800px;
   margin-top: 60px;
   height: calc(100vh - 120px);
-
-  #content {
-    width: 1200px;
-    margin: auto;
-    height: auto;
-
-    .con {
-      height: 100%;
-      // overflow-y: scroll;
-      overflow-x: hidden;
-    }
-  }
 }
 
 .el-footer {
