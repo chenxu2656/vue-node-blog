@@ -1,3 +1,6 @@
 <template>
-    个人信息页面
+<el-card>
+个人信息管理
+</el-card>
+    
 </template>

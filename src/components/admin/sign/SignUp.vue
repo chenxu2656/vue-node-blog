@@ -55,7 +55,8 @@ let router = useRouter()
 const ruleForm = reactive({
   password: "",
   email: "",
-  username: ""
+  username: "",
+  avatar: "http://qiniu-btfblog-bucket.xccit.cn/1654407891481_开心.svg"
 });
 const handleRegister = ()=>{
     apiRequest({
@@ -64,7 +65,7 @@ const handleRegister = ()=>{
         params: ruleForm
     }).then((resp)=>{
         console.log(resp);
-        router.push({path: 'admin/login/in'})
+        router.push({path: '/admin/login/in'})
     }).catch((err)=>{
         console.log(err);
     })

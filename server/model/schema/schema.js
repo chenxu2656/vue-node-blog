@@ -16,6 +16,9 @@ const userStructure = {
         type: Date,
         default: Date.now
     },
+    avatar: {
+        type: String,
+    },
     role: {
         type: String,
         default: "admin"    // admin | user

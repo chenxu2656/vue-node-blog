@@ -24,7 +24,8 @@ const article = createModel('article',articleStructure)
 // 文件夹
 const folder = createModel('folder',folderStructure)
 // 用户
-const Users = createModel('user',userStructure)
+const userSchema = new mongoose.Schema(userStructure,{strict: false})
+const Users = createModel('user',userSchema)
 // 标签
 const tags = createModel('tags',tagsStructure,'tags')
 
