@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 //单页
 const SinglePage = require('../views/front/components/SinglePage.vue')
-// const TodoList =require('../src/components/homePage/todolist/TodoList.vue')
-// 
 const FrontEnd = require('../views/front/FrontEnd.vue')
 
 const GeneralPage = require('../views/front/components/GeneralPage.vue')
@@ -12,6 +10,8 @@ const TagList = require('../src/components/homePage/tagList.vue')
 
 const AdminMa = require('../views/admin/AdminMa.vue')
 const LogIn = require('../src/components/AdminLogin.vue')
+const SignIn = require('../src/components/admin/sign/SignIn.vue')
+const SignUp = require('../src/components/admin/sign/SignUp.vue')
 const AdminP = require('../src/components/AdminP.vue')
 const AdminHomePage = require('../src/components/admin/content/HomePage.vue')
 const CreateBlog = require('../src/components/admin/content/CreateBlog.vue')
@@ -80,6 +80,7 @@ const routes = [
         path: "/admin",
         components: AdminMa,
         children: [
+            
             {
                 path: "",
                 components: AdminP,
@@ -137,21 +138,32 @@ const routes = [
             },
             {
                 path: "login",
-                components: LogIn
+                components: LogIn,
+                children: [
+                    {
+                        path: "in",
+                        components: SignIn
+                    },
+                    {
+                        path: "up",
+                        components: SignUp
+                    }
+                ]
             }
+            
         ],
         // 判断是否已经登陆
         beforeEnter: (to, from, next) => {
-            if (to.path.split('admin/')[1] === 'login') {
+            if (to.path.split('/')[2] === 'login') {
                 next()
             } else {
                 // 获取token
                 let token = localStorage.getItem('token')
-                // 验证一下token对不对
+                //TODO: 验证一下token对不对 拦截器
                 if (!token) {
                     // 如果有token继续 没有token 登陆
                     next({
-                        path: "/admin/login"
+                        path: "/admin/login/in"
                     })
                 } else {
                     next()

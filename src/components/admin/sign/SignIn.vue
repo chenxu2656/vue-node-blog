@@ -1,6 +1,5 @@
 <template>
-  <div id="con">
-    <el-card class="box-card" id="login">
+<el-card class="box-card" id="login">
       <el-form
         ref="ruleFormRef"
         :model="ruleForm"
@@ -25,20 +24,10 @@
           >
         </el-form-item>
       </el-form>
+      <div @click="router.push({path: '/admin/login/up'})">立即注册</div>
     </el-card>
-  </div>
 </template>
 <style lang="scss" scoped>
-#con {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    padding: 0px;
-    margin: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient( to right, #64b3f4, #c2e59c ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   #login {
     width: 600px;
     padding: 40px 0px 40px 0px;
@@ -54,13 +43,12 @@
       }
     }
   }
-}
 </style>
 <script setup>
 import axios from "axios";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
-import {getSys} from '../js/api/sysSetting'
+import {getSys} from '../../../js/api/sysSetting'
 let router = useRouter()
 let token = ""
 const ruleForm = reactive({
