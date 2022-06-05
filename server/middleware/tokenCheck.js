@@ -14,16 +14,16 @@ module.exports = (req,res,next)=>{
             const token = req.headers.token
             jwt.verify(token, secretkey, function(err, decoded) {
                 if (err) {
-                    res.status(400).json({
-                        'err': 'token 过期或者没有token，请重新登录后重试'
+                    res.status(403).json({
+                        'err': 'token鉴权失败，可以能是token过期或者无效'
                     })
                 } else {
                     next()
                 }
             });
         } else {
-            res.status(400).json({
-                'err': '没有token，请重新登录后重试'
+            res.status(402).json({
+                'err': '没有token'
             })
         }
         

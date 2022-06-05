@@ -70,7 +70,13 @@ let submitForm = async (email, pass) => {
       //TODO: 出现多个setting信息, 告诉用户有这个error，
       console.log('err');
     }
-    router.push({ path: '/admin' })
+    if(localStorage.getItem('prev')) {
+      router.push({ path: localStorage.getItem('prev') })
+      localStorage.removeItem('prev')
+    } else {
+router.push({ path: '/admin' })
+    }
+    
   }
 }
 </script>

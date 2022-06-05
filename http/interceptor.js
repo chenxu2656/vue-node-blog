@@ -1,6 +1,6 @@
 // 封装拦截器
 import axios from 'axios'
-
+import  errorhandle  from './errorhandle'
 const instance = axios.create({ })
 
 instance.interceptors.request.use((config)=>{
@@ -17,7 +17,7 @@ instance.interceptors.request.use((config)=>{
 instance.interceptors.response.use((resp)=>{
     return resp.data
 },err=>{
-    console.log(err);
+    errorhandle(err)
 })
 
 export {
