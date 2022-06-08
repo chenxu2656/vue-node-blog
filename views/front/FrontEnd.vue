@@ -1,4 +1,7 @@
 <template>
+  <div id="back">
+    <backCanvas/>
+  </div>
   <el-container>
     <el-header>
       <navHeader />
@@ -11,11 +14,17 @@
   </el-container>
 </template>
 <script setup>
+import backCanvas from './components/BackCanvas.vue'
 import navHeader from "../../src/components/homePage/Header.vue";
 import { useRoute } from 'vue-router'
 </script>
 
 <style lang='scss' scoped>
+#back{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
 .el-header {
   width: 100%;
   position: fixed;
@@ -35,6 +44,7 @@ import { useRoute } from 'vue-router'
   &::-webkit-scrollbar{
     display: none;
   }
+  
 }
 
 .el-footer {
