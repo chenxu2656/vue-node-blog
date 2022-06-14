@@ -26,6 +26,12 @@ module.exports = async(req,res)=>{
     if(req.query.count){
         query.count = req.query.count
     }
+    if(req.query.skip){
+        query.skip = req.query.skip
+    }
+    if(req.query.limit){
+        query.limit = req.query.limit
+    }
     const resp  = await getArticleList(query)
     if(req.query.count == 'true') {
         res.status(200).json(resp)

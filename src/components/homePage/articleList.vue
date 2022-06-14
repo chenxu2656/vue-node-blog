@@ -20,7 +20,8 @@
       </li>
       <el-pagination background 
       layout="prev, pager, next" 
-      :total="1000" 
+      :page-size="7"
+      :total="blogCount" 
       @current-change="handleChange"
       />
     </ul>
@@ -46,9 +47,7 @@ let listName = ""
 let sourceId = ""
 let queryParams = new Object()
 let queryCount = new Object()
-let blogCount = ref("")
-const pageNumber = ref('')
-// const currentPage = ref("")
+let blogCount = ref(0)
  // 创建路由
 const router = useRouter();
 const urlSplit  = useRoute().path.split('/')
@@ -92,7 +91,7 @@ if(url[1]=='custom'){
 
 /**
  * 
- * @param {*} listType 
+ * @param {*} listType ,获取当前页面应该展示的数据类型
  */
 const handleQueryParams = (listType2)=>{
 if(listType2 == 'tag'){
@@ -154,10 +153,13 @@ const getBlogCount = async()=>{
     params: queryCount
   })
   if (resp.data) {
-  
       blogCount.value = resp.data
       console.log(blogCount.value);
   }
+}
+const handleChange = async(pageNumber)=>{
+  queryParams.skip = (pageNumber-1)*7
+  await getBlogList()
 }
 onMounted(async()=>{
   // 1. 获取所有导航项目
@@ -166,9 +168,10 @@ onMounted(async()=>{
   await handlegetArticleType(urlSplit)
   queryParams = handleQueryParams(listType)
   queryCount = handleQueryParams(listType)
+  queryParams.skip = 0
+  queryParams.limit = 7
   queryCount.count = 'true'
-  pageNumber.value = parseInt(queryCount)/7
-  console.log(pageNumber.value);
+  
   await getBlogCount()
   await getBlogList()
 } )

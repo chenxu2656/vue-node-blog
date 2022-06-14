@@ -7,6 +7,17 @@ const createArticle = async(obj)=>{
 // 获取文章列表
 const getArticleList = async (query)=>{
     let queryField = {}
+    let limit = 10000,
+        skip = 0
+    if(query.hasOwnProperty('skip')){
+        skip = query.skip
+        delete query.skip
+    }
+    if(query.hasOwnProperty('limit')){
+        limit = query.limit
+        delete query.limit
+        
+    }
     if(query.hasOwnProperty('tagid')) {
         queryField = {
             tage: query.tage,
@@ -24,7 +35,7 @@ const getArticleList = async (query)=>{
         console.log('111');
         return await article.find(queryField).count()
     }else{
-        return await article.find(queryField)
+        return await article.find(queryField).limit(limit).skip(skip)
     }
 }
 // 获取文章具体信息s
