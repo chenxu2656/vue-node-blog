@@ -18,6 +18,11 @@
         <EmptyDisplayVue />
     </slot> -->
       </li>
+      <el-pagination background 
+      layout="prev, pager, next" 
+      :total="1000" 
+      @current-change="handleChange"
+      />
     </ul>
   </div>
 </template>
@@ -40,6 +45,10 @@ let listType = ""
 let listName = ""
 let sourceId = ""
 let queryParams = new Object()
+let queryCount = new Object()
+let blogCount = ref("")
+const pageNumber = ref('')
+// const currentPage = ref("")
  // 创建路由
 const router = useRouter();
 const urlSplit  = useRoute().path.split('/')
@@ -135,13 +144,33 @@ const getBlogList = async()=>{
       artList.value = resp.data
   }
 }
+/**
+ * @description 获取文章数量
+ */
+const getBlogCount = async()=>{
+  const resp = await axios({
+    url: '/api/article',
+    method: "get",
+    params: queryCount
+  })
+  if (resp.data) {
+  
+      blogCount.value = resp.data
+      console.log(blogCount.value);
+  }
+}
 onMounted(async()=>{
   // 1. 获取所有导航项目
   await handleGetTagList()
   // 2. 
   await handlegetArticleType(urlSplit)
   queryParams = handleQueryParams(listType)
-  getBlogList()
+  queryCount = handleQueryParams(listType)
+  queryCount.count = 'true'
+  pageNumber.value = parseInt(queryCount)/7
+  console.log(pageNumber.value);
+  await getBlogCount()
+  await getBlogList()
 } )
 
 </script>
@@ -199,6 +228,10 @@ onMounted(async()=>{
     li:not(:first-child) {
           margin-top: 10px;
         }
+    .el-pagination{
+      margin-top: 15px;
+      justify-content: right;
+    }
     }
   }
 </style>

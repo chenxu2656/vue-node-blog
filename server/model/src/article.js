@@ -6,22 +6,26 @@ const createArticle = async(obj)=>{
 }
 // 获取文章列表
 const getArticleList = async (query)=>{
-    let articleList = {}
+    let queryField = {}
     if(query.hasOwnProperty('tagid')) {
-        articleList = await article.find({
+        queryField = {
             tage: query.tage,
             tags: {$all: [query.tagid]}
-        })
+        }
     }else if (query.hasOwnProperty('folderid')){
-        articleList = await article.find({
+        queryField = {
             tage: query.tage,
             folders: {$all: [query.folderid]}
-        })
+        }
     } else {
-        articleList = await article.find(query)
+        queryField = query
     }
-    
-    return articleList
+    if (query.count == 'true') {
+        console.log('111');
+        return await article.find(queryField).count()
+    }else{
+        return await article.find(queryField)
+    }
 }
 // 获取文章具体信息s
 const getArticleDetail = async (id)=>{

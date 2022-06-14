@@ -45,11 +45,11 @@
         <el-menu-item index="trash" @click="routerPush(router, '/admin/trash')"
           >垃圾箱</el-menu-item
         >
-        <el-menu-item
+        <!-- <el-menu-item
           index="qiniuFile"
           @click="routerPush(router, '/admin/qiniuFile')"
           >七牛云</el-menu-item
-        >
+        > -->
       </el-menu-item-group>
     </el-sub-menu>
     <el-menu-item index="frontDesk" @click="routerPush(router, '/admin/frontDesk')">

@@ -23,10 +23,18 @@ module.exports = async(req,res)=>{
     if(req.query.folderid){
         query.folderid = req.query.folderid
     }
-    const articleList  = await getArticleList(query)
-    if(articleList.length > 0) {
-        res.status(200).json(articleList)
-    }else{
-        res.status(200).json([])
+    if(req.query.count){
+        query.count = req.query.count
     }
+    const resp  = await getArticleList(query)
+    if(req.query.count == 'true') {
+        res.status(200).json(resp)
+    } else {
+        if(resp.length > 0) {
+            res.status(200).json(resp)
+        }else{
+            res.status(200).json([])
+        }
+    }
+    
 }

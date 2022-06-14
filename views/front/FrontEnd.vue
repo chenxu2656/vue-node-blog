@@ -1,7 +1,7 @@
 <template>
-  <div id="back">
+  <!-- <div id="back">
     <backCanvas/>
-  </div>
+  </div> -->
   <el-container>
     <el-header>
       <navHeader />
@@ -10,11 +10,12 @@
       <router-view :key="useRoute().fullPath"></router-view>
     </el-main>
     <el-footer>
+     ❤️ Powered By &nbsp;<a href="https://github.com/chenxu2656/vue-node-blog" style="text-decoration: none; color: #f3ae60;" target="_blank">BTFBLOG</a>
     </el-footer>
   </el-container>
 </template>
 <script setup>
-import backCanvas from './components/BackCanvas.vue'
+// import backCanvas from './components/BackCanvas.vue'
 import navHeader from "../../src/components/homePage/Header.vue";
 import { useRoute } from 'vue-router'
 </script>
