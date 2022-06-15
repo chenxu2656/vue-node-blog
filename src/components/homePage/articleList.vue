@@ -22,6 +22,7 @@
       layout="prev, pager, next" 
       :page-size="7"
       :total="blogCount" 
+      hide-on-single-page="true"
       @current-change="handleChange"
       />
     </ul>

@@ -10,7 +10,8 @@
       <router-view :key="useRoute().fullPath"></router-view>
     </el-main>
     <el-footer>
-     ❤️ Powered By &nbsp;<a href="https://github.com/chenxu2656/vue-node-blog" style="text-decoration: none; color: #f3ae60;" target="_blank">BTFBLOG</a>
+      ❤️ Powered By &nbsp;<a href="https://github.com/chenxu2656/vue-node-blog" style="text-decoration: none;"
+        target="_blank">BTFBLOG</a>
     </el-footer>
   </el-container>
 </template>
@@ -21,7 +22,7 @@ import { useRoute } from 'vue-router'
 </script>
 
 <style lang='scss' scoped>
-#back{
+#back {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -32,9 +33,8 @@ import { useRoute } from 'vue-router'
   margin: auto;
   background-color: white;
   z-index: 10;
-  // border-bottom: 1px solid $base_color;
+  border-bottom: 1px solid $back_color;
 }
-
 .el-main {
   background-color: $back_color;
   // min-height: 800px;
@@ -42,10 +42,11 @@ import { useRoute } from 'vue-router'
   height: calc(100vh - 120px);
   overflow-x: hidden;
   overflow-y: auto;
-  &::-webkit-scrollbar{
+
+  &::-webkit-scrollbar {
     display: none;
   }
-  
+
 }
 
 .el-footer {
@@ -53,5 +54,10 @@ import { useRoute } from 'vue-router'
   text-align: center;
   justify-content: center;
   align-items: center;
+  border-top: 1px solid $back_color;
+  a {
+    color: $base_light_color;
+  }
+
 }
 </style>

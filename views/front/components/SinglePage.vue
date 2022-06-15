@@ -1,51 +1,47 @@
 <!-- 单页应用 -->
 <template>
   <el-card class="box-card category" id="blogBlock">
-    <!-- <div >
-      {{ blogDetail.content }}
-    </div> -->
     <v-md-preview :text="blogDetail.content" id="blogCon"></v-md-preview>
   </el-card>
 </template>
 <script setup>
-import axios from "axios";
 import { onMounted, ref } from "vue-demi";
 import apiRequest from '../../../http/index'
 import { useRoute } from "vue-router";
-let blogId = ""
-const itemList = ref([])
+const blogDetail = ref({});
 const urlSplit = useRoute().path.split('/')
+/**
+ * @description 获取所有自定义导航项目
+ */
 const handleGetTagList = async () => {
-  await apiRequest({
+  return await apiRequest({
     url: '/api/navItem/'
-  }).then((resp) => {
-    itemList.value = resp
-  }).catch((err) => {
-    console.log(err);
   })
 }
-let blogDetail = ref({});
-let getCon = async () => {
-  let resp = await axios({
+/**
+ * @description 根据博客id获取到文章具体内容
+ * @param {*} blogId 博客id
+ */
+const handleBlogDetail = async (blogId) => {
+  return apiRequest({
     url: `/api/article/${blogId}`,
-    method: "get",
-  });
-  if (resp) {
-    blogDetail.value = resp.data;
-  }
+  })
 };
-const handleGetBlogId = () => {
+/**
+ * @description 根据路由获取当前房间文章的id 用当前index来匹配
+ */
+const handleGetBlogId = (itemList) => {
   if (urlSplit[1] == 'custom') {
-    return itemList.value[itemList.value.findIndex(item => item.index === urlSplit[3])].dataSourceId
+    return itemList[itemList.findIndex(item => item.index === urlSplit[3])].dataSourceId
   } else if (urlSplit[1] == 'blog') {
     console.log(urlSplit[3]);
     return urlSplit[2]
   }
 }
 onMounted(async () => {
-  await handleGetTagList();
-  blogId = handleGetBlogId()
-  getCon();
+  const itemList  = await handleGetTagList();
+  const blogId = handleGetBlogId(itemList)
+  blogDetail.value = await handleBlogDetail(blogId);
 });
 </script>
 <style lang="scss" scoped>
@@ -57,7 +53,6 @@ onMounted(async () => {
 }
 .el-card {
   width: 100%;
-  //   max-width: 1300px;
   margin: auto;
 }
 </style>

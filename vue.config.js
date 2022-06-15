@@ -21,7 +21,7 @@ module.exports = defineConfig({
     config
       .plugin("html")
       .tap(args=>{
-        args[0].title = "xccit"
+        args[0].title = "BTFBLOG"
         return args
       })
   

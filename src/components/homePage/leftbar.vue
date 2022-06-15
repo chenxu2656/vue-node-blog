@@ -102,7 +102,7 @@ onMounted(() => {
 
     .categoryTitle {
         left: 5px;
-        color: $base_color;
+        color: $base_light_color;
         font-weight: $font_weight_bold;
     }
 
@@ -117,7 +117,7 @@ onMounted(() => {
 
         &:hover {
             cursor: pointer;
-            color: $base_color;
+            color: $base_light_color;
         }
     }
 
@@ -141,7 +141,7 @@ onMounted(() => {
 
             &:hover {
                 cursor: pointer;
-                color: $base_color;
+                color: $base_light_color;
             }
         }
     }
