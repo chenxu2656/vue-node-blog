@@ -14,8 +14,8 @@
       <el-table-column align="right">
         <template #default="scope">
           <el-button size="small" @click="
-            dialogFormVisible = true;
-          tagId = scope.row._id;
+  dialogFormVisible = true;
+tagId = scope.row._id;
           ">编辑</el-button>
           <el-button size="small" type="danger" @click="handleDelete(scope.row._id)">删除</el-button>
         </template>
@@ -28,8 +28,8 @@
         <span class="dialog-footer">
           <el-button @click="dialogFormVisible = false">Cancel</el-button>
           <el-button type="primary" @click="
-            dialogFormVisible = false;
-          handleUpdate(tagId, updateField);
+  dialogFormVisible = false;
+handleUpdate(tagId, updateField);
           ">Confirm</el-button>
         </span>
       </template>
@@ -41,8 +41,8 @@
         <span class="dialog-footer">
           <el-button @click="createFieldVisible = false">Cancel</el-button>
           <el-button type="primary" @click="
-            createFieldVisible = false;
-          handleCreate(createField);
+  createFieldVisible = false;
+handleCreate(createField);
           ">Confirm</el-button>
         </span>
       </template>
@@ -52,9 +52,10 @@
 <script setup>
 import { onMounted, reactive, ref } from "vue";
 import { formateCtime } from "../../../js/index.js";
-import { tag } from "../../../js/api/index";
 import { Edit } from "@element-plus/icons-vue";
 import EmptyDisplayVue from "./common/EmptyDisplay.vue";
+import apiRequest from '../../../../http'
+
 const tags = ref([]);
 const dialogFormVisible = ref(false);
 const createFieldVisible = ref(false);
@@ -65,30 +66,47 @@ const createField = reactive({
   tagName: "",
 });
 const tagId = reactive({});
-const handleGetList = async () => {
-  let resp = await tag.tagList();
-  console.log(resp);
-  tags.value = resp.data;
-};
+const handleTagList = async () => {
+  return await apiRequest({
+    url: "/api/tags",
+  })
+}
 const handleDelete = async (tagId) => {
-  const resp = await tag.tagDelete(tagId);
-  console.log(resp);
-  await handleGetList();
+  await apiRequest({
+    url: `/api/tags/${tagId}`,
+    method: "delete",
+    headers: {
+      token: localStorage.getItem("token")
+    },
+  })
+  tags.value = await handleTagList();
 };
 const handleUpdate = async (tagId, field) => {
-  const resp = await tag.folderNameUpdate(tagId, field);
-  console.log(resp);
+  await apiRequest({
+    url: `/api/tags/${tagId}`,
+    method: 'put',
+    params: field,
+    headers: {
+      token: localStorage.getItem("token")
+    },
+  })
   updateField.tagName = ''
-  await handleGetList();
+  tags.value = await handleTagList();
 };
 const handleCreate = async (field) => {
-  const resp = await tag.createTag(field)
-  console.log(resp);
+  await apiRequest({
+    url: "/api/tags",
+    method: 'post',
+    headers: {
+      token: localStorage.getItem("token")
+    },
+    params: field
+  })
   createField.tagName = ''
-  await handleGetList();
+  tags.value = await handleTagList();
 }
-onMounted(() => {
-  handleGetList();
+onMounted(async () => {
+  tags.value = await handleTagList();
 });
 </script>
 <style lang="scss" scoped>

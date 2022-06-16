@@ -9,7 +9,8 @@ export default (options)=>{
             }
         } else if(options.method == 'post' || options.method == 'put') {
             other = {
-                data: options.params
+                data: options.params,
+                headers: options.headers
             }
         } else {
             other = {
