@@ -1,5 +1,5 @@
 <template>
-    <el-card class="box-card" id="qiniuSetting">
+    <div class="box-card" id="qiniuSetting">
         <div id="con">
             <el-form
                 :label-position="labelPosition"
@@ -23,11 +23,11 @@
         <div id="ope">
             <el-button type="primary" @click="setQiniu(qiniuSetting)">{{buttonInfo}}</el-button>
         </div>
-    </el-card>
+    </div>
 </template>
 <script setup>
 import {onMounted, reactive, ref} from 'vue'
-import {creatSys,updateSys,getSys} from '../../../js/api/sysSetting'
+import {creatSys,updateSys,getSys} from '../../../../../js/api/sysSetting'
 // 表单label位置
 const labelPosition = ref('top')
 // 定义表单信息

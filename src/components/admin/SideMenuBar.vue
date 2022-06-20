@@ -64,8 +64,8 @@
       <el-menu-item-group>
         <el-menu-item
           index="qiniu"
-          @click="routerPush(router, '/admin/qiniu')"
-          >七牛云设置
+          @click="routerPush(router, '/admin/sys')"
+          >系统配置
         </el-menu-item>
         <el-menu-item index="info" @click="routerPush(router, '/admin/info')">
       <template #title>个人信息</template>
