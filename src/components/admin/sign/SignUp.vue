@@ -46,7 +46,7 @@
 
 #login {
   width: 500px;
-  height: 60%;
+  height: auto;
   margin-left: -9%;
   padding: 40px 0px 40px 0px;
   background-color: rgba($color: #fff, $alpha: 0.85);
