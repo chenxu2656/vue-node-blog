@@ -2,22 +2,51 @@
     <el-card>
         123
         <div id="avatar">
-            <el-upload id="upload" class="upload-demo" drag >
-                <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
+            <el-upload id="upload" class="avatar-uploader" drag 
+            :show-file-list="false"
+            >
+                <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+    <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
             </el-upload>
         </div>
     </el-card>
 
 </template>
 
+<script setup>
+import { ref } from 'vue'
+import { Plus } from '@element-plus/icons-vue'
+
+
+const imageUrl = ref('')
+
+
+</script>
+
 <style lang="scss" scoped>
-#avatar {
-    #upload {
-        width: 100px;
-        height: 200px;
-        background-color: aqua;
-    }
+.avatar-uploader .avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed var(--el-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: var(--el-color-primary);
+}
+
+.el-icon.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  text-align: center;
 }
 </style>
-<script setup>
-</script>
