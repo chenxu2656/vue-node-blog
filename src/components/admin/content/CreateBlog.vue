@@ -90,12 +90,12 @@
       </el-form>
     </div>
     <div id="createBlog" v-if="isUpdate" class="operationButton">
-      <el-button type="primary" @click="postBlog(1);">创建博客</el-button>
-      <el-button type="primary" @click="postBlog(0)">保存到草稿</el-button>
+      <el-button type="primary" @click="cBlog(1,'post');">创建博客</el-button>
+      <el-button type="primary" @click="cBlog(0,'post')">保存到草稿</el-button>
     </div>
     <div id="updateBlog" v-if="!isUpdate" class="operationButton">
-      <el-button type="primary" @click="putBlog(1)">更新博客</el-button>
-      <el-button type="primary" @click="putBlog(0)">保存到草稿箱</el-button>
+      <el-button type="primary" @click="cBlog(1,'put',blogId)">更新博客</el-button>
+      <el-button type="primary" @click="cBlog(0,'put',blogId)">保存到草稿箱</el-button>
     </div>
   </el-card>
 </template>
@@ -107,7 +107,7 @@ import { useRoute,useRouter } from "vue-router";
 import { startUpload, url } from "../../../js/bucket/qiniu";
 import uploadImgUrl from "../../../../public/images/upload.png";
 import { routerPush } from "../../../js/index";
-
+import apiRequest from '../../../../http/index'
 const blogInfo = reactive({
   title: "",
   folders: [],
@@ -214,47 +214,20 @@ const getCon = async (blogId) => {
   }
 };
 // 创建博客
-const postBlog = async (tage) => {
-  blogInfo.tage = tage;
-  try {
-    let resp = await axios({
-      url: "/api/article/",
-      method: "post",
-      data: blogInfo,
-      headers: {
-        token: localStorage.getItem("token"),
-      },
-    });
-    if (resp.data) {
-      if(tage == 1) {
-        routerPush(router,'/admin/blogList')
-      }
-    }
-  } catch (err) {
-    console.log(`err: ${err}`);
+const cBlog = async(tage,method,blogId='') =>{
+  blogInfo.tage = tage
+  await apiRequest({
+    url:  `/api/article/${blogId}`,
+    method: method,
+    params: blogInfo
+  })
+  if(tage == 1) {
+    routerPush(router,'/admin/blogList')
+  } else {
+    routerPush(router,'/admin/draft')
   }
-  
-};
+}
 
-// 更新博客
-const putBlog = async (tage) => {
-  blogInfo.tage = tage;
-  try {
-    let resp = await axios({
-      url: `/api/article/${blogId}`,
-      method: "put",
-      data: blogInfo,
-      headers: {
-        token: localStorage.getItem("token"),
-      },
-    });
-    if (resp.data) {
-      console.log(resp);
-    }
-  } catch (err) {
-    console.log(`err: ${err}`);
-  }
-};
 // 获取七牛云token
 /**
  * TODO: 从后台获取token
