@@ -1,20 +1,21 @@
 <template>
     <el-card>
-        
-        <el-upload id="upload" class="avatar-uploader" :show-file-list="false">
+        <div id="uploadcon">
+<el-upload id="upload" class="avatar-uploader" :show-file-list="false">
             <img v-if="imageUrl" :src="imageUrl" class="avatar" />
             <el-icon v-else class="avatar-uploader-icon">
-                <Plus />
             </el-icon>
         </el-upload>
+        </div>
+        
         <el-form :model="userInfo" label-width="120px" label-position="top">
-            <el-form-item label="name">
+            <el-form-item label="名字">
                 <el-input v-model="userInfo.name" />
             </el-form-item>
-            <el-form-item label="location">
+            <el-form-item label="位置">
                 <el-input v-model="userInfo.location" />
             </el-form-item>
-            <el-form-item label="social media">
+            <el-form-item label="社交媒体">
                 <el-row :gutter="20">
                     <el-col :span="6">
                         <el-input
@@ -51,8 +52,8 @@
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
-import { Plus } from '@element-plus/icons-vue'
-const imageUrl = ref('')
+import uploadImgUrl from "../../../../../public/images/avatar.png";
+const imageUrl = ref(uploadImgUrl)
 const userInfo = reactive({
     name: "",
     location: "",
@@ -66,14 +67,23 @@ const userInfo = reactive({
 </script>
 <style lang="scss" scoped>
 .el-card {
+#uploadcon{
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    border-radius: 50px;
+    background-color: #8c939d;
     .avatar-uploader .el-upload {
         width: 100px;
         height: 100px;
-        border-radius: 6px;
+        border-radius: 50px;
         cursor: pointer;
         position: relative;
         overflow: hidden;
-
+img.avatar{
+                width: 100px;
+                height: 100px;
+            }
         .el-icon.avatar-uploader-icon {
             font-size: 28px;
             color: #8c939d;
@@ -82,8 +92,11 @@ const userInfo = reactive({
             border: 1px dashed black;
             border-radius: 50%;
             margin: auto;
+            
         }
     }
+}
+
 
     .el-form {
         margin-top: 20px;
