@@ -53,9 +53,8 @@
             <el-upload
               class="upload-demo"
               drag
-              :disabled="!hasQiniuToken"
               action="https://jsonplaceholder.typicode.com/posts/"
-              :on-change="selectImg"
+              :on-change="uploadCoverImage"
               :file-list="fileList"
               multiple
             >
@@ -82,8 +81,8 @@
           <v-md-editor
             v-model="blogInfo.content"
             height="800px"
-            :disabled-menus="disableMenus"
-            @upload-image="handleUploadQiniu"
+            disabled-menus="true"
+            @upload-image="insertLocalImage"
           >
           </v-md-editor>
         </div>
@@ -104,7 +103,7 @@
 import axios from "axios";
 import { onMounted, reactive, ref } from "vue";
 import { useRoute,useRouter } from "vue-router";
-import { startUpload, url } from "../../../js/bucket/qiniu";
+import { uploadFile} from "../../../js/bucket/qiniu";
 import uploadImgUrl from "../../../../public/images/upload.png";
 import { routerPush } from "../../../js/index";
 import apiRequest from '../../../../http/index'
@@ -133,22 +132,12 @@ const route = useRoute();
 const router = useRouter();
 // 文件id
 const blogId = route.path.split("createBlog/")[1];
-// 是否有token
-let hasQiniuToken = ref(true)
-// 控制菜单栏的上传功能
-let disableMenus = ref([])
 // 获取七牛云token
-let qiniuToken = ref();
-// 文件转成blob格式，用来预览
-const blobFile = ref();
 const insertUrl = ref();
 // 上传至七牛云文件
 const files = ref();
 const editorfile = ref();
-// 文件上传百分比
-const uploadPresent = ref();
 // 返回url
-const imgUrl = ref();
 const labelPosition = ref("top");
 const isUpdate = ref(true);
 const transToFolderIdList = (objList, selectKey) => {
@@ -188,9 +177,16 @@ const transIdListToTag = (objList, selectKey) => {
   });
   optionInfo.tags = folderIdList;
 };
-const handleUploadQiniu = async (event, insertImage, files) => {
+/**
+ * 上传本地图片到七牛云 并插入图片链接
+ * @param {*} event 
+ * @param {*} insertImage 
+ * @param {*} files 
+ * https://ckang1229.gitee.io/vue-markdown-editor/zh/
+ */
+const insertLocalImage = async (event, insertImage, files) => {
   editorfile.value = files[0];
-  insertUrl.value = await editorUploadImg(qiniuToken.value);
+  insertUrl.value = await uploadFile(editorfile.value)
   insertImage({
     url: insertUrl.value,
     desc: 'text'
@@ -228,78 +224,10 @@ const cBlog = async(tage,method,blogId='') =>{
   }
 }
 
-// 获取七牛云token
-/**
- * TODO: 从后台获取token
- * */
-const getToken = async () => {
-  try {
-    let data = await axios({
-      url: "/api/qiniu/token",
-      method: "post",
-      headers: {
-        token: localStorage.getItem("token"),
-      },
-      data: JSON.parse(localStorage.getItem('qiniuToken'))
-    });
-    if (data) {
-      console.dir(data);
-      return data;
-    }
-  } catch (err) {
-    return err;
-  }
-};
 // 选择文件时触发， 一是转成blob并预览，同时获取到上传的文件
-const selectImg = (e) => {
+const uploadCoverImage = async(e) => {
   files.value = e.raw;
-  let BlobFormat = URL.createObjectURL(files.value);
-  blobFile.value = BlobFormat;
-  // 上传到七牛云
-  uploadImg(qiniuToken.value);
-};
-// 上传七牛云，并返回url
-const uploadImg = async (token) => {
-  let tokenParse = token.data.token;
-  const observable = startUpload(
-    files.value,
-    `${Date.now()}_${files.value.name}`,
-    tokenParse
-  );
-  observable.subscribe({
-    next(res) {
-      uploadPresent.value = res.total.percent;
-    },
-    error(err) {
-      console.dir(err);
-    },
-    complete(res) {
-      imgUrl.value = `${url}${res.key}`;
-      blogInfo.imgPath = `${url}${res.key}`;
-    },
-  });
-};
-// eeditor 上传
-const editorUploadImg = async (token) => {
-  return new Promise((resolve, reject) => {
-    let tokenParse = token.data.token;
-    const observable = startUpload(
-      editorfile.value,
-      `${Date.now()}_${editorfile.value.name}`,
-      tokenParse
-    );
-    let insertUrl = "";
-    observable.subscribe({
-      next() {},
-      error(err) {
-        reject(err);
-      },
-      complete(res) {
-        insertUrl = `${url}${res.key}`;
-        resolve(insertUrl);
-      },
-    });
-  });
+  blogInfo.imgPath = await uploadFile(files.value)
 };
 
 const folders = async () => {
@@ -324,23 +252,11 @@ const tags = async () => {
 onMounted(async () => {
   await tags();
   await folders();
-  /**
-   * 两种情况
-   * 1. 创建 博客
-   * 2. 更新 博客
-   */
   if (blogId) {
-    // 创建博客
     isUpdate.value = false;
     getCon(blogId);
   }
-  // 没有token 需要阻断。 
-  if (localStorage.getItem('qiniuToken')) {
-    qiniuToken.value = await getToken();
-  } else {
-    disableMenus.value = ['image/upload-image']
-    hasQiniuToken.value = false
-  }
+
 });
 </script>
 <style scoped lang="scss">

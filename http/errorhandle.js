@@ -9,7 +9,9 @@ const handle402_3 = (errorCode,errorMsg)=>{
     window.location.href= '/admin/login/in'
     console.log(`%c ${errorCode}:${errorMsg}`,'background:#ff0012;color:#fff;height:30px;line-height:30px');
 }
-
+const handleUndefineError = (err)=>{
+    console.error(err);
+}
 export default (err)=>{
     let errorCode = err.response.status
     let errorMsg = err.response.data.err
@@ -21,6 +23,7 @@ export default (err)=>{
             handle402_3(errorCode,errorMsg);
             break;
         default:
+            handleUndefineError(err);
             break;
     }
     
