@@ -23,7 +23,6 @@ const TagsManage = require('../src/components/admin/content/TagsManage.vue')
 const TrashBlog = require('../src/components/admin/content/TrashBlog.vue')
 const FolderManage = require('../src/components/admin/content/FolderManage.vue')
 const FileManage = require('../src/components/admin/content/FileManage.vue')
-const UserInfo = require('../src/components/admin/content/systemSetting/UserInfo.vue')
 const SysSetting = require('../src/components/admin/content/systemSetting/SysSetting.vue')
 
 const FrontDesk = require('../src/components/admin/content/frontDesk/FrontDesk.vue')
@@ -122,10 +121,6 @@ const routes = [
                     {
                         path: "qiniuFile",
                         components: FileManage
-                    },
-                    {
-                        path: 'info',
-                        components: UserInfo
                     },
                     {
                         path: 'sys',

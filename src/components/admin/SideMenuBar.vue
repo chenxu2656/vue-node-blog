@@ -67,9 +67,9 @@
           @click="routerPush(router, '/admin/sys')"
           >系统配置
         </el-menu-item>
-        <el-menu-item index="info" @click="routerPush(router, '/admin/info')">
-      <template #title>个人信息</template>
-    </el-menu-item>
+        <!-- <el-menu-item index="info" @click="routerPush(router, '/admin/info')"> -->
+      <!-- <template #title>主页信息</template> -->
+    <!-- </el-menu-item>œ -->
       </el-menu-item-group>
     </el-sub-menu>
   </el-menu>

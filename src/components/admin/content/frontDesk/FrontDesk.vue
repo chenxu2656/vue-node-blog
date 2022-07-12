@@ -6,12 +6,13 @@
     class="demo-tabs"
     @tab-click="handleClick"
   >
-    <el-tab-pane label="导航栏配置" name="first" class="navSetting">
+  <el-tab-pane label="前台信息配置" name="first" class="carousel">
+      <FrontDeskInfo />
+    </el-tab-pane>
+    <el-tab-pane label="导航栏配置" name="second" class="navSetting">
       <NavSettingVue />
     </el-tab-pane>
-    <!-- <el-tab-pane label="轮播图设置" name="second" class="carousel">
-      <LunboSetting />
-    </el-tab-pane> -->
+    
     <!-- <el-tab-pane label="Task" name="fourth">Task</el-tab-pane> -->
   </el-tabs>
 </el-card>
@@ -19,7 +20,7 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-// import LunboSetting from './components/LunboSetting.vue'
+import FrontDeskInfo from './components/FrontDeskInfo.vue'
 import NavSettingVue from './components/NavSetting.vue';
 const activeName = ref('first')
 
