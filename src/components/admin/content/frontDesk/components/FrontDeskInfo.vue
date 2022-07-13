@@ -66,7 +66,7 @@
                     <el-col :span="4" :offset="8">
                         <div class="award">
                             <span class="awardTit">支付宝</span>
-                            <el-upload id="upload" class="avatar-uploader" :show-file-list="false"
+                            <el-upload id="upload"  class="avatar-uploader" :show-file-list="false"
                                 :on-change="uploadAliImage" action="localhost">
                                 <img v-if="userInfo.reward.alipay" :src="userInfo.reward.alipay" class="avatar" />
                                 <el-icon v-else class="avatar-uploader-icon">
@@ -79,7 +79,7 @@
                     <el-col :span="4">
                         <div class="award">
                             <span class="awardTit">微信</span>
-                            <el-upload id="upload" class="avatar-uploader" :show-file-list="false"
+                            <el-upload id="upload"  class="avatar-uploader" :show-file-list="false"
                                 :on-change="uploadWechatImage" action="localhost">
                                 <img v-if="userInfo.reward.wechat" :src="userInfo.reward.wechat" class="avatar" />
                                 <el-icon v-else class="avatar-uploader-icon">

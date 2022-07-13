@@ -22,7 +22,7 @@
       layout="prev, pager, next" 
       :page-size="7"
       :total="blogCount" 
-      hide-on-single-page="true"
+      :hide-on-single-page=true
       @current-change="handleChange"
       />
     </ul>
@@ -155,7 +155,6 @@ const getBlogCount = async()=>{
   })
   if (resp.data) {
       blogCount.value = resp.data
-      console.log(blogCount.value);
   }
 }
 const handleChange = async(pageNumber)=>{

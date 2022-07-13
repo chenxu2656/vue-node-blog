@@ -68,7 +68,6 @@ const handleGetBlogId = (itemList)=>{
   if (urlSplit[1] == 'custom') {
     return itemList[itemList.findIndex(item=> item.index === urlSplit[3])].dataSourceId
   } else if (urlSplit[1] == 'blog'){
-    console.log(urlSplit[3]);
     return urlSplit[2]
   }
 }
