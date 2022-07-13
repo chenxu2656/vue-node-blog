@@ -16,7 +16,7 @@ const  {
         userStructure,
         tagsStructure,
         syssettingStructure,
-        themeSetting,
+        frontDeskSetting,
         navItemList
     } = require('../schema/schema')
 // 文章
@@ -34,8 +34,8 @@ const sysSchema = new mongoose.Schema(syssettingStructure,{strict: false})
 const sysSetting = mongoose.model('sysSsetting',sysSchema)
 
 // 前台设置
-const themeSchema = new mongoose.Schema(themeSetting)
-const themeModel = mongoose.model('themeSetting',themeSchema)
+const frontDesk = new mongoose.Schema(frontDeskSetting)
+const frontDeskModel = mongoose.model('frontDeskSetting',frontDesk)
 
 // 导航栏设置
 const navItemSchema = new mongoose.Schema(navItemList,{ capped: { size : 1024, max: 1,autoIndexId: true}})
@@ -46,6 +46,6 @@ module.exports = {
     Users,
     tags,
     sysSetting,
-    themeModel,
+    frontDeskModel,
     navItemModel
 }

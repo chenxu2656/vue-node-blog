@@ -1,6 +1,6 @@
 <template>
         <div id="uploadcon">
-            <el-upload id="upload" class="avatar-uploader" :show-file-list="false" :on-change="uploadAvatar">
+            <el-upload id="upload" class="avatar-uploader" :show-file-list="false" :on-change="uploadAvatar" action="localhost">
                 <img v-if="userInfo.avatar" :src="userInfo.avatar" class="avatar" />
                 <el-icon v-else class="avatar-uploader-icon">
                     <Plus />
@@ -67,7 +67,7 @@
                         <div class="award">
                             <span class="awardTit">支付宝</span>
                             <el-upload id="upload" class="avatar-uploader" :show-file-list="false"
-                                :on-change="uploadAliImage">
+                                :on-change="uploadAliImage" action="localhost">
                                 <img v-if="userInfo.reward.alipay" :src="userInfo.reward.alipay" class="avatar" />
                                 <el-icon v-else class="avatar-uploader-icon">
                                     <Plus />
@@ -80,25 +80,26 @@
                         <div class="award">
                             <span class="awardTit">微信</span>
                             <el-upload id="upload" class="avatar-uploader" :show-file-list="false"
-                                :on-change="uploadWechatImage">
+                                :on-change="uploadWechatImage" action="localhost">
                                 <img v-if="userInfo.reward.wechat" :src="userInfo.reward.wechat" class="avatar" />
                                 <el-icon v-else class="avatar-uploader-icon">
                                     <Plus />
                                 </el-icon>
-                                <!-- <img v-if="!userInfo.avatar" :src="imageUrl" class="avatar" /> -->
                             </el-upload>
                         </div>
                     </el-col>
                 </el-row>
             </el-form-item>
         </el-form>
-        <el-button type="primary" @click="onSubmit">Save</el-button>
+        <el-button type="primary" v-if="!userInfo._id" @click="onSubmit">Save</el-button>
+        <el-button type="primary" v-else @click="onSubmit">Update</el-button>
 </template>
 <script setup>
-import { reactive } from 'vue'
+import { onMounted, ref } from 'vue'
 import { uploadFile } from '../../../../../js/bucket/qiniu'
 import { Plus } from '@element-plus/icons-vue'
-const userInfo = reactive({
+import apiRequest from '../../../../../../http/index'
+let userInfo = ref({
     name: "",
     location: "",
     socialMedia: {
@@ -120,16 +121,42 @@ const userInfo = reactive({
 
 })
 const uploadAvatar = async (e) => {
-    userInfo.avatar = await uploadFile(e.raw)
+    userInfo.value.avatar = await uploadFile(e.raw)
 };
 const uploadAliImage = async (e) => {
-    userInfo.reward.alipay = await uploadFile(e.raw)
+    userInfo.value.reward.alipay = await uploadFile(e.raw)
 };
 const uploadWechatImage = async (e) => {
-    userInfo.reward.wechat = await uploadFile(e.raw)
+    userInfo.value.reward.wechat = await uploadFile(e.raw)
 };
-console.log(userInfo.avatar);
+const getSettingInfo = async ()=>{
+    const resp = await apiRequest({
+        url: "/api/front"
+    })
+    if(resp.length > 0) {
+        userInfo.value = resp[0]
+    } 
+}
+const onSubmit = async()=>{
+    if(userInfo.value._id) {
+        await apiRequest({
+            url: `/api/front/${userInfo.value._id}`,
+            params: userInfo.value,
+            method: "put"
+        })
+    } else {
+        await apiRequest({
+            url: "/api/front",
+            params: userInfo.value,
+            method: "post"
+        })
+    }
+}
+onMounted(async()=>{
+    await getSettingInfo()
+})
 </script>
+
 <style lang="scss" scoped>
     #uploadcon {
         width: 100px;
@@ -149,7 +176,8 @@ console.log(userInfo.avatar);
             img.avatar {
                 width: 100px;
                 height: 100px;
-                border-radius: 50px
+                border-radius: 50px;
+                border: 1px solid #dbdfe5;
             }
 
             .el-icon.avatar-uploader-icon {
@@ -188,7 +216,7 @@ console.log(userInfo.avatar);
 
                     img.avatar {
                         width: 150px;
-                        border: 1px solid #8c939c;
+                        border: 1px solid #dbdfe5;
                         // height: 100px;
                     }
 

@@ -56,22 +56,10 @@
       <el-icon><img src="../../../public/images/icons/frontend.svg" alt=""></el-icon>
       <template #title>前台配置</template>
     </el-menu-item>
-    <el-sub-menu index="sysSetting">
-      <template #title>
-        <el-icon><img src="../../../public/images/icons/setting.svg" alt=""></el-icon>
-        <span>系统设置</span>
-      </template>
-      <el-menu-item-group>
-        <el-menu-item
-          index="qiniu"
-          @click="routerPush(router, '/admin/sys')"
-          >系统配置
-        </el-menu-item>
-        <!-- <el-menu-item index="info" @click="routerPush(router, '/admin/info')"> -->
-      <!-- <template #title>主页信息</template> -->
-    <!-- </el-menu-item>œ -->
-      </el-menu-item-group>
-    </el-sub-menu>
+    <el-menu-item index="sysSetting" @click="routerPush(router, '/admin/sys')">
+      <el-icon><img src="../../../public/images/icons/setting.svg" alt=""></el-icon>
+      <template #title>系统设置</template>
+    </el-menu-item>
   </el-menu>
 </template>
 

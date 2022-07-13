@@ -150,7 +150,6 @@ const routes = [
         ],
         // 判断是否已经登陆
         beforeEnter: (to, from, next)=>{
-            console.log('1');
             tokenCheck(to,from,next)
         }
     }

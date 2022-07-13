@@ -103,23 +103,50 @@ const syssettingStructure = {
 }
 
 // 前台设置
-const themeSetting = {
+const frontDeskSetting = {
+    name: {
+        require: true,
+        type: String
+    },
+    location: {
+        require: true,
+        type: String
+    },
+    socialMedia: {
+        sina: String,
+        github: String,
+        segmentfault: String,
+        csdn: String
+    },
+    avatar: {
+        require: true,
+        type: String
+    },
     lunbo: {
         open: {
+            require: true,
             type: Boolean,
-            default: true
+            default: false
         },
-        category: {
-            name: {
-                type: String,
-                require: true
-            },
-            id: {
-                type: String,
-                require: true
-            }
+        folder: {
+            require: true,
+            type: String
+        }
+    },
+    reward: {
+        open: {
+            require: true,
+            type: Boolean,
+            default: false
         },
-        require: false
+        alipay: {
+            require: true,
+            type: String
+        },
+        wechat: {
+            require: true,
+            type: String
+        }
     }
 }
 
@@ -168,6 +195,6 @@ module.exports = {
     folderStructure,
     tagsStructure,
     syssettingStructure,
-    themeSetting,
+    frontDeskSetting,
     navItemList
 }

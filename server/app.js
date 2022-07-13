@@ -19,6 +19,8 @@ const Qiniu = require('./routes/qiniu')
 const Setting = require('./routes/setting')
 
 const NavItem = require('./routes/navItem')
+
+const FrontDesk = require('./routes/frontDesk')
 const errhandle = require('./middleware/errhandle')
 var app = express()
 // 允许跨域 否则 前台请求可能会报错
@@ -45,5 +47,6 @@ app.use('/api/tags',Tags)
 app.use('/api/qiniu',Qiniu)
 app.use('/api/setting',Setting)
 app.use('/api/navItem',NavItem)
+app.use('/api/front',FrontDesk)
 app.use(errhandle)
 module.exports = app;

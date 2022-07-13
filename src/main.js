@@ -13,6 +13,7 @@ import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
 import Prism from 'prismjs';
 import VMdPreview from '@kangc/v-md-editor/lib/preview';
 import '@kangc/v-md-editor/lib/style/preview.css';
+
 VueMarkdownEditor.use(vuepressTheme, {
   Prism,
 });

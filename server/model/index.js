@@ -38,6 +38,11 @@ const {
     updateNavItem
 } = require('./src/navItem')
 
+const {
+    createFront,
+    getFront,
+    updateFront
+} = require('./src/frontDesk')
 module.exports = {
     createArticle, 
     getArticleList, 
@@ -67,5 +72,9 @@ module.exports = {
     createNavItem,
     getNavItem,
     deleteNavItem,
-    updateNavItem
+    updateNavItem,
+
+    createFront,
+    getFront,
+    updateFront
 }
