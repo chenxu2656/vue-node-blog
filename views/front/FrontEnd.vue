@@ -10,15 +10,50 @@
       <router-view :key="useRoute().fullPath"></router-view>
     </el-main>
     <el-footer>
-      ❤️ Powered By &nbsp;<a href="https://github.com/chenxu2656/vue-node-blog" style="text-decoration: none;"
-        target="_blank">BTFBLOG</a>
+      {{userInfo.record}} &nbsp;&nbsp;
+      <span>❤️ Powered By &nbsp;<a href="https://github.com/chenxu2656/vue-node-blog" style="text-decoration: none;"
+        target="_blank">BTFBLOG</a> </span>
+      
     </el-footer>
   </el-container>
 </template>
 <script setup>
 // import backCanvas from './components/BackCanvas.vue'
 import navHeader from "../../src/components/homePage/Header.vue";
-import { useRoute } from 'vue-router'
+import { useRoute } from 'vue-router';
+import { onMounted,ref} from 'vue'
+import apiRequest from '../../http/index'
+const userInfo = ref({
+    name: "",
+    location: "",
+    socialMedia: {
+        sina: '',
+        github: "",
+        segmentfault: "",
+        csdn: ""
+    },
+    avatar: "",
+    lunbo: {
+        open: false,
+        folder: ""
+    },
+    reward: {
+        open: false,
+        alipay: "",
+        wechat: ""
+    },
+    record: ""
+
+})
+const getFrontDeskInfo = async ()=>{
+    const resp = await apiRequest({
+        url: "/api/front"
+    })
+    userInfo.value = resp[0]
+}
+onMounted(() => {
+    getFrontDeskInfo()
+})
 </script>
 
 <style lang='scss' scoped>

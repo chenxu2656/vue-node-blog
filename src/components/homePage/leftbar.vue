@@ -2,8 +2,8 @@
 
 <template>
     <el-card class="box-card" id="basicInfo">
-        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
-        <div id="username">chen.xu</div>
+        <el-avatar :src="userInfo.avatar" />
+        <div id="username">{{userInfo.name}}</div>
         <div id="location">
             <el-icon :size="20">
                 <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8="">
@@ -15,7 +15,7 @@
                     </path>
                 </svg>
             </el-icon>
-            <div id="localtionName">Anhui,hefei,AHMU</div>
+            <div id="localtionName">{{userInfo.location}}</div>
         </div>
     </el-card>
     <el-card class="box-card category" id="categoryList">
@@ -36,14 +36,35 @@
     </el-card>
 </template>
 <script setup>
-import { ref } from 'vue';
 import axios from 'axios'
-import { onMounted } from 'vue'
+import { onMounted ,ref } from 'vue'
 import { routerPush } from "../../js/index";
+import apiRequest from '../../../http/index'
 import { useRouter } from "vue-router";
 let categoryList = ref("")
 let tagsList = ref("")
 const router = useRouter();
+const userInfo = ref({
+    name: "",
+    location: "",
+    socialMedia: {
+        sina: '',
+        github: "",
+        segmentfault: "",
+        csdn: ""
+    },
+    avatar: "",
+    lunbo: {
+        open: false,
+        folder: ""
+    },
+    reward: {
+        open: false,
+        alipay: "",
+        wechat: ""
+    }
+
+})
 let getCategoryList = async () => {
     let category = await axios({
         url: "/api/folder",
@@ -62,9 +83,16 @@ let getTagList = async () => {
         tagsList.value = tagList.data
     }
 }
+const getFrontDeskInfo = async ()=>{
+    const resp = await apiRequest({
+        url: "/api/front"
+    })
+    userInfo.value = resp[0]
+}
 onMounted(() => {
     getCategoryList()
     getTagList()
+    getFrontDeskInfo()
 })
 </script>
 <style lang="scss" scoped>

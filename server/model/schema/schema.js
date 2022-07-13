@@ -147,6 +147,10 @@ const frontDeskSetting = {
             require: true,
             type: String
         }
+    },
+    record: {
+        require: true,
+        type: String
     }
 }
 
