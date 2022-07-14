@@ -17,6 +17,10 @@
             </el-icon>
             <div id="localtionName">{{userInfo.location}}</div>
         </div>
+        <div id="socialMedia">
+            <img src="../../../public/images/icons/github.svg" alt="" width="25">
+            <img src="../../../public/images/icons/weibo.svg" alt="" width="25">
+        </div>
     </el-card>
     <el-card class="box-card category" id="categoryList">
         <div class="categoryTitle">Category</div>
@@ -121,6 +125,12 @@ onMounted(() => {
             display: inline-block;
             vertical-align: top;
         }
+    }
+    #socialMedia{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        
     }
 }
 
