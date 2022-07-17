@@ -10,7 +10,8 @@
       <router-view :key="useRoute().fullPath"></router-view>
     </el-main>
     <el-footer>
-      {{userInfo.record}} &nbsp;&nbsp;
+      <a href="https://wap.miit.gov.cn/" target="_blank" id="record"> {{userInfo.record}}</a>
+      &nbsp;&nbsp;
       <span>❤️ Powered By &nbsp;<a href="https://github.com/chenxu2656/vue-node-blog" style="text-decoration: none;"
         target="_blank">BTFBLOG</a> </span>
       
@@ -90,8 +91,13 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   border-top: 1px solid $back_color;
+  font-size: 15px;
   a {
     color: $base_light_color;
+    &#record{
+      color: #000;
+      text-decoration: none;
+    }
   }
 
 }

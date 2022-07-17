@@ -2,6 +2,10 @@
 
 <template>
     <el-card class="box-card" id="basicInfo">
+        <div id="github" v-if="userInfo.socialMedia.github">
+            <a :href="userInfo.socialMedia.github" target="_blank">
+            <img src="../../../public/images/icons/github.svg" alt="" width="27"></a>
+        </div>
         <el-avatar :src="userInfo.avatar" />
         <div id="username">{{userInfo.name}}</div>
         <div id="location">
@@ -16,10 +20,6 @@
                 </svg>
             </el-icon>
             <div id="localtionName">{{userInfo.location}}</div>
-        </div>
-        <div id="socialMedia">
-            <img src="../../../public/images/icons/github.svg" alt="" width="25">
-            <img src="../../../public/images/icons/weibo.svg" alt="" width="25">
         </div>
     </el-card>
     <el-card class="box-card category" id="categoryList">
@@ -101,6 +101,23 @@ onMounted(() => {
 </script>
 <style lang="scss" scoped>
 #basicInfo {
+    position: relative;
+    #github{
+        width: 0px;
+        height: 0px;
+        border-top: 35px solid #eaeaea;
+        border-right: 35px solid #eaeaea;
+        border-left: 35px solid transparent;
+        border-bottom: 35px solid transparent;
+        position: absolute;
+        right: 0px;
+        margin-top: -20px;
+        a{
+            display: block;
+            position: absolute;
+            top: -20px;
+        }
+    }
     text-align: center;
     .el-avatar {
         width: 100px;
@@ -126,12 +143,17 @@ onMounted(() => {
             vertical-align: top;
         }
     }
-    #socialMedia{
-        width: 100%;
-        display: flex;
-        justify-content: center;
+    // #socialMedia{
+    //     width: 100%;
+    //     display: flex;
+    //     position: relative;
+    //     justify-content: center;
+    //     a{
+    //         width: 30px;
+    //         display: inline-block;
+    //     }
         
-    }
+    // }
 }
 
 .category {

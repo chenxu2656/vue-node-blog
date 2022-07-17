@@ -1,112 +1,81 @@
 <template>
   <el-card class="box-card" id="createblog">
     <div id="header">
-      <el-form
-        :label-position="labelPosition"
-        label-width="100px"
-        :model="blogInfo"
-      >
-        <el-form-item
-          label="Title"
-          id="title"
-          class="lable"
-          style="color: #000000"
-        >
+      <el-form :label-position="labelPosition" label-width="100px" :model="blogInfo">
+        <el-form-item label="Title" id="title" class="lable" style="color: #000000">
           <el-input style="width: 100%" v-model="blogInfo.title" />
         </el-form-item>
         <div id="tags">
           <el-form-item label="Category">
-            <el-select
-              v-model="optionInfo.folders"
-              multiple
-              placeholder="Select"
-              style="width: 100%"
-              @change="transToFolderIdList(categoryList, optionInfo.folders)"
-            >
-              <el-option
-                v-for="item in categoryList"
-                :key="item._id"
-                :label="item.folderName"
-                :value="item.folderName"
-              />
+            <el-select v-model="optionInfo.folders" multiple placeholder="Select" style="width: 100%"
+              @change="transToFolderIdList(categoryList, optionInfo.folders)">
+              <el-option v-for="item in categoryList" :key="item._id" :label="item.folderName"
+                :value="item.folderName" />
             </el-select>
           </el-form-item>
           <el-form-item label="Tags">
-            <el-select
-              v-model="optionInfo.tags"
-              multiple
-              placeholder="Select"
-              style="width: 100%"
-              @change="transToTagIdList(tagList, optionInfo.tags)"
-            >
-              <el-option
-                v-for="item in tagList"
-                :key="item._id"
-                :label="item.tagName"
-                :value="item.tagName"
-              />
+            <el-select v-model="optionInfo.tags" multiple placeholder="Select" style="width: 100%"
+              @change="transToTagIdList(tagList, optionInfo.tags)">
+              <el-option v-for="item in tagList" :key="item._id" :label="item.tagName" :value="item.tagName" />
             </el-select>
           </el-form-item>
         </div>
-        <div id="imgUpload">
-          <el-form-item label="Images (封面图片)">
-            <el-upload
-              class="upload-demo"
-              drag
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :on-change="uploadCoverImage"
-              :file-list="fileList"
-              multiple
-            >
-              <img
-                :src="blogInfo.imgPath"
-                alt=""
-                id="imgView"
-                v-if="blogInfo.imgPath"
-              />
-              <img
-                :src="uploadImgUrl"
-                alt=""
-                id="uploadUrl"
-                v-if="!blogInfo.imgPath"
-              />
-              <div class="el-upload__text">
-                Drop file here or <em>click to upload</em>
-              </div>
+        <el-row class="upload" :gutter="20">
+          <el-col :span="8">
+            <div id="imgUpload">
+              <el-form-item label="Images (封面图片)">
+                <el-upload class="upload-demo" drag action="https://jsonplaceholder.typicode.com/posts/"
+                  :on-change="uploadCoverImage" :file-list="fileList" multiple>
+                  <img :src="blogInfo.imgPath" alt="" id="imgView" v-if="blogInfo.imgPath" />
+                  <img :src="uploadImgUrl" alt="" id="uploadUrl" v-if="!blogInfo.imgPath" />
+                  <div class="el-upload__text">
+                    Drop file here or <em>click to upload</em>
+                  </div>
+                </el-upload>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="16" id="uploadFile">
+            <el-form-item label="上传附件"></el-form-item>
+            <el-upload :show-file-list="false" class="upload-demo"
+              action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :on-success="handleFileUpload">
+              <el-button type="primary">Click to upload</el-button>
             </el-upload>
-          </el-form-item>
-        </div>
-
+            <div id="attachFileList">
+              <div class="file" v-for="item in attachFileList" :index="item.name" :key="item.name">
+                <a :href="item.url" target="_blank">{{item.name}}</a>
+                <img src="../../../../public/images/icons/copy.png" alt="" srcset="" height="20" onclick="copyUrl(item.url)">
+              </div>
+            </div>
+          </el-col>
+        </el-row>
         <div id="editor">
-          <v-md-editor
-            v-model="blogInfo.content"
-            height="800px"
-            disabled-menus="true"
-            @upload-image="insertLocalImage"
-          >
+          <v-md-editor v-model="blogInfo.content" height="800px" disabled-menus="true" @upload-image="insertLocalImage">
           </v-md-editor>
         </div>
       </el-form>
     </div>
     <div id="createBlog" v-if="isUpdate" class="operationButton">
-      <el-button type="primary" @click="cBlog(1,'post');">创建博客</el-button>
-      <el-button type="primary" @click="cBlog(0,'post')">保存到草稿</el-button>
+      <el-button type="primary" @click="cBlog(1, 'post');">创建博客</el-button>
+      <el-button type="primary" @click="cBlog(0, 'post')">保存到草稿</el-button>
     </div>
     <div id="updateBlog" v-if="!isUpdate" class="operationButton">
-      <el-button type="primary" @click="cBlog(1,'put',blogId)">更新博客</el-button>
-      <el-button type="primary" @click="cBlog(0,'put',blogId)">保存到草稿箱</el-button>
+      <el-button type="primary" @click="cBlog(1, 'put', blogId)">更新博客</el-button>
+      <el-button type="primary" @click="cBlog(0, 'put', blogId)">保存到草稿箱</el-button>
     </div>
   </el-card>
 </template>
 
 <script setup>
 import axios from "axios";
-import { onMounted, reactive, ref } from "vue";
-import { useRoute,useRouter } from "vue-router";
-import { uploadFile} from "../../../js/bucket/qiniu";
+import { onMounted, reactive, ref, h } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { uploadFile } from "../../../js/bucket/qiniu";
 import uploadImgUrl from "../../../../public/images/upload.png";
 import { routerPush } from "../../../js/index";
 import apiRequest from '../../../../http/index'
+import { ElMessage } from 'element-plus'
+// import Clipboard from 'clipboard' 
 const blogInfo = reactive({
   title: "",
   folders: [],
@@ -126,7 +95,16 @@ const optionInfo = reactive({
   tags: [],
 });
 const fileList = ref();
-
+const attachFileList = ref([
+  {
+    name: "12312",
+    url: "www.taobao.con"
+  },
+  {
+    name: "234",
+    url: "www.taobao.con"
+  }
+])
 // 判断是编辑还是新建
 const route = useRoute();
 const router = useRouter();
@@ -210,26 +188,47 @@ const getCon = async (blogId) => {
   }
 };
 // 创建博客
-const cBlog = async(tage,method,blogId='') =>{
+const cBlog = async (tage, method, blogId = '') => {
   blogInfo.tage = tage
   await apiRequest({
-    url:  `/api/article/${blogId}`,
+    url: `/api/article/${blogId}`,
     method: method,
     params: blogInfo
   })
-  if(tage == 1) {
-    routerPush(router,'/admin/blogList')
+  if (tage == 1) {
+    successPopup()
+    routerPush(router, '/admin/blogList')
   } else {
-    routerPush(router,'/admin/draft')
+    routerPush(router, '/admin/draft')
   }
 }
-
+const successPopup = () => {
+  ElMessage({
+    message: h('p', null, [
+      h('span', null, 'Blog create '),
+      h('i', { style: 'color: green' }, 'Successful'),
+    ]),
+    type: 'success',
+  })
+}
 // 选择文件时触发， 一是转成blob并预览，同时获取到上传的文件
-const uploadCoverImage = async(e) => {
+const uploadCoverImage = async (e) => {
   files.value = e.raw;
   blogInfo.imgPath = await uploadFile(files.value)
 };
 
+const handleFileUpload = async (res,e)=>{
+  files.value = e.raw;
+  const filePath = await uploadFile(files.value)
+  const file = {
+    name: files.value.name,
+    url: filePath
+  }
+  attachFileList.value.push(file)
+}
+// const copyUrl = (url)=>{
+// [链接](http://)
+// }
 const folders = async () => {
   let resp = await axios({
     url: "/api/folder",
@@ -262,46 +261,82 @@ onMounted(async () => {
 <style scoped lang="scss">
 .el-card {
   margin-top: 10px;
+
   #tags {
     width: 100%;
     height: 100px;
     display: flex;
     justify-content: space-between;
+
     .el-form-item {
       width: 47%;
     }
   }
-  #imgUpload {
-    #imgView {
-      width: 100%;
-      height: 100%;
+
+  .upload {
+    #imgUpload {
+      #imgView {
+        width: 100%;
+        height: 100%;
+      }
+
+      #uploadUrl {
+        width: 30%;
+      }
     }
-    #uploadUrl {
-      width: 30%;
+    #uploadFile{
+      .el-form-item{
+        margin-bottom: 0px;
+      }
+      #attachFileList{
+        margin-top: 10px;
+        height: 20px;
+        .file{
+          margin-top: 5px;
+          a{
+            display: inline-block;
+            line-height: 20px;
+            text-decoration: none;
+            color: #52a98b;
+          }
+          display: flex;
+          justify-content: space-between;
+          &:hover{
+            background-color: aqua;
+            cursor: pointer;
+          }
+        }
+      }
     }
   }
+
   #editor {
     margin: auto;
     max-height: 1000px;
+
     .el-form-item__label {
       font-size: 20px;
       font-weight: 800;
     }
   }
+
   .operationButton {
     margin-top: 20px;
-    .el-button{
+
+    .el-button {
       background-color: $button_color;
     }
   }
-  .el-form-item{
-    label{
+
+  .el-form-item {
+    label {
       font-size: 40px;
     }
   }
-  
+
 }
-label{
-    color: aquamarine!important;
-  }
+
+label {
+  color: aquamarine !important;
+}
 </style>

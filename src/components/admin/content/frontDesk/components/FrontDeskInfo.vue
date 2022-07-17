@@ -8,32 +8,30 @@
             </el-icon>
         </el-upload>
     </div>
+
     <el-form :model="userInfo" label-width="120px" label-position="top" id="infoForm">
-        <el-form-item label="名字">
-            <el-input v-model="userInfo.name" />
-        </el-form-item>
-        <el-form-item label="位置">
-            <el-input v-model="userInfo.location" />
-        </el-form-item>
-        <el-form-item label="社交媒体">
-            <el-row class="media" :gutter="20">
-                <el-col :span="6">
+        <el-row class="basicInfo" :gutter="20">
+            <el-col :span="8">
+                <el-form-item label="名字">
+                    <el-input v-model="userInfo.name" />
+                </el-form-item>
+            </el-col>
+            <el-col :span="8">
+                <el-form-item label="位置">
+                    <el-input v-model="userInfo.location" />
+                </el-form-item>
+            </el-col>
+            <el-col :span="8">
+                <el-form-item label="github">
                     <el-input v-model="userInfo.socialMedia.github" label="github" placeholder="github" />
-                </el-col>
-                <el-col :span="6">
-                    <el-input v-model="userInfo.socialMedia.segmentfault" label="segmentfault" placeholder="思否" />
-                </el-col>
-                <el-col :span="6">
-                    <el-input v-model="userInfo.socialMedia.csdn" label="csdn" placeholder="csdn" />
-                </el-col>
-                <el-col :span="6">
-                    <el-input v-model="userInfo.socialMedia.sina" label="sina" placeholder="微博" />
-                </el-col>
-            </el-row>
-        </el-form-item>
+                </el-form-item>
+            </el-col>
+        </el-row>
+       
+
         <el-form-item>
 
-            <el-row id="header">
+            <el-row id="header" :gutter="20">
                 <el-col :span="3">
                     <span id="tit">首页轮播图</span>
                 </el-col>
@@ -42,7 +40,7 @@
                 </el-col>
 
                 <el-col :span="17" v-if="userInfo.lunbo.open">
-                    <el-select v-model="userInfo.lunbo.folder" placeholder="Select">
+                    <el-select v-model="userInfo.lunbo.folder" placeholder="请选择文件夹">
                         <el-option v-for="item in folerList" :key="item._id" :label="item.folderName"
                             :value="item._id" />
                     </el-select>
@@ -85,9 +83,15 @@
                 </el-col>
             </el-row>
         </el-form-item>
-        <el-form-item label="备案信息" id="record">
+        <el-row id="record" :gutter="20">
+                <el-col :span="24">
+                    <el-form-item label="备案信息" id="record">
             <el-input v-model="userInfo.record" />
         </el-form-item>
+                </el-col>
+               
+            </el-row>
+        
     </el-form>
     <el-button type="primary" v-if="!userInfo._id" @click="onSubmit">Save</el-button>
     <el-button type="primary" v-else @click="onSubmit">Update</el-button>
@@ -101,10 +105,7 @@ const userInfo = ref({
     name: "",
     location: "",
     socialMedia: {
-        sina: '',
         github: "",
-        segmentfault: "",
-        csdn: ""
     },
     avatar: "",
     lunbo: {
@@ -206,9 +207,11 @@ onMounted(async () => {
     .el-row {
         width: 100%;
     }
-    #record{
-            margin-top: 50px;
-        }
+
+    #record {
+        margin-top: 50px;
+    }
+
     .el-form-item {
         .media {
             justify-content: space-between;
@@ -247,7 +250,7 @@ onMounted(async () => {
                 text-align: center;
             }
         }
-        
+
         .el-select {
             width: 100%;
         }
