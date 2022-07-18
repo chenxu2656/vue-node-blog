@@ -24,8 +24,8 @@
           <el-col :span="8">
             <div id="imgUpload">
               <el-form-item label="Images (封面图片)">
-                <el-upload class="upload-demo" drag action="https://jsonplaceholder.typicode.com/posts/"
-                  :on-change="uploadCoverImage" :file-list="fileList" multiple>
+                <el-upload class="upload-demo" drag action="#"
+                  :http-request="uploadCoverImage" :file-list="fileList" multiple>
                   <img :src="blogInfo.imgPath" alt="" id="imgView" v-if="blogInfo.imgPath" />
                   <img :src="uploadImgUrl" alt="" id="uploadUrl" v-if="!blogInfo.imgPath" />
                   <div class="el-upload__text">
@@ -36,15 +36,19 @@
             </div>
           </el-col>
           <el-col :span="16" id="uploadFile">
-            <el-form-item label="上传附件"></el-form-item>
+            <el-form-item label="上传附件"></el-form-item>    
             <el-upload :show-file-list="false" class="upload-demo"
-              action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :on-success="handleFileUpload">
-              <el-button type="primary">Click to upload</el-button>
+              action="#" 
+              :http-request="handleFileUpload">
+              <el-tooltip content="上传附件后点击右侧复制,并粘贴到编辑器" placement="top">
+    <el-button type="primary">Click to upload</el-button>
+  </el-tooltip>
+              
             </el-upload>
             <div id="attachFileList">
               <div class="file" v-for="item in attachFileList" :index="item.name" :key="item.name">
                 <a :href="item.url" target="_blank">{{item.name}}</a>
-                <img src="../../../../public/images/icons/copy.png" alt="" srcset="" height="20" onclick="copyUrl(item.url)">
+                <img src="../../../../public/images/icons/copy.png" alt="" srcset="" height="20" v-on:click="copyUrl(item.name,item.url)">
               </div>
             </div>
           </el-col>
@@ -95,16 +99,7 @@ const optionInfo = reactive({
   tags: [],
 });
 const fileList = ref();
-const attachFileList = ref([
-  {
-    name: "12312",
-    url: "www.taobao.con"
-  },
-  {
-    name: "234",
-    url: "www.taobao.con"
-  }
-])
+const attachFileList = ref([])
 // 判断是编辑还是新建
 const route = useRoute();
 const router = useRouter();
@@ -118,6 +113,8 @@ const editorfile = ref();
 // 返回url
 const labelPosition = ref("top");
 const isUpdate = ref(true);
+const uploadUrl = ref()
+uploadUrl.value = JSON.parse(localStorage.getItem('qiniuToken')).url
 const transToFolderIdList = (objList, selectKey) => {
   let folderIdList = [];
   objList.forEach((element) => {
@@ -196,29 +193,30 @@ const cBlog = async (tage, method, blogId = '') => {
     params: blogInfo
   })
   if (tage == 1) {
-    successPopup()
+    successPopup('创建成功','2000')
     routerPush(router, '/admin/blogList')
   } else {
     routerPush(router, '/admin/draft')
   }
 }
-const successPopup = () => {
+const successPopup = (message,duration) => {
   ElMessage({
     message: h('p', null, [
-      h('span', null, 'Blog create '),
-      h('i', { style: 'color: green' }, 'Successful'),
+      h('i', { style: 'color: green' }, `${message}`),
     ]),
     type: 'success',
+    duration: `${duration}`
   })
 }
 // 选择文件时触发， 一是转成blob并预览，同时获取到上传的文件
 const uploadCoverImage = async (e) => {
-  files.value = e.raw;
+  files.value = e.file;
   blogInfo.imgPath = await uploadFile(files.value)
 };
 
-const handleFileUpload = async (res,e)=>{
-  files.value = e.raw;
+const handleFileUpload = async (e)=>{
+  console.log(e);
+  files.value = e.file;
   const filePath = await uploadFile(files.value)
   const file = {
     name: files.value.name,
@@ -226,9 +224,16 @@ const handleFileUpload = async (res,e)=>{
   }
   attachFileList.value.push(file)
 }
-// const copyUrl = (url)=>{
-// [链接](http://)
-// }
+const copyUrl = (name,url)=>{
+    let text = `[${name}](${url})`
+    let dummy = document.createElement('textarea')
+    document.body.appendChild(dummy)
+    dummy.value = text
+    dummy.select()
+    document.execCommand('copy')
+    document.body.removeChild(dummy)
+    successPopup('复制成功','1000')
+}
 const folders = async () => {
   let resp = await axios({
     url: "/api/folder",
@@ -288,9 +293,14 @@ onMounted(async () => {
       .el-form-item{
         margin-bottom: 0px;
       }
+      .el-tooltip{
+        padding: 6px 12px;
+        background: linear-gradient(90deg, rgb(159, 229, 151), rgb(204, 229, 129));
+      }
       #attachFileList{
         margin-top: 10px;
-        height: 20px;
+        height: 120px;
+        overflow-y: scroll;
         .file{
           margin-top: 5px;
           a{
@@ -302,7 +312,7 @@ onMounted(async () => {
           display: flex;
           justify-content: space-between;
           &:hover{
-            background-color: aqua;
+            background-color: #f0f5f9;
             cursor: pointer;
           }
         }

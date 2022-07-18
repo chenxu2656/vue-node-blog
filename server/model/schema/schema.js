@@ -178,6 +178,10 @@ const navItemList = {
         require: true,
         type: String
     },
+    weight: {
+        require: true,
+        type: String
+    },
     type: {
         require: true,
         type: String

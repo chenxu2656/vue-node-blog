@@ -5,7 +5,9 @@ let createNavItem = async(data)=>{
     return createNavResp
 }
 let getNavItem = async(reqData)=>{
-    const resp = await navItemModel.find(reqData)
+    const resp = await navItemModel.find(reqData).sort({
+        weight: -1
+    })
     return resp
 }
 let deleteNavItem = async(id)=>{

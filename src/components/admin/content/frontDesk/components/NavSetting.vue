@@ -10,6 +10,7 @@
         </template>
         <el-table-column prop="title" label="TITLE" width="180" />
         <el-table-column prop="index" label="INDEX" width="180" />
+        <el-table-column prop="weight" label="WEIGHT" width="180" />
         <el-table-column prop="type" label="TYPE" />
         <el-table-column prop="dataSourceId" label="DataSourceId" />
         <el-table-column label="STATUS">
@@ -28,17 +29,22 @@
     <el-dialog v-model="createFieldVisible" title="创建新的导航">
         <el-form label-position="top">
             <el-row :gutter="20">
-                <el-col :span="8">
+                <el-col :span="6">
                     <el-form-item label="标题">
                         <el-input v-model="navItem.title" />
                     </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="6">
                     <el-form-item label="索引">
                         <el-input v-model="navItem.index" />
                     </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :span="6">
+                    <el-form-item label="权重">
+                        <el-input v-model="navItem.weight" />
+                    </el-form-item>
+                </el-col>
+                <el-col :span="6">
                     <el-form-item label="数据类型">
                         <el-select v-model="navItem.type" placeholder="please select your zone">
                             <el-option label="文章页" value="article" />
@@ -106,7 +112,8 @@ const navItem = reactive({
     index: "",
     type: "",
     dataSourceId: "",
-    status: false
+    status: false,
+    weight: ''
 })
 const handleCreate = (navItem) => {
     apiRequest({
